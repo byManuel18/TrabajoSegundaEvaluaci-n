@@ -13,5 +13,6 @@ public class App {
     public static void main(String[] args) {
         GUI.principal();
         System.out.println("Alberto");
+        System.out.println("Isma");
     }
 }

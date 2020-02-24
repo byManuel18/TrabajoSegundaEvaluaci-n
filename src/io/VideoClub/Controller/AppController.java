@@ -344,7 +344,60 @@ public class AppController implements IAppController{
 
     @Override
     public boolean saveClientsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean guardado=false;
+        try {
+                
+                DocumentBuilderFactory dFact= DocumentBuilderFactory.newInstance();
+                DocumentBuilder build=dFact.newDocumentBuilder();
+                Document doc = build.newDocument();
+                
+                Element raiz=doc.createElement("Clientes");
+                
+                for(Client c:clientes){
+                    Element e =doc.createElement("Cliente");
+                    
+                    
+                    Element k=doc.createElement("ID");
+                    k.appendChild(doc.createTextNode(c.getID()));
+                    Element name=doc.createElement("Nombre");
+                    name.appendChild(doc.createTextNode(c.getName()));
+                    Element tel=doc.createElement("Telefono");
+                    tel.appendChild(doc.createTextNode(c.getPhone()));
+                    Element prec=doc.createElement("Fecha");
+                    prec.appendChild(doc.createTextNode(String.valueOf(c.getTime())));
+
+                    e.appendChild(k);
+                    e.appendChild(name);
+                    e.appendChild(tel);
+                    e.appendChild(prec);
+                    
+                    raiz.appendChild(e);  
+                    
+                }
+                
+                //Guardar el xml en el disco duro
+                TransformerFactory tFact=TransformerFactory.newInstance();
+                Transformer trans=tFact.newTransformer();
+                //<-- OPCIONES DEL ARCHIVO
+                trans.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+                trans.setOutputProperty(OutputKeys.INDENT,"yes");
+                trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount","4");
+                DOMSource source=new DOMSource(doc);
+                StreamResult result=new StreamResult(new File(catalogDDBB));
+
+                trans.transform(source, result);
+                guardado=true;
+
+                } catch (ParserConfigurationException ex) {
+                    System.out.println(ex);
+                }catch (TransformerConfigurationException ex) {
+                    System.out.println(ex);
+                } catch (TransformerException ex) {
+                    System.out.println(ex);
+                
+ 
+            } 
+        return guardado;
     }
 
     @Override

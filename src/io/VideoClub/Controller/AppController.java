@@ -56,7 +56,7 @@ public class AppController implements IAppController{
     
     }
     
-    public AppController getInstance(){
+    public static AppController getInstance(){
         instancia=new AppController();
         return instancia;
     }

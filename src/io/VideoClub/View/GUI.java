@@ -5,6 +5,9 @@
  */
 package io.VideoClub.View;
 
+import io.VideoClub.Controller.AppController;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Manueh
@@ -12,7 +15,10 @@ package io.VideoClub.View;
 public class GUI {
 
     public static void principal(){
-      
+        AppController ni=AppController.getInstance();
+        System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
+        
+        System.out.println(ni.saveClientsFromDDBB());
     } 
     
 }

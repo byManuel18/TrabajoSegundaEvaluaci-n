@@ -290,13 +290,16 @@ public class AppController implements IAppController {
         try {
 
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
-            DocumentBuilder build = dFact.newDocumentBuilder();
-            Document doc = build.newDocument();
+            DocumentBuilder build;
+
+            build = dFact.newDocumentBuilder();   
+
+            org.w3c.dom.Document doc = build.newDocument(); 
 
             Element raiz = doc.createElement("Catalogo");
 
             for (Product c : productos) {
-                Element e = null;
+                Element e;
                 if (c instanceof Pelicula) {
                     e = doc.createElement("Pelicula");
                     Element cat = doc.createElement("Categoria");
@@ -336,7 +339,7 @@ public class AppController implements IAppController {
                 raiz.appendChild(e);
 
             }
-
+            doc.appendChild(raiz);
             //Guardar el xml en el disco duro
             TransformerFactory tFact = TransformerFactory.newInstance();
             Transformer trans = tFact.newTransformer();
@@ -367,9 +370,11 @@ public class AppController implements IAppController {
         try {
 
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
-            DocumentBuilder build = dFact.newDocumentBuilder();
-            Document doc = build.newDocument();
+            DocumentBuilder build;
 
+            build = dFact.newDocumentBuilder();   
+
+            org.w3c.dom.Document doc = build.newDocument(); 
             Element raiz = doc.createElement("Clientes");
 
             for (Client c : clientes) {
@@ -377,21 +382,22 @@ public class AppController implements IAppController {
 
                 Element k = doc.createElement("ID");
                 k.appendChild(doc.createTextNode(c.getID()));
+                e.appendChild(k);
                 Element name = doc.createElement("Nombre");
                 name.appendChild(doc.createTextNode(c.getName()));
+                e.appendChild(name);
                 Element tel = doc.createElement("Telefono");
                 tel.appendChild(doc.createTextNode(c.getPhone()));
+                e.appendChild(tel);
                 Element prec = doc.createElement("Fecha");
                 prec.appendChild(doc.createTextNode(String.valueOf(c.getTime())));
 
-                e.appendChild(k);
-                e.appendChild(name);
-                e.appendChild(tel);
                 e.appendChild(prec);
 
                 raiz.appendChild(e);
 
             }
+            doc.appendChild(raiz);
 
             //Guardar el xml en el disco duro
             TransformerFactory tFact = TransformerFactory.newInstance();

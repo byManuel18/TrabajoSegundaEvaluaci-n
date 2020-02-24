@@ -14,5 +14,6 @@ public class App {
         GUI.principal();
         System.out.println("Alberto");
         System.out.println("Isma");
+        System.out.println("David");
     }
 }

@@ -226,7 +226,15 @@ public class AppController implements IAppController {
 
     @Override
     public boolean removeClient(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            boolean flag=false;
+       for (Client client : clientes) {
+            if (client.getID().equals(id)){
+                flag = true;
+                clientes.remove(id);
+                break;
+            }
+        }
+            return flag;
     }
 
     @Override

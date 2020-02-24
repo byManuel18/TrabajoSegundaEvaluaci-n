@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package io.VideoClub.Model;
+import io.VideoClub.Model.Enums.ProductsTypes;
 import java.util.UUID;
 /**
  *
@@ -16,7 +17,8 @@ public abstract class Product extends Item implements Cloneable{
     }
     private String key;
     private Status status;
-   
+    private int edadmnima;
+    private ProductsTypes tipo;
     
     
     public Product(){}
@@ -25,10 +27,38 @@ public abstract class Product extends Item implements Cloneable{
         this.key=generateRandom16Chars();
     }
     
+    public Product(String name, String description,double prize,int edadminima, ProductsTypes tipo){
+        super(name,description,prize);
+        this.key=generateRandom16Chars();
+        this.tipo=tipo;
+        this.edadmnima=edadminima;
+    }
+    public Product(String name, String description,double prize,ProductsTypes tipo){
+        super(name,description,prize);
+        this.key=generateRandom16Chars();
+        this.tipo=tipo;
+    }
+    
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
 
+    public int getEdadmnima() {
+        return edadmnima;
+    }
+
+    public void setEdadmnima(int edadmnima) {
+        this.edadmnima = edadmnima;
+    }
+
+    public ProductsTypes getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(ProductsTypes tipo) {
+        this.tipo = tipo;
+    }
+    
     public String getKey() {
         return key;
     }
@@ -67,7 +97,7 @@ public abstract class Product extends Item implements Cloneable{
 
     @Override
     public String toString() {
-        return ">"+ "Key: "+ key +" Nombre: " +super.name+" Descripción: "+super.description+" Precio: "+super.prize+ " PEstado: "+status;
+        return ">"+ "Key: "+ key +" Tipo: "+tipo +" Nombre: " +super.name+" Descripción: "+super.description+" Precio: "+super.prize+ " Estado: "+status;
     }
     
     

@@ -140,4 +140,16 @@ public class Utilities {
         Utilities.p(f + " : ");
         return Utilities.getString();
     }
+    public static int Menu(){
+        int opcion=0;
+        
+        P("-----Vienvenido al siete y medio-----");
+        P("1)Jugar");
+        P("2)Salir");
+        P("-------------------------------------");
+        
+        opcion=getInt(); //Llama a la funcion LeerNUmeros para darle un valor por teclado a opción
+        
+        return opcion;
+    }
 }

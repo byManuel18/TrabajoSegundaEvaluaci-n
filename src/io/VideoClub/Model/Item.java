@@ -22,4 +22,6 @@ public class Item {
         this.prize = prize;
     }
     
+    
+    
 }

@@ -249,7 +249,17 @@ public class AppController implements IAppController {
 
     @Override
     public boolean removeProduct(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = false;
+ 
+        for (Product ite : productos) {
+            if (ite.getName().equals(name)) {
+                result = true;
+                productos.remove(ite);
+                break;
+            }
+            
+        }
+        return result;
     }
 
     @Override

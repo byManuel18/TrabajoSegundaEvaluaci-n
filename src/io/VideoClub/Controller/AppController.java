@@ -178,7 +178,14 @@ public class AppController implements IAppController{
 
     @Override
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Client c=new Client(id, name, time, phone);
+      boolean flag=false;
+        while (clientes.iterator().hasNext() && !flag) { 
+            /*if(it.next().getDni().equals(p.getDni())){
+              flag=true;
+            }*/
+        }
+        return flag;
     }
 
     @Override

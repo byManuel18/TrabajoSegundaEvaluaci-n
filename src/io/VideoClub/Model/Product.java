@@ -28,6 +28,22 @@ public abstract class Product extends Item implements Cloneable{
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
     
     public boolean equals(Object o){
         boolean result=false;
@@ -48,4 +64,11 @@ public abstract class Product extends Item implements Cloneable{
         clone.key=generateRandom16Chars();
         return (Object)clone;
     } 
+
+    @Override
+    public String toString() {
+        return ">"+ "Key: "+ key +" Nombre: " +super.name+" Descripción: "+super.description+" Precio: "+super.prize+ " PEstado: "+status;
+    }
+    
+    
 }

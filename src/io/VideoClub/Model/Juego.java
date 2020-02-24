@@ -30,7 +30,7 @@ public class Juego extends Product{
 
     @Override
     public String toString() {
-        return super.toString()+" Categoria: "+category;
+        return super.toString()+" Categoria: "+category+" Edad mínima: "+getEdadmnima();
     }
     
     

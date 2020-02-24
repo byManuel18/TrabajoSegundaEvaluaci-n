@@ -5,6 +5,8 @@
  */
 package io.VideoClub.Model;
 
+import java.util.Objects;
+
 /**
  *
  * @author Manueh
@@ -44,6 +46,22 @@ public class Item {
 
     public void setPrize(double prize) {
         this.prize = prize;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean igual=false;
+        if(obj!=null){
+            if(this==obj){
+                igual=true;
+            }else{
+                if(obj instanceof Item){
+                    Item n=(Item) obj;
+                    igual=name.equals(n.name);
+                }
+            }
+        }
+        return igual;
     }
     
     

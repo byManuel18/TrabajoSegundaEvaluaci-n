@@ -11,41 +11,77 @@ import java.time.LocalDateTime;
  *
  * @author Manueh
  */
-public class Client implements IClient{
+public class Client implements IClient {
+
+    //Atributos
+    private String ID;
+    private String name;
+    private LocalDateTime time;
+    private String phone;
+
+    //Constructor FULL
+    public Client(String ID, String name, LocalDateTime time, String phone) {
+        this.ID = ID;
+        this.name = name;
+        this.time = time;
+        this.phone = phone;
+    }
 
     @Override
     public String getID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ID;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return name;
     }
 
     @Override
     public void setName(String n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.name = name;
     }
 
     @Override
     public LocalDateTime getTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return time;
     }
 
     @Override
     public void setTime(LocalDateTime t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.time = time;
     }
 
     @Override
     public String getPhone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return phone;
     }
 
     @Override
     public void setPhone(String p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.phone = phone;
     }
-    
+
+    //Método toString
+    @Override
+    public String toString() {
+        return "Client{" + "ID=" + ID + ", name=" + name + ", time=" + time + ", phone=" + phone + '}';
+    }
+
+    //Método equals (Dos clientes son iguales si tienen el mismo ID)
+    public boolean toString(Object o) {
+        boolean result = true;
+
+        if (o != null) {
+            if (this == o) {
+                result = true;
+            } else if (o instanceof Client) {
+                Client other = (Client) o;
+                result = this.ID.equals(other.getID());
+            }
+        }
+
+        return result;
+    }
+
 }

@@ -143,7 +143,7 @@ public class Utilities {
     public static int Menu(){
         int opcion=0;
         
-        P("-----Vienvenido al siete y medio-----");
+        P("-----Bienvenido al siete y medio-----");
         P("1)Jugar");
         P("2)Salir");
         P("-------------------------------------");

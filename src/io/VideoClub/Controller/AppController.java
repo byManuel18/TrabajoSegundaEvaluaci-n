@@ -401,7 +401,7 @@ public class AppController implements IAppController {
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
             trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(catalogDDBB));
+            StreamResult result = new StreamResult(new File(clientsDDBB));
 
             trans.transform(source, result);
             guardado = true;

@@ -140,12 +140,35 @@ public class Utilities {
         Utilities.p(f + " : ");
         return Utilities.getString();
     }
-    public static int Menu(){
-        int opcion=0;
+   public static int Menu(){
+        int opcion;
         
-        P("-----Bienvenido al siete y medio-----");
-        P("1)Jugar");
-        P("2)Salir");
+        P("-----Bienvenido al videoclub-----");
+        P("1)Listar productos");
+        P("2)Listar productos por tipo");
+        P("3)Listar los productos ordenados");
+        P("4)Listar productos por nombre");
+        P("5)Listar productos por nombre y tipo");
+        P("6)Listar los productos por estado");
+        P("7)Listar diferentes productos");
+        P("8)Listar peliculas");
+        P("9)Listar juegos");
+        P("10)Listar catidad de productos por nombre");
+        P("11)Listar catidad de productos por nombre y tipo");
+        P("12)Mostrar clientes");
+        P("13)Mostrar todos los clientes(comparados)");
+        P("14)Mostrar clientes cuya reserva no ha acabado");
+        P("15)Mostrar todas las reservas ");
+        P("16)Listar las reservas (ordenadas)");
+        P("17)Listar reservas por estado");
+        P("18)Crear Producto");
+        P("19)Añadir cliente");
+        P("20)Borrar cliente");
+        P("21)Añadir producto");
+        P("22)Borrar producto");
+        P("23)Editar producto");
+        P("24)Consultar productos disponibles");
+        P("25)Cerrar reserva");
         P("-------------------------------------");
         
         opcion=getInt(); //Llama a la funcion LeerNUmeros para darle un valor por teclado a opción

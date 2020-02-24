@@ -10,6 +10,7 @@ import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
+import io.VideoClub.Model.Item;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import java.time.LocalDate;
@@ -44,9 +45,6 @@ public class AppController implements IAppController{
         instancia=new AppController();
         return instancia;
     }
-    
-    
-    
 
     @Override
     public Set<Product> listAllProducts() {
@@ -155,7 +153,17 @@ public class AppController implements IAppController{
 
     @Override
     public boolean createProduct(String name, String description, double prize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean creado=false;
+        Item nuevo=new Item(name, description, prize);
+        
+        for(Item ite: productos){
+            if(ite.equals(nuevo)){
+                creado=true;
+                break;
+            }
+        }
+        
+        return creado;
     }
 
     @Override

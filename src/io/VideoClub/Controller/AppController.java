@@ -11,8 +11,11 @@ import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Item;
+import io.VideoClub.Model.Juego;
+import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -20,6 +23,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -250,7 +265,81 @@ public class AppController implements IAppController{
 
     @Override
     public boolean saveCatalogFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean guardado=false;
+        try {
+                
+                DocumentBuilderFactory dFact= DocumentBuilderFactory.newInstance();
+                DocumentBuilder build=dFact.newDocumentBuilder();
+                Document doc = build.newDocument();
+                
+                Element raiz=doc.createElement("Catalogo");
+                
+                for(Product c:productos){
+                    Element e=null;
+                    if(c instanceof Pelicula){
+                        e =doc.createElement("Pelicula");
+                        Element cat=doc.createElement("Categoria");
+                        cat.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c).getCategory())));
+                        e.appendChild(cat);
+                    }else if(c instanceof Juego){
+                        e =doc.createElement("Juego");
+                        Element cat=doc.createElement("Categoria");
+                        cat.appendChild(doc.createTextNode(String.valueOf(((Juego) c).getCategory())));
+                        e.appendChild(cat);
+                    }else{
+                        e =doc.createElement("Otro");
+                    }
+                    
+                    Element k=doc.createElement("Key");
+                    k.appendChild(doc.createTextNode(c.getKey()));
+                    Element name=doc.createElement("Nombre");
+                    name.appendChild(doc.createTextNode(c.getName()));
+                    Element des=doc.createElement("Descripcion");
+                    des.appendChild(doc.createTextNode(c.getDescription()));
+                    Element prec=doc.createElement("Precio");
+                    prec.appendChild(doc.createTextNode(String.valueOf(c.getPrize())));
+                    Element edad=doc.createElement("EdadMinima");
+                    edad.appendChild(doc.createTextNode(String.valueOf(c.getPrize())));
+                    Element tipo=doc.createElement("Tipo");
+                    tipo.appendChild(doc.createTextNode(String.valueOf(c.getTipo())));
+                    Element estado=doc.createElement("Estado");
+                    estado.appendChild(doc.createTextNode(String.valueOf(c.getStatus())));
+                    
+
+                    e.appendChild(k);
+                    e.appendChild(name);
+                    e.appendChild(des);
+                    e.appendChild(prec);
+                    e.appendChild(edad);
+                    e.appendChild(tipo);
+                    e.appendChild(estado);
+                    raiz.appendChild(e);  
+                    
+                }
+                
+                //Guardar el xml en el disco duro
+                TransformerFactory tFact=TransformerFactory.newInstance();
+                Transformer trans=tFact.newTransformer();
+                //<-- OPCIONES DEL ARCHIVO
+                trans.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+                trans.setOutputProperty(OutputKeys.INDENT,"yes");
+                trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount","4");
+                DOMSource source=new DOMSource(doc);
+                StreamResult result=new StreamResult(new File(catalogDDBB));
+
+                trans.transform(source, result);
+                guardado=true;
+
+                } catch (ParserConfigurationException ex) {
+                    System.out.println(ex);
+                }catch (TransformerConfigurationException ex) {
+                    System.out.println(ex);
+                } catch (TransformerException ex) {
+                    System.out.println(ex);
+                
+ 
+            } 
+        return guardado;
     }
 
     @Override

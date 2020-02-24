@@ -69,7 +69,7 @@ public class Client implements IClient {
     }
 
     //Método equals (Dos clientes son iguales si tienen el mismo ID)
-    public boolean toString(Object o) {
+    public boolean equals(Object o) {
         boolean result = true;
 
         if (o != null) {

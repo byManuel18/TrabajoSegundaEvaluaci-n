@@ -5,6 +5,7 @@
  */
 package io.VideoClub.Controller;
 
+import io.VideoClub.Model.Client;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
@@ -14,6 +15,7 @@ import io.VideoClub.Model.Reservation;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +25,28 @@ import java.util.Set;
  * @author Manueh
  */
 public class AppController implements IAppController{
+    
+    private static AppController instancia=null;
+    
+    private Set<Product> productos;
+    private Set<Client> clientes;
+    private Set<Reservation> reservas;
+
+    private AppController() {
+        productos=new HashSet<>();
+        clientes=new HashSet<>();
+        reservas=new HashSet<>();
+        
+    
+    }
+    
+    public AppController getInstance(){
+        instancia=new AppController();
+        return instancia;
+    }
+    
+    
+    
 
     @Override
     public Set<Product> listAllProducts() {

@@ -18,11 +18,14 @@ import io.VideoClub.Model.Reservation;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,7 +48,7 @@ public class AppController implements IAppController {
     private static AppController instancia = null;
 
     private Set<Product> productos;
-    private Set<Client> clientes;
+    private Set<IClient> clientes;
     private Set<Reservation> reservas;
 
     private AppController() {
@@ -117,32 +120,50 @@ public class AppController implements IAppController {
 
     @Override
     public Set<IClient> listAllClients() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return clientes;
     }
 
     @Override
     public Set<IClient> listAllClients(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Set<IClient> ordenado=new TreeSet<>(c);
+       ordenado.addAll(clientes);
+       return ordenado;
     }
 
     @Override
     public Set<IClient> listAllClientsWithReservationsNotFinished() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<IClient> clientesconreservas=new HashSet<>();
+        for(IClient c: clientes){
+            for(Reservation re: reservas){
+                if(re.cli.equals(re)&&re.status==Reservation.StatusReserve.ACTIVE){
+                    clientesconreservas.add(c);
+                }
+            }
+        }
+        return clientesconreservas;
     }
 
     @Override
     public Set<Reservation> listAllReservations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return reservas;
     }
 
     @Override
     public Set<Reservation> listAllReservations(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Reservation> ordenado=new TreeSet<>(c);
+        ordenado.addAll(reservas);
+        return ordenado;
     }
 
     @Override
     public Set<Reservation> listAllReservations(Reservation.StatusReserve status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Reservation> ordenado=new HashSet<>();
+        for(Reservation re: reservas){
+            if(re.status==status){
+                ordenado.add(re);
+            }
+        }
+        return ordenado;
     }
 
     @Override
@@ -210,7 +231,7 @@ public class AppController implements IAppController {
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
         Client c = new Client(id, name, time, phone);
         boolean flag = false, añadido = false;
-        for (Client client : clientes) {
+        for (IClient client : clientes) {
             if (client.equals(c)) {
                 flag = true;
                 break;
@@ -227,7 +248,7 @@ public class AppController implements IAppController {
     @Override
     public boolean removeClient(String id) {
             boolean flag=false;
-       for (Client client : clientes) {
+       for (IClient client : clientes) {
             if (client.getID().equals(id)){
                 flag = true;
                 clientes.remove(id);
@@ -395,7 +416,7 @@ public class AppController implements IAppController {
             org.w3c.dom.Document doc = build.newDocument(); 
             Element raiz = doc.createElement("Clientes");
 
-            for (Client c : clientes) {
+            for (IClient c : clientes) {
                 Element e = doc.createElement("Cliente");
 
                 Element k = doc.createElement("ID");

@@ -16,8 +16,10 @@ import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -40,6 +42,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -362,7 +367,44 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadClientsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean cargado=false;
+        this.clientes.clear();
+        try {
+            File file = new File(clientsDDBB);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+
+            // estos métodos podemos usarlos combinados para normalizar el archivo XML
+            //getDocumentElement()	Accede al nodo raíz del documento
+            //normalize()	Elimina nodos vacíos y combina adyacentes en caso de que los hubiera
+            doc.getDocumentElement().normalize();
+            NodeList nList = doc.getElementsByTagName("Cliente");   //nList.getLength() -> n_nodos
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    //String id=eElement.getAttribute("id");
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String id = eElement.getElementsByTagName("Id").item(0).getTextContent();
+                    String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
+                    String fecha=eElement.getElementsByTagName("Fecha").item(0).getTextContent();
+                    Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 3)),
+                            Integer.parseInt(fecha.substring(5, 6)), Integer.parseInt(fecha.substring(8, 9)), Integer.parseInt(fecha.substring(11, 12)),
+                            Integer.parseInt(fecha.substring(14, 15)),Integer.parseInt(fecha.substring(17, 18))), telef);
+                    clientes.add(c);
+                }
+            }
+            cargado=true;
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return cargado;
     }
 
     @Override

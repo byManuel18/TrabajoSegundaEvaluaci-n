@@ -248,10 +248,21 @@ public class AppController implements IAppController {
     @Override
     public boolean removeClient(String id) {
         boolean borrado =false;
-        if(existeCliente(id)){
+        if(existeCliente(id)&&!comprobarssiclientetienereserva(devolverClienteExistente(id))){
             borrado=clientes.remove(devolverClienteExistente(id));
         }
         return borrado;
+    }
+    
+    private boolean comprobarssiclientetienereserva(Client c){
+        boolean tiene=false;
+        for(Reservation reser : reservas){
+            if(reser.cli.equals(c)){
+                tiene=true;
+                break;
+            }
+        }
+        return tiene;
     }
     
     public boolean existeCliente(String id){

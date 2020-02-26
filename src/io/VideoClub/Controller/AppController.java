@@ -200,15 +200,7 @@ public class AppController implements IAppController {
     @Override
     public boolean createProduct(String name, String description, double prize) {
         boolean creado = false;
-        Item nuevo = new Item(name, description, prize);
-
-        for (Item ite : productos) {
-            if (ite.equals(nuevo)) {
-                creado = true;
-                break;
-            }
-        }
-
+   
         return creado;
     }
 

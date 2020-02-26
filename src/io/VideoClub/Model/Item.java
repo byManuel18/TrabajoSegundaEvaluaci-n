@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Manueh
  */
-public class Item {
+public  abstract class Item {
    
     protected String name;
     protected String description;

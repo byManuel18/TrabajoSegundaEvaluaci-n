@@ -12,7 +12,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
  *
  * @author alberto
  */
-public class Pelicula extends Product {
+public class Pelicula extends Product implements Cloneable{
 
     private MovieCategory category;
 

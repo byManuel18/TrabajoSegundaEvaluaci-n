@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -168,7 +170,11 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double resultado=0;
+        for(Reservation re:reservas){
+            resultado+=re.pro.getPrize();
+        }
+        return resultado;
     }
 
     @Override
@@ -230,16 +236,10 @@ public class AppController implements IAppController {
     @Override
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
         Client c = new Client(id, name, time, phone);
-        boolean flag = false, añadido = false;
-        for (IClient client : clientes) {
-            if (client.equals(c)) {
-                flag = true;
-                break;
-            }
-        }
-        if (!flag) {
-            clientes.add(c);
-            añadido = true;
+        boolean añadido = false;
+        
+        if(!existeCliente(id)){
+            añadido=clientes.add(c);
         }
 
         return añadido;
@@ -247,15 +247,33 @@ public class AppController implements IAppController {
 
     @Override
     public boolean removeClient(String id) {
-            boolean flag=false;
-       for (IClient client : clientes) {
+        boolean borrado =false;
+        if(existeCliente(id)){
+            borrado=clientes.remove(devolverClienteExistente(id));
+        }
+        return borrado;
+    }
+    
+    public boolean existeCliente(String id){
+        boolean existe=false;
+        for (IClient client : clientes) {
             if (client.getID().equals(id)){
-                flag = true;
-                clientes.remove(id);
+                existe = true;
                 break;
             }
         }
-            return flag;
+        return existe;
+    }
+    
+    public Client devolverClienteExistente(String id){
+        Client devolver=null;
+        for(IClient c: clientes){
+            if(c.getID().equals(id)){
+                devolver=(Client)c;
+                break;
+            }
+        }
+        return devolver;
     }
 
     @Override
@@ -265,7 +283,21 @@ public class AppController implements IAppController {
 
     @Override
     public boolean addProduct(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean clonado=false;
+        
+        return clonado;
+    }
+    
+    public boolean productoExistente(String name){
+        boolean existe=false;
+        for(Product p: productos){
+            if(p.getName().equals(name)){
+                existe=true;
+                break;
+            }
+            
+        }
+        return existe;
     }
 
     @Override
@@ -290,7 +322,16 @@ public class AppController implements IAppController {
 
     @Override
     public Product isAvailableProduct(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Product p=null;
+        if(productoExistente(name)){
+            for(Product pro: productos){
+                if(pro.getName().equals(name)&&pro.getStatus()==Product.Status.AVAILABLE){
+                    p=pro;
+                    break;
+                }
+            }
+        }
+        return p;
     }
 
     @Override

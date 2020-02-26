@@ -12,7 +12,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
  *
  * @author Manueh
  */
-public class Juego extends Product{
+public class Juego extends Product implements Cloneable{
     GameCategory category;
 
     public Juego(String name, String description, double prize, int edadminima, ProductsTypes tipo,GameCategory category) {

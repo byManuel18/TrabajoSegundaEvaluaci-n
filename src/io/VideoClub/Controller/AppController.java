@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -117,12 +118,19 @@ public class AppController implements IAppController {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Product,Integer> listado=new HashMap<>();
+       
+        
+        return listado;
+       
     }
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Product,Integer> listado=new HashMap<>();
+       
+        
+        return listado;
     }
 
     @Override
@@ -142,7 +150,7 @@ public class AppController implements IAppController {
         Set<IClient> clientesconreservas=new HashSet<>();
         for(IClient c: clientes){
             for(Reservation re: reservas){
-                if(re.cli.equals(re)&&re.status==Reservation.StatusReserve.ACTIVE){
+                if(re.cli.equals(re)&&re.status!=Reservation.StatusReserve.FINISHED){
                     clientesconreservas.add(c);
                 }
             }
@@ -184,17 +192,42 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings(LocalDate from) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double resultado=0;
+        for(Reservation reser: reservas){
+            if(reser.ini.compareTo(from)>=0){
+                resultado+=reser.pro.getPrize();
+            }
+        }
+        return resultado;
     }
 
     @Override
     public double getIncommings(LocalDate from, LocalDate to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double resultado=0;
+        for(Reservation reser: reservas){
+            if(reser.ini.compareTo(from)>=0&&reser.ini.compareTo(to)<=0){
+                resultado+=reser.pro.getPrize();
+            }
+        }
+        return resultado;
     }
 
     @Override
     public Map<IClient, Double> resumeAllIncomingsByClient() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<IClient,Double> listado=new HashMap<>();
+        
+        for(IClient cli: clientes){
+            double cantidad=0;
+            for(Reservation re: reservas){
+                if(re.cli.equals(cli)){
+                    cantidad+=re.pro.getPrize();
+                }
+            }
+            listado.put(cli,cantidad);
+        }
+       
+        
+        return listado;
     }
 
     @Override
@@ -286,7 +319,9 @@ public class AppController implements IAppController {
 
     @Override
     public boolean editClient(IClient e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean editado=false;
+        
+        return editado;
     }
 
     @Override

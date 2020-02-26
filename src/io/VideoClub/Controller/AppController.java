@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -346,15 +347,18 @@ public class AppController implements IAppController {
     @Override
     public boolean removeProduct(String name) {
         boolean result = false;
- 
-        for (Product ite : productos) {
-            if (ite.getName().equals(name)) {
-                result = true;
-                productos.remove(ite);
-                break;
+        Predicate prueba=new Predicate() {
+            @Override
+            public boolean test(Object t) {
+                boolean procede=false;
+                Product produc=(Product)t;
+                procede=produc.getName().equals(name);
+                return procede;
             }
-            
-        }
+        };
+        
+        result=productos.removeIf(prueba);
+        
         return result;
     }
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Catalogo>
+<Otro>
+<Key>c274a313-9e2f-44</Key>
+<Nombre>P1</Nombre>
+<Descripcion>Producto1</Descripcion>
+<Precio>5.5</Precio>
+<EdadMinima>5.5</EdadMinima>
+<Tipo>null</Tipo>
+<Estado>AVAILABLE</Estado>
+</Otro>
+</Catalogo>

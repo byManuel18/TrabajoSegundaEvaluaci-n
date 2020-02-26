@@ -92,19 +92,38 @@ public class AppController implements IAppController {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //No Funciona --> Alberto
     @Override
     public Set<Product> listAllByName(String name, ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> ordenado = new TreeSet<>();
+        for (Product product : productos) {
+            if (product.getName().equals(name)) {
+                ordenado.addAll(productos);
+            }
+        }
+        return ordenado;
     }
-
+//No Funciona --> Alberto
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> ordenado = new TreeSet<>();
+        for (Product product : productos) {
+            if (product.getStatus().equals(status.AVAILABLE)) {
+                ordenado.addAll(productos);
+            }else if(product.getStatus().equals(status.RESERVED)){
+             ordenado.addAll(productos);
+            }
+        }
+        return ordenado;
     }
-
+//No Funciona --> Alberto
     @Override
     public List<Product> listAllDifferentProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       /* List<Product> ordenado = new LinkedList<>(productos);
+        for (Product product : ordenado) {
+                ordenado.addAll(productos);
+        }*/
+        return (List<Product>) productos;
     }
 
     @Override

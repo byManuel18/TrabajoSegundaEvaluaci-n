@@ -481,7 +481,7 @@ public class AppController implements IAppController {
                 tel.appendChild(doc.createTextNode(c.getPhone()));
                 e.appendChild(tel);
                 Element prec = doc.createElement("Fecha");
-                prec.appendChild(doc.createTextNode(String.valueOf(c.getTime())));
+                prec.appendChild(doc.createTextNode(c.getTime().toString()));
 
                 e.appendChild(prec);
 

@@ -55,7 +55,7 @@ public class AppController implements IAppController {
     private static AppController instancia = null;
 
     private Set<Product> productos;
-    private Set<IClient> clientes;
+    public Set<IClient> clientes;
     private Set<Reservation> reservas;
 
     private AppController() {
@@ -387,12 +387,14 @@ public class AppController implements IAppController {
                     Element eElement = (Element) nNode;
                     //String id=eElement.getAttribute("id");
                     String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-                    String id = eElement.getElementsByTagName("Id").item(0).getTextContent();
+                    String id = eElement.getElementsByTagName("ID").item(0).getTextContent();
                     String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
                     String fecha=eElement.getElementsByTagName("Fecha").item(0).getTextContent();
-                    Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 3)),
-                            Integer.parseInt(fecha.substring(5, 6)), Integer.parseInt(fecha.substring(8, 9)), Integer.parseInt(fecha.substring(11, 12)),
-                            Integer.parseInt(fecha.substring(14, 15)),Integer.parseInt(fecha.substring(17, 18))), telef);
+                    int mes=Integer.parseInt(fecha.substring(5, 7));
+                    System.out.println(mes);
+                    Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)),mes
+                            , Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
+                            Integer.parseInt(fecha.substring(14, 16)),Integer.parseInt(fecha.substring(17, 19))), telef);
                     clientes.add(c);
                 }
             }

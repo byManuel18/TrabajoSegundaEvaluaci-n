@@ -16,9 +16,11 @@ public class GUI {
 
     public static void principal(){
         AppController ni=AppController.getInstance();
-        System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
+        //System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
         
-        System.out.println(ni.saveClientsFromDDBB());
+        System.out.println(ni.loadClientsFromDDBB());
+        System.out.println(ni.clientes.isEmpty());
+        System.out.println(ni.clientes);
     } 
     
 }

@@ -383,7 +383,7 @@ public class AppController implements IAppController {
                     String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
                     String fecha=eElement.getElementsByTagName("Fecha").item(0).getTextContent();
                     int mes=Integer.parseInt(fecha.substring(5, 7));
-                    System.out.println(mes);
+                    
                     Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)),mes
                             , Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
                             Integer.parseInt(fecha.substring(14, 16)),Integer.parseInt(fecha.substring(17, 19))), telef);

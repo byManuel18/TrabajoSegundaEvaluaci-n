@@ -169,6 +169,7 @@ public class Utilities {
         P("23)Editar producto");
         P("24)Consultar productos disponibles");
         P("25)Cerrar reserva");
+        P("26)Salir");
         P("-------------------------------------");
         
         opcion=getInt(); //Llama a la funcion LeerNUmeros para darle un valor por teclado a opción

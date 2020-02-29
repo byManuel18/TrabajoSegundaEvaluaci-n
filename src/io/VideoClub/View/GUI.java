@@ -6,9 +6,8 @@
 package io.VideoClub.View;
 
 import io.VideoClub.Controller.AppController;
-import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
-import java.time.LocalDateTime;
+import io.VideoClub.Utilities.Utilities;
 
 /**
  *
@@ -27,6 +26,34 @@ public class GUI {
         System.out.println(ni.clientes.isEmpty());
         System.out.println(ni.clientes);
         System.out.println(ni.listAllByStatus(Product.Status.RESERVED));
+        PrimerMenu();
     } 
+    private static void PrimerMenu(){
+        int opcion=0;
+        
+        do{
+            opcion=Utilities.Menu();
+            ControladorPrimerMenu(opcion);
+        }while(opcion!=26);
+        
+    }
+    private static void ControladorPrimerMenu(int op1){
+        switch(op1){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+    }
     
 }

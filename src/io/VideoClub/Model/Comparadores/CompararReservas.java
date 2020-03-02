@@ -13,10 +13,32 @@ import java.util.Comparator;
  * @author Manueh
  */
 public class CompararReservas implements Comparator<Reservation>{
+    public enum Criterio{
+        AtoZ,
+        ZtoA,
+        PorKeyAtoZ,
+        PorkeyZtoA,
+        MenosAMallorPrecio,
+        MallorAMenorPrecio
+    }
+    private Criterio criterio;
 
+    public CompararReservas() {
+        this(Criterio.AtoZ);
+    }
+
+    public CompararReservas(Criterio criterio) {
+        this.criterio = criterio;
+    }
+    
+    
     @Override
     public int compare(Reservation o1, Reservation o2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int resultado=0;
+        switch(criterio){
+            
+        }
+        return resultado;
     }
 
     

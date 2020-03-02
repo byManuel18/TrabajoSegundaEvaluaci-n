@@ -6,16 +6,19 @@
 package io.VideoClub.Model.Comparadores;
 
 import io.VideoClub.Model.Reservation;
+import java.util.Comparator;
 
 /**
  *
  * @author Manueh
  */
-public class CompararReservas implements Comparable<Reservation>{
+public class CompararReservas implements Comparator<Reservation>{
 
     @Override
-    public int compareTo(Reservation o) {
+    public int compare(Reservation o1, Reservation o2) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }

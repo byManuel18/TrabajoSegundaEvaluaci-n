@@ -13,7 +13,7 @@ import java.util.Comparator;
  * @author Manueh
  */
 public class CompararProductos implements Comparator<Product>{
-    private enum Criterio{
+    public enum Criterio{
         AtoZ,
         ZtoA,
         PorKeyAtoZ,

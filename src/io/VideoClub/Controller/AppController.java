@@ -530,13 +530,194 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadCatalogFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       boolean cargado = false;
+        this.productos.clear();
+        try {
+            File file = new File(catalogDDBB);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+
+            // estos métodos podemos usarlos combinados para normalizar el archivo XML
+            //getDocumentElement()	Accede al nodo raíz del documento
+            //normalize()	Elimina nodos vacíos y combina adyacentes en caso de que los hubiera
+            doc.getDocumentElement().normalize();
+            NodeList nList = doc.getElementsByTagName("Pelicula");   //nList.getLength() -> n_nodos
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    //String id=eElement.getAttribute("id");
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String key = eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    String descrip = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                    String precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                    String tipo = eElement.getElementsByTagName("Tipo").item(0).getTextContent();
+                    String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
+                    String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                    
+                    ProductsTypes tipos=null;
+                    switch(tipo){
+                        case "Otros":
+                            tipos=ProductsTypes.Otros;
+                            break;
+                        case "Juegos":
+                            tipos=ProductsTypes.Juegos;
+                            break;
+                        case "Peliculas":
+                            tipos=ProductsTypes.Peliculas;
+                            break;
+                    }
+                    MovieCategory cate=null;
+                    switch(categoria){
+                        case "Action":
+                            cate=MovieCategory.Action;
+                            break;
+                        case "Horror":
+                            cate=MovieCategory.Horror;
+                            break;
+                        case "Love":
+                            cate=MovieCategory.Love;
+                            break;
+                        case "SciFi":
+                            cate=MovieCategory.SciFi;
+                            break;
+                    }   
+                    Product.Status est=null;
+                    switch(estado){
+                        case "AVAILABLE":
+                           est=Product.Status.AVAILABLE;
+                            break;
+                        case "RESERVED":
+                            est=Product.Status.RESERVED;
+                            break;
+                    }
+
+                    Pelicula p=new Pelicula(nombre, descrip,Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
+                    p.setKey(key);
+                    p.setStatus(est);
+                    
+                    productos.add(p);
+                }
+            }
+            nList = doc.getElementsByTagName("Juego");   //nList.getLength() -> n_nodos
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    //String id=eElement.getAttribute("id");
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String key = eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    String descrip = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                    String precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                    String tipo = eElement.getElementsByTagName("Tipo").item(0).getTextContent();
+                    String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
+                    String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                    
+                    ProductsTypes tipos=null;
+                    switch(tipo){
+                        case "Otros":
+                            tipos=ProductsTypes.Otros;
+                            break;
+                        case "Juegos":
+                            tipos=ProductsTypes.Juegos;
+                            break;
+                        case "Peliculas":
+                            tipos=ProductsTypes.Peliculas;
+                            break;
+                    }
+                    GameCategory cate=null;
+                    switch(categoria){
+                        case "Adeventures":
+                            cate=GameCategory.Adeventures;
+                            break;
+                        case "Cars":
+                            cate=GameCategory.Cars;
+                            break;
+                        case "Shooter":
+                            cate=GameCategory.Shooter;
+                            break;
+                
+                    }   
+                    Product.Status est=null;
+                    switch(estado){
+                        case "AVAILABLE":
+                           est=Product.Status.AVAILABLE;
+                            break;
+                        case "RESERVED":
+                            est=Product.Status.RESERVED;
+                            break;
+                    }
+
+                    Juego j=new Juego(nombre, descrip,Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
+                    j.setKey(key);
+                    j.setStatus(est);
+                    
+                    productos.add(j);
+                }
+            }
+            nList = doc.getElementsByTagName("Otro");   //nList.getLength() -> n_nodos
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    //String id=eElement.getAttribute("id");
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String key = eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    String descrip = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                    String precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                    String tipo = eElement.getElementsByTagName("Tipo").item(0).getTextContent();
+                    String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                 
+                    ProductsTypes tipos=null;
+                    switch(tipo){
+                        case "Otros":
+                            tipos=ProductsTypes.Otros;
+                            break;
+                        case "Juegos":
+                            tipos=ProductsTypes.Juegos;
+                            break;
+                        case "Peliculas":
+                            tipos=ProductsTypes.Peliculas;
+                            break;
+                    }
+                      
+                    Product.Status est=null;
+                    switch(estado){
+                        case "AVAILABLE":
+                           est=Product.Status.AVAILABLE;
+                            break;
+                        case "RESERVED":
+                            est=Product.Status.RESERVED;
+                            break;
+                    }
+
+                    Others o=new Others(nombre, descrip,Double.parseDouble(precio));
+                    o.setKey(key);
+                    o.setStatus(est);
+                    o.setTipo(tipos);
+                    
+                    productos.add(o);
+                }
+            }
+            cargado = true;
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return cargado;
     }
 
     @Override
     public boolean loadClientsFromDDBB() {
-        boolean cargado = false;
-        this.clientes.clear();
+         boolean cargado = false;
+        this.productos.clear();
         try {
             File file = new File(clientsDDBB);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -607,12 +788,18 @@ public class AppController implements IAppController {
                     Element cat = doc.createElement("Categoria");
                     cat.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c).getCategory())));
                     e.appendChild(cat);
+                    Element edad = doc.createElement("EdadMinima");
+                    edad.appendChild(doc.createTextNode(String.valueOf(c.getEdadmnima())));
+                    e.appendChild(edad);
                 } else if (c instanceof Juego) {
                     e = doc.createElement("Juego");
                     Element cat = doc.createElement("Categoria");
                     cat.appendChild(doc.createTextNode(String.valueOf(((Juego) c).getCategory())));
                     e.appendChild(cat);
-                } else {
+                    Element edad = doc.createElement("EdadMinima");
+                    edad.appendChild(doc.createTextNode(String.valueOf(c.getEdadmnima())));
+                    e.appendChild(edad);
+                } else{
                     e = doc.createElement("Otro");
                 }
 
@@ -624,8 +811,6 @@ public class AppController implements IAppController {
                 des.appendChild(doc.createTextNode(c.getDescription()));
                 Element prec = doc.createElement("Precio");
                 prec.appendChild(doc.createTextNode(String.valueOf(c.getPrize())));
-                Element edad = doc.createElement("EdadMinima");
-                edad.appendChild(doc.createTextNode(String.valueOf(c.getPrize())));
                 Element tipo = doc.createElement("Tipo");
                 tipo.appendChild(doc.createTextNode(String.valueOf(c.getTipo())));
                 Element estado = doc.createElement("Estado");
@@ -635,7 +820,6 @@ public class AppController implements IAppController {
                 e.appendChild(name);
                 e.appendChild(des);
                 e.appendChild(prec);
-                e.appendChild(edad);
                 e.appendChild(tipo);
                 e.appendChild(estado);
                 raiz.appendChild(e);

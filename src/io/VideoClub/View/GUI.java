@@ -7,6 +7,7 @@ package io.VideoClub.View;
 
 import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Comparadores.CompararaClientes;
+import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Utilities.Utilities;
@@ -21,22 +22,11 @@ public class GUI {
     public static void principal(){
         AppController ni=AppController.getInstance();
         //System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.loadClientsFromDDBB());
-        System.out.println(ni.createClient("12", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("13", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("14", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("15", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("16", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("17", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.createClient("18", "fasef", "ad", LocalDateTime.now()));
-        System.out.println(ni.saveClientsFromDDBB());
-        System.out.println(ni.createProduct("Pr1", "Producto1", 5.5));
-        System.out.println(ni.createProduct("Pr2", "Producto2", 6.5));
-        System.out.println(ni.createProduct("Pr3", "Producto3", 7.5));
-        System.out.println(ni.saveCatalogFromDDBB());
-        CompararaClientes c=new CompararaClientes(CompararaClientes.Criterio.PorkeyZtoA);
-        System.out.println(ni.listAllClients(c));
-        System.out.println(ni.listAllByName("Pr2", ProductsTypes.Otros));
+        
+        System.out.println(ni.listAllProducts());
+        System.out.println(ni.loadCatalogFromDDBB());
+        System.out.println(ni.listAllProducts());
+        
        // PrimerMenu();
     } 
     private static void PrimerMenu(){

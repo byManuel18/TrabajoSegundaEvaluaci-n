@@ -33,6 +33,7 @@ public abstract class Product extends Item implements Cloneable{
         this.key=generateRandom16Chars();
         this.tipo=tipo;
         this.edadmnima=edadminima;
+        this.status=Status.AVAILABLE;
     }
     public Product(String name, String description,double prize,ProductsTypes tipo){
         super(name,description,prize);

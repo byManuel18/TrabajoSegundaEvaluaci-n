@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Catalogo/>
+<Catalogo>
+<Otro>
+<Key>df3b1b45-2634-49</Key>
+<Nombre>papas</Nombre>
+<Descripcion>wsef</Descripcion>
+<Precio>1.23</Precio>
+<Tipo>Otros</Tipo>
+<Estado>AVAILABLE</Estado>
+</Otro>
+</Catalogo>

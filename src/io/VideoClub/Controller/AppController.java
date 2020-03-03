@@ -12,6 +12,7 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Item;
 import io.VideoClub.Model.Juego;
+import io.VideoClub.Model.Others;
 import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
@@ -305,35 +306,63 @@ public class AppController implements IAppController {
 
     @Override
     public boolean createProduct(String name, String description, double prize) {
-        boolean creado = false;
+        boolean creado = false, flag = false;
+          Others o=new Others(name, description, prize);
+          o.setTipo(ProductsTypes.Otros);
+          for (Product otro : productos) {
+            if (otro.equals(o)) {
+                flag = true;
+                break;
+            }
+        }
 
+        if (!flag) {
+            productos.add(o);
+            creado = true;
+        }
         return creado;
     }
 
     @Override
     public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
-        boolean result = false, flag = false;
+        boolean creado = false, flag = false;
 
-        Pelicula p = new Pelicula(name, description, minAge, minAge, type, cat);
+        Pelicula p = new Pelicula(name, description, prize, minAge, type, cat);
 
         for (Product peli : productos) {
             if (peli.equals(p)) {
-                result = true;
+                flag = true;
                 break;
             }
         }
 
-        if (!result) {
+        if (!flag) {
             productos.add(p);
-            flag = true;
+            creado = true;
         }
 
-        return flag;
+        return creado;
     }
 
     @Override
     public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean creado = false, flag = false;
+
+        Juego j = new Juego(name, description, prize, minAge, type, cat);
+
+        for (Product peli : productos) {
+            if (peli.equals(j)) {
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag) {
+            productos.add(j);
+            creado = true;
+        }
+
+        return creado;
     }
 
     @Override
@@ -400,7 +429,7 @@ public class AppController implements IAppController {
     @Override
     public boolean addProduct(String name) {
         boolean clonado = false;
-
+        
         return clonado;
     }
 

@@ -99,8 +99,35 @@ public interface IAppController {
     double getIncommings(LocalDate from, LocalDate to);
     Map<IClient,Double> resumeAllIncomingsByClient();
     
+    /**
+     * Crea el producto segun los parametros pasados
+     * @param name String
+     * @param description String
+     * @param prize double
+     * @return devuelve un booleano
+     */
     boolean createProduct(String name, String description,double prize);
+    /**
+     *  Crea la pelicula segun los parametros pasados
+     * @param type ProductsTypes
+     * @param name String
+     * @param description String
+     * @param cat MovieCategory
+     * @param minAge int
+     * @param prize double
+     * @return devuelve un booleano
+     */
     boolean createMovie(ProductsTypes type,String name, String description, MovieCategory cat,int minAge, double prize);
+    /**
+     *  Crea el juego segun los parametros pasados
+     * @param type ProductsTypes
+     * @param name String
+     * @param description String
+     * @param cat MovieCategory
+     * @param minAge int
+     * @param prize double
+     * @return devuelve un booleano
+     */
     boolean createGame(ProductsTypes type, String name, String description, GameCategory cat,int minAge, double prize);
     
     boolean createClient(String id,String name,String phone,LocalDateTime time);

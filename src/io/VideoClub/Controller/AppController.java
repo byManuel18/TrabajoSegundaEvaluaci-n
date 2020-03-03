@@ -90,7 +90,7 @@ public class AppController implements IAppController {
     public Set<Product> listAllByType(ProductsTypes type) {
         Set<Product> ordenado = new HashSet<>();
         for (Product productos : productos) {
-            if (productos.getTipo()==(type)) {
+            if (productos.getTipo() == (type)) {
                 ordenado.add(productos);
             }
         }
@@ -143,7 +143,8 @@ public class AppController implements IAppController {
     }
 
     /**
-     *Comprueba si el producto se ha insertado en la lista
+     * Comprueba si el producto se ha insertado en la lista
+     *
      * @param lista List<Product>
      * @param p Product
      * @return devuelve un booleano
@@ -256,7 +257,9 @@ public class AppController implements IAppController {
     public double getIncommings() {
         double resultado = 0;
         for (Reservation re : reservas) {
-            resultado += re.pro.getPrize();
+            if (re.status == Reservation.StatusReserve.FINISHED) {
+                resultado += re.pro.getPrize();
+            }
         }
         return resultado;
     }
@@ -401,7 +404,13 @@ public class AppController implements IAppController {
         return clonado;
     }
 
-    public boolean productoExistente(String name) {
+    /**
+     * Comprueba si un producto existe en el catalogo
+     *
+     * @param name String
+     * @return devuelve un booleano
+     */
+    private boolean productoExistente(String name) {
         boolean existe = false;
         for (Product p : productos) {
             if (p.getName().equals(name)) {
@@ -456,7 +465,7 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public double closeReservation() {
+    public double closeReservation(Reservation r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

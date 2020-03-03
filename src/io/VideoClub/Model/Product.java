@@ -21,7 +21,7 @@ public abstract class Product extends Item implements Cloneable{
     private ProductsTypes tipo;
     
     
-    public Product(){}
+    private Product(){}
     public Product(String name, String description,double prize){
         super(name,description,prize);
         this.key=generateRandom16Chars();

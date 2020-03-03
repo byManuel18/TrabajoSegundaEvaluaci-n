@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -75,22 +76,37 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Product> listAllProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return productos;
     }
 
     @Override
     public Set<Product> listAllProducts(Comparator c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> ordenado = new TreeSet<>(c);
+        ordenado.addAll(productos);
+        return ordenado;
     }
 
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> ordenado = new TreeSet<>();
+        for (Product productos : productos) {
+            if (productos.getTipo().equals(type)) {
+                ordenado.addAll(this.productos);
+            }
+        }
+        return ordenado;
+
     }
 
     @Override
     public Set<Product> listAllByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Product> ordenado = new TreeSet<>();
+        for (Product productos : productos) {
+            if (productos.getName().equals(name)) {
+                ordenado.addAll(this.productos);
+            }
+        }
+        return ordenado;
     }
 
     //No Funciona --> Alberto
@@ -105,22 +121,24 @@ public class AppController implements IAppController {
         return ordenado;
     }
 //No Funciona --> Alberto
+
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
         Set<Product> ordenado = new TreeSet<>();
         for (Product product : productos) {
             if (product.getStatus().equals(status.AVAILABLE)) {
                 ordenado.addAll(productos);
-            }else if(product.getStatus().equals(status.RESERVED)){
-             ordenado.addAll(productos);
+            } else if (product.getStatus().equals(status.RESERVED)) {
+                ordenado.addAll(productos);
             }
         }
         return ordenado;
     }
 //No Funciona --> Alberto
+
     @Override
     public List<Product> listAllDifferentProducts() {
-       /* List<Product> ordenado = new LinkedList<>(productos);
+        /* List<Product> ordenado = new LinkedList<>(productos);
         for (Product product : ordenado) {
                 ordenado.addAll(productos);
         }*/
@@ -129,41 +147,42 @@ public class AppController implements IAppController {
 
     @Override
     public List<Product> listAllDifferentMovies() {
-    Pelicula Peli ;
-    boolean result = false;
-        Iterator<Product> iter = Pelicula.Iterator();
-        while(iter.hasNext()){
-        Peli = (Pelicula)iter.next(); 
-        System.out.println(Peli.getName());
-}
+        List<Product> result = new ArrayList<>();
+
+        for (Product p : productos) {
+            if (p instanceof Pelicula) {
+                result.add(p);
+            }
+        }
+
         return result;
     }
+
     @Override
     public List<Product> listAllDifferentGames() {
-        Juego Jueg ;
-    boolean result = false;
-        Iterator<Product> iter = Juego.Iterator();
-        while(iter.hasNext()){
-        Jueg = (Juego)iter.next(); 
-        System.out.println(Jueg.getName());
-}
+        List<Product> result = new ArrayList<>();
+
+        for (Product p : productos) {
+            if (p instanceof Juego) {
+                result.add(p);
+            }
+        }
+
         return result;
     }
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
-        Map<Product,Integer> listado=new HashMap<>();
-       
-        
+        Map<Product, Integer> listado = new HashMap<>();
+
         return listado;
-       
+
     }
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        Map<Product,Integer> listado=new HashMap<>();
-       
-        
+        Map<Product, Integer> listado = new HashMap<>();
+
         return listado;
     }
 
@@ -174,17 +193,17 @@ public class AppController implements IAppController {
 
     @Override
     public Set<IClient> listAllClients(Comparator c) {
-       Set<IClient> ordenado=new TreeSet<>(c);
-       ordenado.addAll(clientes);
-       return ordenado;
+        Set<IClient> ordenado = new TreeSet<>(c);
+        ordenado.addAll(clientes);
+        return ordenado;
     }
 
     @Override
     public Set<IClient> listAllClientsWithReservationsNotFinished() {
-        Set<IClient> clientesconreservas=new HashSet<>();
-        for(IClient c: clientes){
-            for(Reservation re: reservas){
-                if(re.cli.equals(re)&&re.status!=Reservation.StatusReserve.FINISHED){
+        Set<IClient> clientesconreservas = new HashSet<>();
+        for (IClient c : clientes) {
+            for (Reservation re : reservas) {
+                if (re.cli.equals(re) && re.status != Reservation.StatusReserve.FINISHED) {
                     clientesconreservas.add(c);
                 }
             }
@@ -199,16 +218,16 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Reservation> listAllReservations(Comparator c) {
-        Set<Reservation> ordenado=new TreeSet<>(c);
+        Set<Reservation> ordenado = new TreeSet<>(c);
         ordenado.addAll(reservas);
         return ordenado;
     }
 
     @Override
     public Set<Reservation> listAllReservations(Reservation.StatusReserve status) {
-        Set<Reservation> ordenado=new HashSet<>();
-        for(Reservation re: reservas){
-            if(re.status==status){
+        Set<Reservation> ordenado = new HashSet<>();
+        for (Reservation re : reservas) {
+            if (re.status == status) {
                 ordenado.add(re);
             }
         }
@@ -217,19 +236,19 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings() {
-        double resultado=0;
-        for(Reservation re:reservas){
-            resultado+=re.pro.getPrize();
+        double resultado = 0;
+        for (Reservation re : reservas) {
+            resultado += re.pro.getPrize();
         }
         return resultado;
     }
 
     @Override
     public double getIncommings(LocalDate from) {
-        double resultado=0;
-        for(Reservation reser: reservas){
-            if(reser.ini.compareTo(from)>=0){
-                resultado+=reser.pro.getPrize();
+        double resultado = 0;
+        for (Reservation reser : reservas) {
+            if (reser.ini.compareTo(from) >= 0) {
+                resultado += reser.pro.getPrize();
             }
         }
         return resultado;
@@ -237,10 +256,10 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings(LocalDate from, LocalDate to) {
-        double resultado=0;
-        for(Reservation reser: reservas){
-            if(reser.ini.compareTo(from)>=0&&reser.ini.compareTo(to)<=0){
-                resultado+=reser.pro.getPrize();
+        double resultado = 0;
+        for (Reservation reser : reservas) {
+            if (reser.ini.compareTo(from) >= 0 && reser.ini.compareTo(to) <= 0) {
+                resultado += reser.pro.getPrize();
             }
         }
         return resultado;
@@ -248,31 +267,30 @@ public class AppController implements IAppController {
 
     @Override
     public Map<IClient, Double> resumeAllIncomingsByClient() {
-        Map<IClient,Double> listado=new HashMap<>();
-        
-        for(IClient cli: clientes){
-            double cantidad=0;
-            for(Reservation re: reservas){
-                if(re.cli.equals(cli)){
-                    cantidad+=re.pro.getPrize();
+        Map<IClient, Double> listado = new HashMap<>();
+
+        for (IClient cli : clientes) {
+            double cantidad = 0;
+            for (Reservation re : reservas) {
+                if (re.cli.equals(cli)) {
+                    cantidad += re.pro.getPrize();
                 }
             }
-            listado.put(cli,cantidad);
+            listado.put(cli, cantidad);
         }
-       
-        
+
         return listado;
     }
 
     @Override
     public boolean createProduct(String name, String description, double prize) {
         boolean creado = false;
-   
+
         return creado;
     }
 
     @Override
-    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge) {
+    public boolean createMovie(ProductsTypes type, String name, String description, MovieCategory cat, int minAge, double prize) {
         boolean result = false, flag = false;
 
         Pelicula p = new Pelicula(name, description, minAge, minAge, type, cat);
@@ -293,7 +311,7 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge) {
+    public boolean createGame(ProductsTypes type, String name, String description, GameCategory cat, int minAge, double prize) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -301,9 +319,9 @@ public class AppController implements IAppController {
     public boolean createClient(String id, String name, String phone, LocalDateTime time) {
         Client c = new Client(id, name, time, phone);
         boolean añadido = false;
-        
-        if(!existeCliente(id)){
-            añadido=clientes.add(c);
+
+        if (!existeCliente(id)) {
+            añadido = clientes.add(c);
         }
 
         return añadido;
@@ -311,40 +329,40 @@ public class AppController implements IAppController {
 
     @Override
     public boolean removeClient(String id) {
-        boolean borrado =false;
-        if(existeCliente(id)&&!comprobarssiclientetienereserva(devolverClienteExistente(id))){
-            borrado=clientes.remove(devolverClienteExistente(id));
+        boolean borrado = false;
+        if (existeCliente(id) && !comprobarssiclientetienereserva(devolverClienteExistente(id))) {
+            borrado = clientes.remove(devolverClienteExistente(id));
         }
         return borrado;
     }
-    
-    private boolean comprobarssiclientetienereserva(Client c){
-        boolean tiene=false;
-        for(Reservation reser : reservas){
-            if(reser.cli.equals(c)){
-                tiene=true;
+
+    private boolean comprobarssiclientetienereserva(Client c) {
+        boolean tiene = false;
+        for (Reservation reser : reservas) {
+            if (reser.cli.equals(c)) {
+                tiene = true;
                 break;
             }
         }
         return tiene;
     }
-    
-    public boolean existeCliente(String id){
-        boolean existe=false;
+
+    public boolean existeCliente(String id) {
+        boolean existe = false;
         for (IClient client : clientes) {
-            if (client.getID().equals(id)){
+            if (client.getID().equals(id)) {
                 existe = true;
                 break;
             }
         }
         return existe;
     }
-    
-    public Client devolverClienteExistente(String id){
-        Client devolver=null;
-        for(IClient c: clientes){
-            if(c.getID().equals(id)){
-                devolver=(Client)c;
+
+    public Client devolverClienteExistente(String id) {
+        Client devolver = null;
+        for (IClient c : clientes) {
+            if (c.getID().equals(id)) {
+                devolver = (Client) c;
                 break;
             }
         }
@@ -353,26 +371,26 @@ public class AppController implements IAppController {
 
     @Override
     public boolean editClient(IClient e) {
-        boolean editado=false;
-        
+        boolean editado = false;
+
         return editado;
     }
 
     @Override
     public boolean addProduct(String name) {
-        boolean clonado=false;
-        
+        boolean clonado = false;
+
         return clonado;
     }
-    
-    public boolean productoExistente(String name){
-        boolean existe=false;
-        for(Product p: productos){
-            if(p.getName().equals(name)){
-                existe=true;
+
+    public boolean productoExistente(String name) {
+        boolean existe = false;
+        for (Product p : productos) {
+            if (p.getName().equals(name)) {
+                existe = true;
                 break;
             }
-            
+
         }
         return existe;
     }
@@ -380,18 +398,18 @@ public class AppController implements IAppController {
     @Override
     public boolean removeProduct(String name) {
         boolean result = false;
-        Predicate prueba=new Predicate() {
+        Predicate prueba = new Predicate() {
             @Override
             public boolean test(Object t) {
-                boolean procede=false;
-                Product produc=(Product)t;
-                procede=produc.getName().equals(name);
+                boolean procede = false;
+                Product produc = (Product) t;
+                procede = produc.getName().equals(name);
                 return procede;
             }
         };
-        
-        result=productos.removeIf(prueba);
-        
+
+        result = productos.removeIf(prueba);
+
         return result;
     }
 
@@ -402,11 +420,11 @@ public class AppController implements IAppController {
 
     @Override
     public Product isAvailableProduct(String name) {
-        Product p=null;
-        if(productoExistente(name)){
-            for(Product pro: productos){
-                if(pro.getName().equals(name)&&pro.getStatus()==Product.Status.AVAILABLE){
-                    p=pro;
+        Product p = null;
+        if (productoExistente(name)) {
+            for (Product pro : productos) {
+                if (pro.getName().equals(name) && pro.getStatus() == Product.Status.AVAILABLE) {
+                    p = pro;
                     break;
                 }
             }
@@ -431,7 +449,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadClientsFromDDBB() {
-        boolean cargado=false;
+        boolean cargado = false;
         this.clientes.clear();
         try {
             File file = new File(clientsDDBB);
@@ -453,16 +471,15 @@ public class AppController implements IAppController {
                     String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
                     String id = eElement.getElementsByTagName("ID").item(0).getTextContent();
                     String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
-                    String fecha=eElement.getElementsByTagName("Fecha").item(0).getTextContent();
-                    int mes=Integer.parseInt(fecha.substring(5, 7));
-                    
-                    Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)),mes
-                            , Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
-                            Integer.parseInt(fecha.substring(14, 16)),Integer.parseInt(fecha.substring(17, 19))), telef);
+                    String fecha = eElement.getElementsByTagName("Fecha").item(0).getTextContent();
+                    int mes = Integer.parseInt(fecha.substring(5, 7));
+
+                    Client c = new Client(id, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)), mes, Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
+                            Integer.parseInt(fecha.substring(14, 16)), Integer.parseInt(fecha.substring(17, 19))), telef);
                     clientes.add(c);
                 }
             }
-            cargado=true;
+            cargado = true;
         } catch (ParserConfigurationException ex) {
             System.out.println(ex);
         } catch (SAXException ex) {
@@ -491,9 +508,9 @@ public class AppController implements IAppController {
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
             DocumentBuilder build;
 
-            build = dFact.newDocumentBuilder();   
+            build = dFact.newDocumentBuilder();
 
-            org.w3c.dom.Document doc = build.newDocument(); 
+            org.w3c.dom.Document doc = build.newDocument();
 
             Element raiz = doc.createElement("Catalogo");
 
@@ -571,9 +588,9 @@ public class AppController implements IAppController {
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
             DocumentBuilder build;
 
-            build = dFact.newDocumentBuilder();   
+            build = dFact.newDocumentBuilder();
 
-            org.w3c.dom.Document doc = build.newDocument(); 
+            org.w3c.dom.Document doc = build.newDocument();
             Element raiz = doc.createElement("Clientes");
 
             for (IClient c : clientes) {
@@ -611,7 +628,6 @@ public class AppController implements IAppController {
             trans.transform(source, result);
             guardado = true;
 
-            
         } catch (ParserConfigurationException ex) {
             System.out.println(ex);
         } catch (TransformerConfigurationException ex) {

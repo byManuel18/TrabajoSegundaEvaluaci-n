@@ -34,4 +34,9 @@ public class Pelicula extends Product implements Cloneable{
         return super.toString() + " Categoria: " + category + " Edad mínima: " + getEdadmnima();
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
 }

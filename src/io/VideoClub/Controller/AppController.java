@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -128,12 +129,25 @@ public class AppController implements IAppController {
 
     @Override
     public List<Product> listAllDifferentMovies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Pelicula Peli ;
+    boolean result = false;
+        Iterator<Product> iter = Pelicula.Iterator();
+        while(iter.hasNext()){
+        Peli = (Pelicula)iter.next(); 
+        System.out.println(Peli.getName());
+}
+        return result;
     }
-
     @Override
     public List<Product> listAllDifferentGames() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Juego Jueg ;
+    boolean result = false;
+        Iterator<Product> iter = Juego.Iterator();
+        while(iter.hasNext()){
+        Jueg = (Juego)iter.next(); 
+        System.out.println(Jueg.getName());
+}
+        return result;
     }
 
     @Override

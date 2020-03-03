@@ -187,7 +187,7 @@ public class AppController implements IAppController {
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
         Map<Product, Integer> listado = new HashMap<>();
-
+        
         return listado;
 
     }
@@ -195,7 +195,7 @@ public class AppController implements IAppController {
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
         Map<Product, Integer> listado = new HashMap<>();
-
+        
         return listado;
     }
 
@@ -408,7 +408,7 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public boolean addProduct(String name) {
+    public boolean addProduct(String name, ProductsTypes type) {
         boolean clonado = false;
         
         return clonado;

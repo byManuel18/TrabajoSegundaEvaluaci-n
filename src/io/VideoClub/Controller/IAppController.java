@@ -134,7 +134,7 @@ public interface IAppController {
     boolean removeClient(String id);  //if has reservations cant be deleted
     boolean editClient(IClient e);
     
-    boolean addProduct(String name);
+    boolean addProduct(String name, ProductsTypes type);
     boolean removeProduct(String name,ProductsTypes ty);
     
     boolean editProduct(String key, Product newP);

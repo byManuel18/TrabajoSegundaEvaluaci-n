@@ -109,40 +109,54 @@ public class AppController implements IAppController {
         return ordenado;
     }
 
-    //No Funciona --> Alberto
     @Override
     public Set<Product> listAllByName(String name, ProductsTypes type) {
-        Set<Product> ordenado = new TreeSet<>();
+        Set<Product> ordenado = new HashSet<>();
         for (Product product : productos) {
-            if (product.getName().equals(name)) {
-                ordenado.addAll(productos);
+            if (product.getName().equals(name) && product.getTipo() == type) {
+                ordenado.add(product);
             }
         }
         return ordenado;
     }
-//No Funciona --> Alberto
 
     @Override
     public Set<Product> listAllByStatus(Product.Status status) {
-        Set<Product> ordenado = new TreeSet<>();
+        Set<Product> ordenado = new HashSet<>();
         for (Product product : productos) {
-            if (product.getStatus().equals(status.AVAILABLE)) {
-                ordenado.addAll(productos);
-            } else if (product.getStatus().equals(status.RESERVED)) {
-                ordenado.addAll(productos);
+            if (product.getStatus() == status) {
+                ordenado.add(product);
             }
         }
         return ordenado;
     }
-//No Funciona --> Alberto
 
     @Override
     public List<Product> listAllDifferentProducts() {
-        /* List<Product> ordenado = new LinkedList<>(productos);
+        List<Product> ordenado = new ArrayList<>();
         for (Product product : ordenado) {
-                ordenado.addAll(productos);
-        }*/
-        return (List<Product>) productos;
+            if (!comprobarInsert(ordenado, product)) {
+                ordenado.add(product);
+            }
+        }
+        return ordenado;
+    }
+
+    /**
+     *Comprueba si el producto se ha insertado en la lista
+     * @param lista List<Product>
+     * @param p Product
+     * @return devuelve un booleano
+     */
+    private boolean comprobarInsert(List<Product> lista, Product p) {
+        boolean result = false;
+        for (Product product : lista) {
+            if (product.getName().equals(p.getName())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -150,8 +164,10 @@ public class AppController implements IAppController {
         List<Product> result = new ArrayList<>();
 
         for (Product p : productos) {
-            if (p instanceof Pelicula) {
-                result.add(p);
+            if (!comprobarInsert(result, p)) {
+                if (p instanceof Pelicula) {
+                    result.add(p);
+                }
             }
         }
 
@@ -163,8 +179,10 @@ public class AppController implements IAppController {
         List<Product> result = new ArrayList<>();
 
         for (Product p : productos) {
-            if (p instanceof Juego) {
-                result.add(p);
+            if (!comprobarInsert(result, p)) {
+                if (p instanceof Juego) {
+                    result.add(p);
+                }
             }
         }
 

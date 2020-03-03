@@ -31,11 +31,35 @@ public interface IAppController {
     Set<Product> listAllProducts(Comparator c);
     Set<Product> listAllByType(ProductsTypes type);
     Set<Product> listAllByName(String name);
+    
+    /**
+     * Lista todos los productos segun el nombre y el tipo pasado
+     * @param name String
+     * @param type ProductTypes
+     * @return devuelve una lista Set de los productos
+     */
     Set<Product> listAllByName(String name,ProductsTypes type);
+    /**
+     * Lista todos los productos segun el estatus pasado
+     * @param status Product.Status
+     * @return devuelve una lista Set de los productos 
+     */
     Set<Product> listAllByStatus(Product.Status status);
     
+    /**
+     * Lista todos los productos diferentes del catalogo
+     * @return devuelve una lista List de los productos
+     */
     List<Product> listAllDifferentProducts();
+     /**
+     * Lista todos las peliculas diferentes del catalogo
+     * @return devuelve una lista List de las peliculas
+     */
     List<Product> listAllDifferentMovies();
+    /**
+     * Lista todos los juegos diferentes del catalogo
+     * @return devuelve una lista List de los juegos
+     */
     List<Product> listAllDifferentGames();
     
     Map<Product,Integer> listAllAmountOfProducts(String name); 

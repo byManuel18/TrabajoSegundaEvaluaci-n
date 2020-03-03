@@ -19,6 +19,8 @@ public class Reservation {
         FINISHED, //ini on finised on == end
         PENDING  //ini on , finished off and end past
     }
+    private static int IDRESEREVA=1;
+    private int id;
     public Product pro;
     public IClient cli;
     public LocalDate ini;
@@ -40,6 +42,8 @@ public class Reservation {
             end = end.plusDays(1);
         }
         status = StatusReserve.ACTIVE;
+        id=IDRESEREVA;
+        IDRESEREVA++;
     }
 
     public boolean equals(Object o) {
@@ -51,13 +55,20 @@ public class Reservation {
                         && this.cli.equals(other.cli)
                         && this.ini.equals(other.cli)
                         && this.end.equals(other.end)
-                        && this.status == other.status) {
+                        && this.status == other.status
+                        && this.id==other.id) {
                     result = true;
                 }
             }
         }
         return result;
     }
+
+    public int getId() {
+        return id;
+    }
+    
+    
 
     @Override
     public String toString() {

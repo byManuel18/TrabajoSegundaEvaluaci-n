@@ -10,7 +10,6 @@ import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
-import io.VideoClub.Model.Item;
 import io.VideoClub.Model.Juego;
 import io.VideoClub.Model.Others;
 import io.VideoClub.Model.Pelicula;
@@ -20,21 +19,15 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -256,31 +249,19 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings() {
-        double resultado = 0;
-        for (Reservation re : reservas) {
-            if (re.status == Reservation.StatusReserve.FINISHED) {
-                resultado += re.pro.getPrize();
-            }
-        }
-        return resultado;
+        return getIncommings(LocalDate.of(0, 0, 0), LocalDate.now());
     }
 
     @Override
     public double getIncommings(LocalDate from) {
-        double resultado = 0;
-        for (Reservation reser : reservas) {
-            if (reser.ini.compareTo(from) >= 0) {
-                resultado += reser.pro.getPrize();
-            }
-        }
-        return resultado;
+       return getIncommings(from, LocalDate.now());
     }
 
     @Override
     public double getIncommings(LocalDate from, LocalDate to) {
         double resultado = 0;
         for (Reservation reser : reservas) {
-            if (reser.ini.compareTo(from) >= 0 && reser.ini.compareTo(to) <= 0) {
+            if (reser.ini.compareTo(from) >= 0 && reser.ini.compareTo(to) <= 0&&reser.status==Reservation.StatusReserve.FINISHED) {
                 resultado += reser.pro.getPrize();
             }
         }
@@ -294,7 +275,7 @@ public class AppController implements IAppController {
         for (IClient cli : clientes) {
             double cantidad = 0;
             for (Reservation re : reservas) {
-                if (re.cli.equals(cli)) {
+                if (re.cli.equals(cli)&&re.status==Reservation.StatusReserve.FINISHED) {
                     cantidad += re.pro.getPrize();
                 }
             }
@@ -452,14 +433,14 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public boolean removeProduct(String name) {
+    public boolean removeProduct(String name,ProductsTypes ty) {
         boolean result = false;
         Predicate prueba = new Predicate() {
             @Override
             public boolean test(Object t) {
                 boolean procede = false;
                 Product produc = (Product) t;
-                procede = produc.getName().equals(name);
+                procede = produc.getName().equals(name)&&produc.getTipo()==ty;
                 return procede;
             }
         };
@@ -468,10 +449,34 @@ public class AppController implements IAppController {
 
         return result;
     }
+    public boolean removeProduct(String key) {
+        boolean result = false;
+        for(Product pr :productos){
+            if(pr.getKey().equals(key)){
+                result=productos.remove(pr);
+                break;
+            }
+        }
+
+        return result;
+    }
 
     @Override
     public boolean editProduct(String key, Product newP) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean editado= false;
+        for(Product pr : productos){
+            if(pr.getKey().equals(key)){
+                pr.setName(newP.getName());
+                pr.setPrize(newP.getPrize());
+                pr.setStatus(newP.getStatus());
+                pr.setTipo(newP.getTipo());
+                pr.setDescription(newP.getDescription());
+                editado=true;
+                break;
+            }
+        }
+        return editado;
+        
     }
 
     @Override
@@ -490,12 +495,37 @@ public class AppController implements IAppController {
 
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean reservado=true;
+        if(prod!=null&&prod.getStatus()==Product.Status.AVAILABLE&&client!=null){
+            reservado=reservas.add(new Reservation(prod, client));
+            prod.setStatus(Product.Status.RESERVED);
+        }
+        return reservado;
+        
     }
 
     @Override
     public double closeReservation(Reservation r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double precio=0;
+        precio=r.pro.getPrize();
+        r.status=Reservation.StatusReserve.FINISHED;
+        r.finished=LocalDate.now();
+        if(r.end.compareTo(r.finished)<0){
+            precio+=(precio*0.15f);
+        }
+        return precio;
+    }
+    
+    public Reservation devolverUnaReserva(int numeroid){
+        Reservation re=null;
+        for(Reservation reser: reservas){
+           if(reser.getId()==numeroid){
+               re=reser;
+               break;
+           } 
+        }
+        return re;
+       
     }
 
     @Override

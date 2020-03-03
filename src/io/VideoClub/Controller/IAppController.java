@@ -135,7 +135,7 @@ public interface IAppController {
     boolean editClient(IClient e);
     
     boolean addProduct(String name);
-    boolean removeProduct(String name);
+    boolean removeProduct(String name,ProductsTypes ty);
     
     boolean editProduct(String key, Product newP);
     

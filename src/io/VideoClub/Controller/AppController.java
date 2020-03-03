@@ -789,7 +789,7 @@ public class AppController implements IAppController {
                     cat.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c).getCategory())));
                     e.appendChild(cat);
                     Element edad = doc.createElement("EdadMinima");
-                    edad.appendChild(doc.createTextNode(String.valueOf(c.getEdadmnima())));
+                    edad.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c).getEdadmnima())));
                     e.appendChild(edad);
                 } else if (c instanceof Juego) {
                     e = doc.createElement("Juego");
@@ -797,7 +797,7 @@ public class AppController implements IAppController {
                     cat.appendChild(doc.createTextNode(String.valueOf(((Juego) c).getCategory())));
                     e.appendChild(cat);
                     Element edad = doc.createElement("EdadMinima");
-                    edad.appendChild(doc.createTextNode(String.valueOf(c.getEdadmnima())));
+                    edad.appendChild(doc.createTextNode(String.valueOf(((Juego) c).getEdadmnima())));
                     e.appendChild(edad);
                 } else{
                     e = doc.createElement("Otro");

@@ -14,10 +14,11 @@ import io.VideoClub.Model.Enums.ProductsTypes;
  */
 public class Juego extends Product implements Cloneable{
     GameCategory category;
-
+    private int edadmnima;
     public Juego(String name, String description, double prize, int edadminima, ProductsTypes tipo,GameCategory category) {
-        super(name, description, prize, edadminima, tipo);
+        super(name, description, prize, tipo);
         this.category=category;
+        this.edadmnima=edadminima;
     }
 
     public GameCategory getCategory() {
@@ -26,6 +27,14 @@ public class Juego extends Product implements Cloneable{
 
     public void setCategory(GameCategory category) {
         this.category = category;
+    }
+
+    public int getEdadmnima() {
+        return edadmnima;
+    }
+
+    public void setEdadmnima(int edadmnima) {
+        this.edadmnima = edadmnima;
     }
 
     @Override

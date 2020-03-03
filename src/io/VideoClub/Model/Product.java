@@ -17,7 +17,6 @@ public abstract class Product extends Item implements Cloneable{
     }
     private String key;
     private Status status;
-    private int edadmnima;
     private ProductsTypes tipo;
     
     
@@ -28,30 +27,21 @@ public abstract class Product extends Item implements Cloneable{
         this.status=Status.AVAILABLE;
     }
     
-    public Product(String name, String description,double prize,int edadminima, ProductsTypes tipo){
-        super(name,description,prize);
-        this.key=generateRandom16Chars();
-        this.tipo=tipo;
-        this.edadmnima=edadminima;
-        this.status=Status.AVAILABLE;
-    }
     public Product(String name, String description,double prize,ProductsTypes tipo){
         super(name,description,prize);
         this.key=generateRandom16Chars();
         this.tipo=tipo;
+        this.status=Status.AVAILABLE;
     }
+   
     
     private String generateRandom16Chars(){
         return(String)UUID.randomUUID().toString().subSequence(0, 16);
     }
 
-    public int getEdadmnima() {
-        return edadmnima;
-    }
+   
 
-    public void setEdadmnima(int edadmnima) {
-        this.edadmnima = edadmnima;
-    }
+  
 
     public ProductsTypes getTipo() {
         return tipo;
@@ -82,7 +72,7 @@ public abstract class Product extends Item implements Cloneable{
         if(o!=null){
             if(o instanceof Product){
                 Product other=(Product)o;
-                if(other.key.equals(other.key)){
+                if(this.key.equals(other.key)){
                     result=true;
                 }
             }

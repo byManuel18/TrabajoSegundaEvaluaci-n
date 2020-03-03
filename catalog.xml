@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Catalogo>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>22f07f01-38d6-49</Key>
+<Nombre>300</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
+<Juego>
+<Categoria>Adeventures</Categoria>
+<EdadMinima>5</EdadMinima>
+<Key>db37992c-758d-43</Key>
+<Nombre>Minecraft</Nombre>
+<Descripcion>Juego de cubos</Descripcion>
+<Precio>19.95</Precio>
+<Tipo>Juegos</Tipo>
+<Estado>AVAILABLE</Estado>
+</Juego>
 <Otro>
-<Key>df3b1b45-2634-49</Key>
-<Nombre>papas</Nombre>
-<Descripcion>wsef</Descripcion>
-<Precio>1.23</Precio>
+<Key>e0db0455-f629-4f</Key>
+<Nombre>Taza</Nombre>
+<Descripcion>Para beber</Descripcion>
+<Precio>3.95</Precio>
 <Tipo>Otros</Tipo>
 <Estado>AVAILABLE</Estado>
 </Otro>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>05d11ebb-2908-49</Key>
+<Nombre>301</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
 </Catalogo>

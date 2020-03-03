@@ -184,10 +184,17 @@ public class AppController implements IAppController {
         return result;
     }
 
+    //Medio hecho
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
         Map<Product, Integer> listado = new HashMap<>();
-        
+        for (Map.Entry<Product, Integer> entry : listado.entrySet()) {
+            Product key = entry.getKey();
+            Integer value = entry.getValue();
+           if (key.getName().equals(name)) {
+                listado.put(key, value);
+            }  
+        } 
         return listado;
 
     }
@@ -195,7 +202,7 @@ public class AppController implements IAppController {
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
         Map<Product, Integer> listado = new HashMap<>();
-        
+
         return listado;
     }
 
@@ -254,14 +261,14 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings(LocalDate from) {
-       return getIncommings(from, LocalDate.now());
+        return getIncommings(from, LocalDate.now());
     }
 
     @Override
     public double getIncommings(LocalDate from, LocalDate to) {
         double resultado = 0;
         for (Reservation reser : reservas) {
-            if (reser.ini.compareTo(from) >= 0 && reser.ini.compareTo(to) <= 0&&reser.status==Reservation.StatusReserve.FINISHED) {
+            if (reser.ini.compareTo(from) >= 0 && reser.ini.compareTo(to) <= 0 && reser.status == Reservation.StatusReserve.FINISHED) {
                 resultado += reser.pro.getPrize();
             }
         }
@@ -275,7 +282,7 @@ public class AppController implements IAppController {
         for (IClient cli : clientes) {
             double cantidad = 0;
             for (Reservation re : reservas) {
-                if (re.cli.equals(cli)&&re.status==Reservation.StatusReserve.FINISHED) {
+                if (re.cli.equals(cli) && re.status == Reservation.StatusReserve.FINISHED) {
                     cantidad += re.pro.getPrize();
                 }
             }
@@ -288,9 +295,9 @@ public class AppController implements IAppController {
     @Override
     public boolean createProduct(String name, String description, double prize) {
         boolean creado = false, flag = false;
-          Others o=new Others(name, description, prize);
-          o.setTipo(ProductsTypes.Otros);
-          for (Product otro : productos) {
+        Others o = new Others(name, description, prize);
+        o.setTipo(ProductsTypes.Otros);
+        for (Product otro : productos) {
             if (otro.equals(o)) {
                 flag = true;
                 break;
@@ -410,7 +417,7 @@ public class AppController implements IAppController {
     @Override
     public boolean addProduct(String name, ProductsTypes type) {
         boolean clonado = false;
-        
+
         return clonado;
     }
 
@@ -433,14 +440,14 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public boolean removeProduct(String name,ProductsTypes ty) {
+    public boolean removeProduct(String name, ProductsTypes ty) {
         boolean result = false;
         Predicate prueba = new Predicate() {
             @Override
             public boolean test(Object t) {
                 boolean procede = false;
                 Product produc = (Product) t;
-                procede = produc.getName().equals(name)&&produc.getTipo()==ty;
+                procede = produc.getName().equals(name) && produc.getTipo() == ty;
                 return procede;
             }
         };
@@ -449,11 +456,12 @@ public class AppController implements IAppController {
 
         return result;
     }
+
     public boolean removeProduct(String key) {
         boolean result = false;
-        for(Product pr :productos){
-            if(pr.getKey().equals(key)){
-                result=productos.remove(pr);
+        for (Product pr : productos) {
+            if (pr.getKey().equals(key)) {
+                result = productos.remove(pr);
                 break;
             }
         }
@@ -463,20 +471,20 @@ public class AppController implements IAppController {
 
     @Override
     public boolean editProduct(String key, Product newP) {
-        boolean editado= false;
-        for(Product pr : productos){
-            if(pr.getKey().equals(key)){
+        boolean editado = false;
+        for (Product pr : productos) {
+            if (pr.getKey().equals(key)) {
                 pr.setName(newP.getName());
                 pr.setPrize(newP.getPrize());
                 pr.setStatus(newP.getStatus());
                 pr.setTipo(newP.getTipo());
                 pr.setDescription(newP.getDescription());
-                editado=true;
+                editado = true;
                 break;
             }
         }
         return editado;
-        
+
     }
 
     @Override
@@ -495,42 +503,42 @@ public class AppController implements IAppController {
 
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
-        boolean reservado=true;
-        if(prod!=null&&prod.getStatus()==Product.Status.AVAILABLE&&client!=null){
-            reservado=reservas.add(new Reservation(prod, client));
+        boolean reservado = true;
+        if (prod != null && prod.getStatus() == Product.Status.AVAILABLE && client != null) {
+            reservado = reservas.add(new Reservation(prod, client));
             prod.setStatus(Product.Status.RESERVED);
         }
         return reservado;
-        
+
     }
 
     @Override
     public double closeReservation(Reservation r) {
-        double precio=0;
-        precio=r.pro.getPrize();
-        r.status=Reservation.StatusReserve.FINISHED;
-        r.finished=LocalDate.now();
-        if(r.end.compareTo(r.finished)<0){
-            precio+=(precio*0.15f);
+        double precio = 0;
+        precio = r.pro.getPrize();
+        r.status = Reservation.StatusReserve.FINISHED;
+        r.finished = LocalDate.now();
+        if (r.end.compareTo(r.finished) < 0) {
+            precio += (precio * 0.15f);
         }
         return precio;
     }
-    
-    public Reservation devolverUnaReserva(int numeroid){
-        Reservation re=null;
-        for(Reservation reser: reservas){
-           if(reser.getId()==numeroid){
-               re=reser;
-               break;
-           } 
+
+    public Reservation devolverUnaReserva(int numeroid) {
+        Reservation re = null;
+        for (Reservation reser : reservas) {
+            if (reser.getId() == numeroid) {
+                re = reser;
+                break;
+            }
         }
         return re;
-       
+
     }
 
     @Override
     public boolean loadCatalogFromDDBB() {
-       boolean cargado = false;
+        boolean cargado = false;
         this.productos.clear();
         try {
             File file = new File(catalogDDBB);
@@ -557,48 +565,48 @@ public class AppController implements IAppController {
                     String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
                     String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
                     String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                    
-                    ProductsTypes tipos=null;
-                    switch(tipo){
+
+                    ProductsTypes tipos = null;
+                    switch (tipo) {
                         case "Otros":
-                            tipos=ProductsTypes.Otros;
+                            tipos = ProductsTypes.Otros;
                             break;
                         case "Juegos":
-                            tipos=ProductsTypes.Juegos;
+                            tipos = ProductsTypes.Juegos;
                             break;
                         case "Peliculas":
-                            tipos=ProductsTypes.Peliculas;
+                            tipos = ProductsTypes.Peliculas;
                             break;
                     }
-                    MovieCategory cate=null;
-                    switch(categoria){
+                    MovieCategory cate = null;
+                    switch (categoria) {
                         case "Action":
-                            cate=MovieCategory.Action;
+                            cate = MovieCategory.Action;
                             break;
                         case "Horror":
-                            cate=MovieCategory.Horror;
+                            cate = MovieCategory.Horror;
                             break;
                         case "Love":
-                            cate=MovieCategory.Love;
+                            cate = MovieCategory.Love;
                             break;
                         case "SciFi":
-                            cate=MovieCategory.SciFi;
+                            cate = MovieCategory.SciFi;
                             break;
-                    }   
-                    Product.Status est=null;
-                    switch(estado){
+                    }
+                    Product.Status est = null;
+                    switch (estado) {
                         case "AVAILABLE":
-                           est=Product.Status.AVAILABLE;
+                            est = Product.Status.AVAILABLE;
                             break;
                         case "RESERVED":
-                            est=Product.Status.RESERVED;
+                            est = Product.Status.RESERVED;
                             break;
                     }
 
-                    Pelicula p=new Pelicula(nombre, descrip,Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
+                    Pelicula p = new Pelicula(nombre, descrip, Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
                     p.setKey(key);
                     p.setStatus(est);
-                    
+
                     productos.add(p);
                 }
             }
@@ -616,46 +624,46 @@ public class AppController implements IAppController {
                     String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
                     String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
                     String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                    
-                    ProductsTypes tipos=null;
-                    switch(tipo){
+
+                    ProductsTypes tipos = null;
+                    switch (tipo) {
                         case "Otros":
-                            tipos=ProductsTypes.Otros;
+                            tipos = ProductsTypes.Otros;
                             break;
                         case "Juegos":
-                            tipos=ProductsTypes.Juegos;
+                            tipos = ProductsTypes.Juegos;
                             break;
                         case "Peliculas":
-                            tipos=ProductsTypes.Peliculas;
+                            tipos = ProductsTypes.Peliculas;
                             break;
                     }
-                    GameCategory cate=null;
-                    switch(categoria){
+                    GameCategory cate = null;
+                    switch (categoria) {
                         case "Adeventures":
-                            cate=GameCategory.Adeventures;
+                            cate = GameCategory.Adeventures;
                             break;
                         case "Cars":
-                            cate=GameCategory.Cars;
+                            cate = GameCategory.Cars;
                             break;
                         case "Shooter":
-                            cate=GameCategory.Shooter;
+                            cate = GameCategory.Shooter;
                             break;
-                
-                    }   
-                    Product.Status est=null;
-                    switch(estado){
+
+                    }
+                    Product.Status est = null;
+                    switch (estado) {
                         case "AVAILABLE":
-                           est=Product.Status.AVAILABLE;
+                            est = Product.Status.AVAILABLE;
                             break;
                         case "RESERVED":
-                            est=Product.Status.RESERVED;
+                            est = Product.Status.RESERVED;
                             break;
                     }
 
-                    Juego j=new Juego(nombre, descrip,Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
+                    Juego j = new Juego(nombre, descrip, Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
                     j.setKey(key);
                     j.setStatus(est);
-                    
+
                     productos.add(j);
                 }
             }
@@ -671,35 +679,35 @@ public class AppController implements IAppController {
                     String precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
                     String tipo = eElement.getElementsByTagName("Tipo").item(0).getTextContent();
                     String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                 
-                    ProductsTypes tipos=null;
-                    switch(tipo){
+
+                    ProductsTypes tipos = null;
+                    switch (tipo) {
                         case "Otros":
-                            tipos=ProductsTypes.Otros;
+                            tipos = ProductsTypes.Otros;
                             break;
                         case "Juegos":
-                            tipos=ProductsTypes.Juegos;
+                            tipos = ProductsTypes.Juegos;
                             break;
                         case "Peliculas":
-                            tipos=ProductsTypes.Peliculas;
-                            break;
-                    }
-                      
-                    Product.Status est=null;
-                    switch(estado){
-                        case "AVAILABLE":
-                           est=Product.Status.AVAILABLE;
-                            break;
-                        case "RESERVED":
-                            est=Product.Status.RESERVED;
+                            tipos = ProductsTypes.Peliculas;
                             break;
                     }
 
-                    Others o=new Others(nombre, descrip,Double.parseDouble(precio));
+                    Product.Status est = null;
+                    switch (estado) {
+                        case "AVAILABLE":
+                            est = Product.Status.AVAILABLE;
+                            break;
+                        case "RESERVED":
+                            est = Product.Status.RESERVED;
+                            break;
+                    }
+
+                    Others o = new Others(nombre, descrip, Double.parseDouble(precio));
                     o.setKey(key);
                     o.setStatus(est);
                     o.setTipo(tipos);
-                    
+
                     productos.add(o);
                 }
             }
@@ -716,7 +724,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadClientsFromDDBB() {
-         boolean cargado = false;
+        boolean cargado = false;
         this.productos.clear();
         try {
             File file = new File(clientsDDBB);
@@ -799,7 +807,7 @@ public class AppController implements IAppController {
                     Element edad = doc.createElement("EdadMinima");
                     edad.appendChild(doc.createTextNode(String.valueOf(((Juego) c).getEdadmnima())));
                     e.appendChild(edad);
-                } else{
+                } else {
                     e = doc.createElement("Otro");
                 }
 

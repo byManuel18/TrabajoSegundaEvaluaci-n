@@ -20,36 +20,41 @@ import java.time.LocalDateTime;
  */
 public class GUI {
 
-    public static void principal(){
-        AppController ni=AppController.getInstance();
+    public static void principal() {
+        AppController ni = AppController.getInstance();
         //System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
         /*
         System.out.println(ni.listAllProducts());
         System.out.println(ni.loadCatalogFromDDBB());
         System.out.println(ni.listAllProducts());
-        */
-       /* System.out.println(ni.createGame(ProductsTypes.Juegos, "Minecraft", "Juego de cubos", GameCategory.Adeventures, 5, 19.95));
+         */
+        System.out.println(ni.createGame(ProductsTypes.Juegos, "Minecraft", "Juego de cubos", GameCategory.Adeventures, 5, 19.95));
+        System.out.println(ni.createGame(ProductsTypes.Juegos, "Minecraft", "Juego de cubos", GameCategory.Adeventures, 5, 19.95));
         System.out.println(ni.createMovie(ProductsTypes.Peliculas, "300", "Hombres semidesnudos", MovieCategory.Action, 12, 4.95));
         System.out.println(ni.createMovie(ProductsTypes.Peliculas, "301", "Hombres semidesnudos", MovieCategory.Action, 12, 4.95));
         System.out.println(ni.createProduct("Taza", "Para beber", 3.95));
-        System.out.println(ni.saveCatalogFromDDBB());*/
+        System.out.println(ni.saveCatalogFromDDBB());
+        System.out.println(ni.listAllAmountOfProducts("Minecraft"));
+        /* 
         System.out.println(ni.listAllProducts());
         System.out.println(ni.loadCatalogFromDDBB());
         System.out.println(ni.listAllProducts());
-
+         */
         // PrimerMenu();
-    } 
-    private static void PrimerMenu(){
-        int opcion=0;
-        
-        do{
-            opcion=Utilities.Menu();
-            ControladorPrimerMenu(opcion);
-        }while(opcion!=26);
-        
     }
-    private static void ControladorPrimerMenu(int op1){
-        switch(op1){
+
+    private static void PrimerMenu() {
+        int opcion = 0;
+
+        do {
+            opcion = Utilities.Menu();
+            ControladorPrimerMenu(opcion);
+        } while (opcion != 26);
+
+    }
+
+    private static void ControladorPrimerMenu(int op1) {
+        switch (op1) {
             case 1:
                 break;
             case 2:
@@ -66,5 +71,5 @@ public class GUI {
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
-    
+
 }

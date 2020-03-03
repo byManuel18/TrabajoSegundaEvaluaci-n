@@ -88,10 +88,10 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Product> listAllByType(ProductsTypes type) {
-        Set<Product> ordenado = new TreeSet<>();
+        Set<Product> ordenado = new HashSet<>();
         for (Product productos : productos) {
-            if (productos.getTipo().equals(type)) {
-                ordenado.addAll(this.productos);
+            if (productos.getTipo()==(type)) {
+                ordenado.add(productos);
             }
         }
         return ordenado;
@@ -100,10 +100,10 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Product> listAllByName(String name) {
-        Set<Product> ordenado = new TreeSet<>();
+        Set<Product> ordenado = new HashSet<>();
         for (Product productos : productos) {
             if (productos.getName().equals(name)) {
-                ordenado.addAll(this.productos);
+                ordenado.add(productos);
             }
         }
         return ordenado;

@@ -26,10 +26,31 @@ public interface IAppController {
     public final static String clientsDDBB="clients.xml";
     public final static String reservationsDDBB="reservations.xml";
     
-    
+    /**
+     * Lista todos los productos
+     * @return devuelve una lista con todos los productos
+     */
     Set<Product> listAllProducts();
+    
+    /**
+     * Lista todos los productos pasandole un comparador
+     * @param c Comparator
+     * @return devuelve la lista
+     */
     Set<Product> listAllProducts(Comparator c);
+    
+    /**
+     * Lista todos los productos según el tipo que le pasemos
+     * @param type ProductsTypes
+     * @return devuelve la lista de los productos
+     */
     Set<Product> listAllByType(ProductsTypes type);
+    
+    /**
+     * Lista todos los productos de la lista pasandole un nombre
+     * @param name String
+     * @return devuelve la lista de los productos
+     */
     Set<Product> listAllByName(String name);
     
     /**

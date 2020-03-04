@@ -36,6 +36,10 @@ public class GUI {
         System.out.println(ni.createClient("20225087R", "Manuel", "32523", LocalDateTime.now()));
         System.out.println(ni.reserveProduct(ni.isAvailableProduct("300"), ni.devolverClienteExistente("20225087R")));
         //System.out.println(ni.closeReservation(ni.devolverUnaReserva(1)));
+        System.out.println(ni.listAllProducts());
+        System.out.println("---------------");
+        System.out.println(ni.addProduct("300", ProductsTypes.Peliculas));
+        System.out.println(ni.listAllProducts());
         System.out.println(ni.listAllReservations());
         System.out.println(ni.saveAllDDBB());
         

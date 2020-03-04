@@ -3,7 +3,7 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
-<Key>adba871e-e7f1-48</Key>
+<Key>35830ecc-f854-4f</Key>
 <Nombre>Minecraft</Nombre>
 <Descripcion>Juego de cubos</Descripcion>
 <Precio>19.95</Precio>
@@ -11,7 +11,7 @@
 <Estado>AVAILABLE</Estado>
 </Juego>
 <Otro>
-<Key>cd5e4f9e-a301-4c</Key>
+<Key>079a05d0-365d-45</Key>
 <Nombre>Taza</Nombre>
 <Descripcion>Para beber</Descripcion>
 <Precio>3.95</Precio>
@@ -21,7 +21,7 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
-<Key>b816a804-e7fe-42</Key>
+<Key>80b5384e-fdf7-4c</Key>
 <Nombre>Minecraft</Nombre>
 <Descripcion>Juego de cubos</Descripcion>
 <Precio>19.95</Precio>
@@ -31,7 +31,7 @@
 <Pelicula>
 <Categoria>Action</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>a31d7a4a-1928-4c</Key>
+<Key>0b6aac6a-8ab8-45</Key>
 <Nombre>301</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>
@@ -41,7 +41,17 @@
 <Pelicula>
 <Categoria>Action</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>c146fb5e-7965-4f</Key>
+<Key>14b8b37a-7a34-44</Key>
+<Nombre>300</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>c427731d-79e9-4c</Key>
 <Nombre>300</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>

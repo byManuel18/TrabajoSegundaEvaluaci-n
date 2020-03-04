@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -417,7 +419,19 @@ public class AppController implements IAppController {
     @Override
     public boolean addProduct(String name, ProductsTypes type) {
         boolean clonado = false;
-
+        for(Product pro:productos){
+            if(pro.getName().equals(name)&&pro.getTipo()==type){
+                try {
+                    Product nuevo=(Product) pro.clone();
+                    nuevo.setStatus(Product.Status.AVAILABLE);
+                    productos.add(nuevo);
+                    clonado=true;
+                    break;
+                } catch (CloneNotSupportedException ex) {
+                    Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         return clonado;
     }
 

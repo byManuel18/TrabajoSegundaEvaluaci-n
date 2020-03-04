@@ -83,7 +83,18 @@ public interface IAppController {
      */
     List<Product> listAllDifferentGames();
     
+    /**
+     * Muestra todos los productos que hay en la lista segun el nombre pasado
+     * @param name String
+     * @return devuelve una lista tipo Map 
+     */
     Map<Product,Integer> listAllAmountOfProducts(String name); 
+    /**
+     * Muestra todos los productos que hay en la lista segun el nombre y el tipo de producto pasado
+     * @param type ProductsTypes
+     * @param name String
+     * @return devuelve una lista tipo Map 
+     */
     Map<Product,Integer> listAllAmountOfProducts(ProductsTypes type,String name);
     
     Set<IClient> listAllClients();

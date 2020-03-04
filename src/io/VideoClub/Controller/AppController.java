@@ -186,25 +186,43 @@ public class AppController implements IAppController {
         return result;
     }
 
-    //Medio hecho
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
+        int num = contarProductos(name);
         Map<Product, Integer> listado = new HashMap<>();
-        for (Map.Entry<Product, Integer> entry : listado.entrySet()) {
-            Product key = entry.getKey();
-            Integer value = entry.getValue();
-            if (key.getName().equals(name)) {
-                listado.put(key, value);
+        for (Product p : productos) {
+            if (p.getName().equals(name)) {
+                listado.put(p, num);
             }
         }
         return listado;
 
     }
 
+    /**
+     *Cuenta los productos que hay en la lista segun el nombre pasado
+     * @param name String
+     * @return devuelve un entero
+     */
+    private int contarProductos(String name) {
+        int num = 0;
+        for (Product p : productos) {
+            if (p.getName().equals(name)) {
+                num++;
+            }
+        }
+        return num;
+    }
+
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
+        int num = contarProductos(name);
         Map<Product, Integer> listado = new HashMap<>();
-
+        for (Product p : productos) {
+            if (p.getName().equals(name) && p.getTipo() == type) {
+                listado.put(p, num);
+            }
+        }
         return listado;
     }
 

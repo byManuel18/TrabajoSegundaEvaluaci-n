@@ -191,10 +191,10 @@ public class AppController implements IAppController {
         for (Map.Entry<Product, Integer> entry : listado.entrySet()) {
             Product key = entry.getKey();
             Integer value = entry.getValue();
-           if (key.getName().equals(name)) {
+            if (key.getName().equals(name)) {
                 listado.put(key, value);
-            }  
-        } 
+            }
+        }
         return listado;
 
     }
@@ -566,42 +566,9 @@ public class AppController implements IAppController {
                     String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
                     String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
 
-                    ProductsTypes tipos = null;
-                    switch (tipo) {
-                        case "Otros":
-                            tipos = ProductsTypes.Otros;
-                            break;
-                        case "Juegos":
-                            tipos = ProductsTypes.Juegos;
-                            break;
-                        case "Peliculas":
-                            tipos = ProductsTypes.Peliculas;
-                            break;
-                    }
-                    MovieCategory cate = null;
-                    switch (categoria) {
-                        case "Action":
-                            cate = MovieCategory.Action;
-                            break;
-                        case "Horror":
-                            cate = MovieCategory.Horror;
-                            break;
-                        case "Love":
-                            cate = MovieCategory.Love;
-                            break;
-                        case "SciFi":
-                            cate = MovieCategory.SciFi;
-                            break;
-                    }
-                    Product.Status est = null;
-                    switch (estado) {
-                        case "AVAILABLE":
-                            est = Product.Status.AVAILABLE;
-                            break;
-                        case "RESERVED":
-                            est = Product.Status.RESERVED;
-                            break;
-                    }
+                    ProductsTypes tipos = devuelvetipoproducto(tipo);
+                    MovieCategory cate = devuelvecategoriapeli(categoria);
+                    Product.Status est = devuelveestadoproducto(estado);
 
                     Pelicula p = new Pelicula(nombre, descrip, Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
                     p.setKey(key);
@@ -625,40 +592,9 @@ public class AppController implements IAppController {
                     String categoria = eElement.getElementsByTagName("Categoria").item(0).getTextContent();
                     String edad = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
 
-                    ProductsTypes tipos = null;
-                    switch (tipo) {
-                        case "Otros":
-                            tipos = ProductsTypes.Otros;
-                            break;
-                        case "Juegos":
-                            tipos = ProductsTypes.Juegos;
-                            break;
-                        case "Peliculas":
-                            tipos = ProductsTypes.Peliculas;
-                            break;
-                    }
-                    GameCategory cate = null;
-                    switch (categoria) {
-                        case "Adeventures":
-                            cate = GameCategory.Adeventures;
-                            break;
-                        case "Cars":
-                            cate = GameCategory.Cars;
-                            break;
-                        case "Shooter":
-                            cate = GameCategory.Shooter;
-                            break;
-
-                    }
-                    Product.Status est = null;
-                    switch (estado) {
-                        case "AVAILABLE":
-                            est = Product.Status.AVAILABLE;
-                            break;
-                        case "RESERVED":
-                            est = Product.Status.RESERVED;
-                            break;
-                    }
+                    ProductsTypes tipos = devuelvetipoproducto(tipo);
+                    GameCategory cate = devuelvecategoriajuego(categoria);
+                    Product.Status est = devuelveestadoproducto(estado);
 
                     Juego j = new Juego(nombre, descrip, Double.parseDouble(precio), Integer.parseInt(edad), tipos, cate);
                     j.setKey(key);
@@ -680,28 +616,9 @@ public class AppController implements IAppController {
                     String tipo = eElement.getElementsByTagName("Tipo").item(0).getTextContent();
                     String estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
 
-                    ProductsTypes tipos = null;
-                    switch (tipo) {
-                        case "Otros":
-                            tipos = ProductsTypes.Otros;
-                            break;
-                        case "Juegos":
-                            tipos = ProductsTypes.Juegos;
-                            break;
-                        case "Peliculas":
-                            tipos = ProductsTypes.Peliculas;
-                            break;
-                    }
+                    ProductsTypes tipos = devuelvetipoproducto(tipo);
 
-                    Product.Status est = null;
-                    switch (estado) {
-                        case "AVAILABLE":
-                            est = Product.Status.AVAILABLE;
-                            break;
-                        case "RESERVED":
-                            est = Product.Status.RESERVED;
-                            break;
-                    }
+                    Product.Status est = devuelveestadoproducto(estado);
 
                     Others o = new Others(nombre, descrip, Double.parseDouble(precio));
                     o.setKey(key);
@@ -720,6 +637,72 @@ public class AppController implements IAppController {
             System.out.println(ex);
         }
         return cargado;
+    }
+
+    private Product.Status devuelveestadoproducto(String cadena) {
+        Product.Status est = null;
+        switch (cadena) {
+            case "AVAILABLE":
+                est = Product.Status.AVAILABLE;
+                break;
+            case "RESERVED":
+                est = Product.Status.RESERVED;
+                break;
+        }
+        return est;
+
+    }
+
+    private ProductsTypes devuelvetipoproducto(String cadena) {
+        ProductsTypes tipos = null;
+        switch (cadena) {
+            case "Otros":
+                tipos = ProductsTypes.Otros;
+                break;
+            case "Juegos":
+                tipos = ProductsTypes.Juegos;
+                break;
+            case "Peliculas":
+                tipos = ProductsTypes.Peliculas;
+                break;
+        }
+        return tipos;
+    }
+
+    private MovieCategory devuelvecategoriapeli(String cadena) {
+        MovieCategory cate = null;
+        switch (cadena) {
+            case "Action":
+                cate = MovieCategory.Action;
+                break;
+            case "Horror":
+                cate = MovieCategory.Horror;
+                break;
+            case "Love":
+                cate = MovieCategory.Love;
+                break;
+            case "SciFi":
+                cate = MovieCategory.SciFi;
+                break;
+        }
+        return cate;
+    }
+
+    private GameCategory devuelvecategoriajuego(String cadena) {
+        GameCategory cate = null;
+        switch (cadena) {
+            case "Adeventures":
+                cate = GameCategory.Adeventures;
+                break;
+            case "Cars":
+                cate = GameCategory.Cars;
+                break;
+            case "Shooter":
+                cate = GameCategory.Shooter;
+                break;
+
+        }
+        return cate;
     }
 
     @Override

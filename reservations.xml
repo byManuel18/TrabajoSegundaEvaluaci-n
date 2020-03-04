@@ -2,15 +2,15 @@
 <Reservas>
 <Reserva>
 <ID>1</ID>
-<Estado>FINISHED</Estado>
+<Estado>ACTIVE</Estado>
 <FechaInicio>2020-03-04</FechaInicio>
 <FechaLimite>2020-03-12</FechaLimite>
-<FechaDevolución>2020-03-04</FechaDevolución>
+<FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225087R</IDCliente>
 <Nombre>Manuel</Nombre>
 <Telefono>32523</Telefono>
-<FechaInscripcion>2020-03-04T12:46:20.233</FechaInscripcion>
+<FechaInscripcion>2020-03-04T12:50:11.241</FechaInscripcion>
 </Cliente>
 <Producto>
 <Pelicula>
@@ -19,8 +19,8 @@
 <Precio>4.95</Precio>
 <Nombre>300</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
-<Key>00705c6b-a0d1-48</Key>
-<Estado>AVAILABLE</Estado>
+<Key>c1c2736e-98bd-4e</Key>
+<Estado>RESERVED</Estado>
 </Pelicula>
 </Producto>
 </Reserva>

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Reservas>
 <Reserva>
+<ID>2</ID>
+<Estado>ACTIVE</Estado>
+<FechaInicio>2020-03-04</FechaInicio>
+<FechaLimite>2020-03-12</FechaLimite>
+<FechaDevolución>NO ENTREGADO</FechaDevolución>
+<Cliente>
+<IDCliente>20225087R</IDCliente>
+<Nombre>Manuel</Nombre>
+<Telefono>32523</Telefono>
+<FechaInscripcion>2020-03-04T14:29:28.313</FechaInscripcion>
+</Cliente>
+<Producto>
+<Otro>
+<Precio>3.95</Precio>
+<Nombre>Taza</Nombre>
+<Descripcion>Para beber</Descripcion>
+<Key>32c1d4f3-b689-46</Key>
+<Estado>RESERVED</Estado>
+</Otro>
+</Producto>
+</Reserva>
+<Reserva>
 <ID>1</ID>
 <Estado>ACTIVE</Estado>
 <FechaInicio>2020-03-04</FechaInicio>
@@ -10,7 +32,7 @@
 <IDCliente>20225087R</IDCliente>
 <Nombre>Manuel</Nombre>
 <Telefono>32523</Telefono>
-<FechaInscripcion>2020-03-04T12:50:11.241</FechaInscripcion>
+<FechaInscripcion>2020-03-04T14:29:28.313</FechaInscripcion>
 </Cliente>
 <Producto>
 <Pelicula>
@@ -19,7 +41,7 @@
 <Precio>4.95</Precio>
 <Nombre>300</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
-<Key>c1c2736e-98bd-4e</Key>
+<Key>69872d76-c539-47</Key>
 <Estado>RESERVED</Estado>
 </Pelicula>
 </Producto>

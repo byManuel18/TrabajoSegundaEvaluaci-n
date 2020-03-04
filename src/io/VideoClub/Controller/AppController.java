@@ -377,7 +377,7 @@ public class AppController implements IAppController {
     private boolean comprobarssiclientetienereserva(Client c) {
         boolean tiene = false;
         for (Reservation reser : reservas) {
-            if (reser.cli.equals(c)) {
+            if (reser.cli.equals(c)&&reser.status!=Reservation.StatusReserve.FINISHED) {
                 tiene = true;
                 break;
             }
@@ -761,7 +761,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadAllDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return loadCatalogFromDDBB()&&loadClientsFromDDBB()&&loadReservationsFromDDBB();
     }
 
     @Override
@@ -1029,7 +1029,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean saveAllDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return saveCatalogFromDDBB()&&saveClientsFromDDBB()&&saveReservationsFromDDBB();
     }
 
 }

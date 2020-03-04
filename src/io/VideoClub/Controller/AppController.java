@@ -902,7 +902,75 @@ public class AppController implements IAppController {
 
     @Override
     public boolean saveReservationsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean guardado = false;
+        try {
+
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+            DocumentBuilder build;
+
+            build = dFact.newDocumentBuilder();
+
+            org.w3c.dom.Document doc = build.newDocument();
+            Element raiz = doc.createElement("Reservas");
+
+            for (Reservation c : reservas) {
+                Element e = doc.createElement("Reserva");
+                Element k = doc.createElement("ID");
+                k.appendChild(doc.createTextNode(String.valueOf(c.getId())));
+                e.appendChild(k);
+                Element estado = doc.createElement("Estado");
+                estado.appendChild(doc.createTextNode(String.valueOf(c.status)));
+                e.appendChild(estado);
+                Element fechini = doc.createElement("FechaInicio");
+                fechini.appendChild(doc.createTextNode(c.ini.toString()));
+                e.appendChild(fechini);
+                Element fechaend = doc.createElement("FechaLimite");
+                fechaend.appendChild(doc.createTextNode(c.end.toString()));
+                e.appendChild(fechaend);
+                
+                Element cliente = doc.createElement("Cliente");
+                Element id = doc.createElement("IDCliente");
+                id.appendChild(doc.createTextNode(c.cli.getID()));
+                cliente.appendChild(id);
+                Element name=doc.createElement("Nombre");
+                name.appendChild(doc.createTextNode(c.cli.getName()));
+                cliente.appendChild(name);
+                Element telefono=doc.createElement("Telefono");
+                telefono.appendChild(doc.createTextNode(c.cli.getPhone()));
+                cliente.appendChild(telefono);
+                Element fechahoracreacion=doc.createElement("FechaInscripcion");
+                fechahoracreacion.appendChild(doc.createTextNode(c.cli.getTime().toString()));
+                cliente.appendChild(fechahoracreacion);
+                e.appendChild(cliente);
+                
+
+                raiz.appendChild(e);
+
+            }
+            doc.appendChild(raiz);
+
+            //Guardar el xml en el disco duro
+            TransformerFactory tFact = TransformerFactory.newInstance();
+            Transformer trans = tFact.newTransformer();
+            //<-- OPCIONES DEL ARCHIVO
+            trans.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+            trans.setOutputProperty("{http://xml.apache.org/xlst}indent-amount", "4");
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(reservationsDDBB));
+
+            trans.transform(source, result);
+            guardado = true;
+
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerConfigurationException ex) {
+            System.out.println(ex);
+        } catch (TransformerException ex) {
+            System.out.println(ex);
+
+        }
+        return guardado;
     }
 
     @Override

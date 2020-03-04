@@ -756,7 +756,7 @@ public class AppController implements IAppController {
     @Override
     public boolean loadClientsFromDDBB() {
         boolean cargado = false;
-        this.productos.clear();
+        this.clientes.clear();
         try {
             File file = new File(clientsDDBB);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -798,7 +798,131 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadReservationsFromDDBB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean cargado = false;
+        this.reservas.clear();
+        try {
+            File file = new File(reservationsDDBB);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+
+            // estos métodos podemos usarlos combinados para normalizar el archivo XML
+            //getDocumentElement()	Accede al nodo raíz del documento
+            //normalize()	Elimina nodos vacíos y combina adyacentes en caso de que los hubiera
+            doc.getDocumentElement().normalize();
+            NodeList nList = doc.getElementsByTagName("Reserva");   //nList.getLength() -> n_nodos
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    //String id=eElement.getAttribute("id");
+                    String id=eElement.getElementsByTagName("ID").item(0).getTextContent();
+                    String estadoreser=eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    String fechainicio=eElement.getElementsByTagName("FechaInicio").item(0).getTextContent();
+                    String fechalimite=eElement.getElementsByTagName("FechaLimite").item(0).getTextContent();
+                    String fechadevol=eElement.getElementsByTagName("FechaDevolución").item(0).getTextContent();
+                   
+                    NodeList nClientes = doc.getElementsByTagName("Cliente");
+                    Node cNode = nClientes.item(0);
+                    eElement = (Element) cNode;
+                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String idclien = eElement.getElementsByTagName("IDCliente").item(0).getTextContent();
+                    String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
+                    String fecha = eElement.getElementsByTagName("FechaInscripcion").item(0).getTextContent();
+                    int mes = Integer.parseInt(fecha.substring(5, 7));
+
+                    Client c = new Client(idclien, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)), mes, Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
+                            Integer.parseInt(fecha.substring(14, 16)), Integer.parseInt(fecha.substring(17, 19))), telef);
+                    Product nuevo=null;
+                    NodeList nPeliculas = doc.getElementsByTagName("Pelicula");
+                    NodeList nOtro= doc.getElementsByTagName("Otro");
+                    NodeList nJuego = doc.getElementsByTagName("Juego");
+                    String nombrepro,precio,edadmin,categoria,tipo,descripcion,estado,key;
+                    if(nPeliculas.getLength()!=0){
+                        Node pNode = nPeliculas.item(0);
+                        eElement = (Element) pNode;
+                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
+                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                        categoria=eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
+                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
+                        nuevo= new Pelicula(nombrepro, descripcion, Double.parseDouble(precio),Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));
+                        nuevo.setStatus(devuelveestadoproducto(estado));
+                        nuevo.setKey(key);
+                    }else if(nJuego.getLength()!=0){
+                        Node jNode = nJuego.item(0);
+                        eElement = (Element) jNode;
+                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
+                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                        categoria=eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
+                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
+                        nuevo=new Juego(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
+                        nuevo.setStatus(devuelveestadoproducto(estado));
+                        nuevo.setKey(key);
+                    }else if(nOtro.getLength()!=0){
+                        Node oNode = nOtro.item(0);
+                        eElement = (Element) oNode;
+                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
+                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
+                        nuevo=new Others(nombrepro, descripcion, Double.parseDouble(precio));
+                        nuevo.setStatus(devuelveestadoproducto(estado));
+                        nuevo.setKey(key);
+                        nuevo.setTipo( devuelvetipoproducto(tipo));
+                    }
+                    
+                    
+                    
+                    
+                    
+                    Reservation nuevareser= new Reservation(nuevo, c);
+                    nuevareser.setId(Integer.parseInt(id));
+                    nuevareser.status=devulveValorEstadoReserva(estadoreser);
+                    nuevareser.ini=LocalDate.of(Integer.parseInt(fechainicio.substring(0, 4)), Integer.parseInt(fechainicio.substring(6, 7)), Integer.parseInt(fechainicio.substring(8)));
+                    nuevareser.end=LocalDate.of(Integer.parseInt(fechalimite.substring(0, 4)), Integer.parseInt(fechalimite.substring(6, 7)), Integer.parseInt(fechalimite.substring(8)));
+                    if(!fechadevol.equals("NO ENTREGADO")){
+                        nuevareser.finished=LocalDate.of(Integer.parseInt(fechadevol.substring(0, 4)), Integer.parseInt(fechadevol.substring(6, 7)), Integer.parseInt(fechadevol.substring(8)));
+                    }
+                    
+                    reservas.add(nuevareser);
+                }
+            }
+            cargado = true;
+        } catch (ParserConfigurationException ex) {
+            System.out.println(ex);
+        } catch (SAXException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        return cargado;
+    }
+    
+    private Reservation.StatusReserve devulveValorEstadoReserva(String cadena){
+        Reservation.StatusReserve estado=null;
+        switch(cadena){
+            case "ACTIVE":
+                 estado=Reservation.StatusReserve.ACTIVE;
+                break;
+            case "FINISHED":
+                 estado=Reservation.StatusReserve.FINISHED;
+                break;
+            case "PENDING":
+                estado=Reservation.StatusReserve.PENDING;
+                break;
+        }
+        return estado;
     }
 
     @Override

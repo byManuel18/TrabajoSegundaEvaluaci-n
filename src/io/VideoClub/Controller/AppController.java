@@ -521,6 +521,12 @@ public class AppController implements IAppController {
         if (r.end.compareTo(r.finished) < 0) {
             precio += (precio * 0.15f);
         }
+        for(Product produc :productos){
+            if(produc.equals(r.pro)){
+                produc.setStatus(Product.Status.AVAILABLE);
+                break;
+            }
+        }
         return precio;
     }
 
@@ -927,6 +933,14 @@ public class AppController implements IAppController {
                 Element fechaend = doc.createElement("FechaLimite");
                 fechaend.appendChild(doc.createTextNode(c.end.toString()));
                 e.appendChild(fechaend);
+                Element fechadev = doc.createElement("FechaDevolución");
+                if(c.finished==null){
+                    fechadev.appendChild(doc.createTextNode("NO ENTREGADO"));
+                }else{
+                    fechadev.appendChild(doc.createTextNode(c.finished.toString()));
+                }
+                
+                e.appendChild(fechadev);
                 
                 Element cliente = doc.createElement("Cliente");
                 Element id = doc.createElement("IDCliente");
@@ -943,7 +957,47 @@ public class AppController implements IAppController {
                 cliente.appendChild(fechahoracreacion);
                 e.appendChild(cliente);
                 
-
+                Element producto = doc.createElement("Producto");
+                 Element instancia;
+                if(c.pro instanceof Pelicula){
+                    instancia = doc.createElement("Pelicula");
+                    Element categoria=doc.createElement("CategoriaPelicula");
+                    categoria.appendChild(doc.createTextNode(String.valueOf(((Pelicula)c.pro).getCategory())));
+                    instancia.appendChild(categoria);
+                    Element edadmin=doc.createElement("EdadMinima");
+                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Pelicula)c.pro).getEdadmnima())));
+                    instancia.appendChild(edadmin);
+                }else if (c.pro instanceof Juego){
+                    instancia = doc.createElement("Juego");
+                    Element categoria=doc.createElement("CategoriaJuego");
+                    categoria.appendChild(doc.createTextNode(String.valueOf(((Juego)c.pro).getCategory())));
+                    instancia.appendChild(categoria);
+                    Element edadmin=doc.createElement("EdadMinima");
+                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Juego)c.pro).getEdadmnima())));
+                    instancia.appendChild(edadmin);
+                }else{
+                    instancia = doc.createElement("Otro");
+                }
+                Element precio=doc.createElement("Precio");
+                precio.appendChild(doc.createTextNode(String.valueOf(c.pro.getPrize())));
+                instancia.appendChild(precio);
+                Element nombre=doc.createElement("Nombre");
+                nombre.appendChild(doc.createTextNode(c.pro.getName()));
+                instancia.appendChild(nombre);
+                Element descrip=doc.createElement("Descripcion");
+                descrip.appendChild(doc.createTextNode(c.pro.getDescription()));
+                instancia.appendChild(descrip);
+                Element key=doc.createElement("Key");
+                key.appendChild(doc.createTextNode(c.pro.getKey()));
+                instancia.appendChild(key);
+                Element estadopro=doc.createElement("Estado");
+                estadopro.appendChild(doc.createTextNode(String.valueOf(c.pro.getStatus())));
+                instancia.appendChild(estadopro);
+                
+            
+                producto.appendChild(instancia);
+                e.appendChild(producto);
+               
                 raiz.appendChild(e);
 
             }

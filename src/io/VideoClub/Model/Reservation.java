@@ -37,7 +37,7 @@ public class Reservation {
         this.pro = pro;
         this.cli = cli;
         ini = LocalDate.now();
-        end = LocalDate.now().plusDays(2);
+        end = LocalDate.now().plusDays(8);
         if (end.getDayOfWeek() == DayOfWeek.SUNDAY) {
             end = end.plusDays(1);
         }

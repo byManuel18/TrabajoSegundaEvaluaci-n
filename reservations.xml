@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Reservas>
+<Reserva>
+<ID>1</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-04</FechaInicio>
+<FechaLimite>2020-03-12</FechaLimite>
+<FechaDevolución>2020-03-04</FechaDevolución>
+<Cliente>
+<IDCliente>20225087R</IDCliente>
+<Nombre>Manuel</Nombre>
+<Telefono>32523</Telefono>
+<FechaInscripcion>2020-03-04T12:46:20.233</FechaInscripcion>
+</Cliente>
+<Producto>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>12</EdadMinima>
+<Precio>4.95</Precio>
+<Nombre>300</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Key>00705c6b-a0d1-48</Key>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
+</Producto>
+</Reserva>
+</Reservas>

@@ -33,8 +33,14 @@ public class GUI {
         System.out.println(ni.createMovie(ProductsTypes.Peliculas, "300", "Hombres semidesnudos", MovieCategory.Action, 12, 4.95));
         System.out.println(ni.createMovie(ProductsTypes.Peliculas, "301", "Hombres semidesnudos", MovieCategory.Action, 12, 4.95));
         System.out.println(ni.createProduct("Taza", "Para beber", 3.95));
+        System.out.println(ni.createClient("20225087R", "Manuel", "32523", LocalDateTime.now()));
+        System.out.println(ni.reserveProduct(ni.isAvailableProduct("300"), ni.devolverClienteExistente("20225087R")));
+        System.out.println(ni.closeReservation(ni.devolverUnaReserva(1)));
+        System.out.println(ni.saveClientsFromDDBB());
         System.out.println(ni.saveCatalogFromDDBB());
-        System.out.println(ni.listAllAmountOfProducts("Minecraft"));
+        System.out.println(ni.saveReservationsFromDDBB());
+        
+        //System.out.println(ni.listAllAmountOfProducts("Minecraft"));
         /* 
         System.out.println(ni.listAllProducts());
         System.out.println(ni.loadCatalogFromDDBB());

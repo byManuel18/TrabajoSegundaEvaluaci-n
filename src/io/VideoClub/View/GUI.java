@@ -6,6 +6,7 @@
 package io.VideoClub.View;
 
 import io.VideoClub.Controller.AppController;
+import io.VideoClub.Model.Client;
 import io.VideoClub.Model.Comparadores.CompararaClientes;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;

@@ -379,7 +379,7 @@ public class AppController implements IAppController {
     private boolean comprobarssiclientetienereserva(Client c) {
         boolean tiene = false;
         for (Reservation reser : reservas) {
-            if (reser.cli.equals(c)&&reser.status!=Reservation.StatusReserve.FINISHED) {
+            if (reser.cli.equals(c) && reser.status != Reservation.StatusReserve.FINISHED) {
                 tiene = true;
                 break;
             }
@@ -413,19 +413,29 @@ public class AppController implements IAppController {
     public boolean editClient(IClient e) {
         boolean editado = false;
 
+        for (IClient cli : clientes) {
+            if (cli.getID().equals(e.getID())) {
+                cli.setName(e.getName());
+                cli.setPhone(e.getPhone());
+                cli.setTime(e.getTime());
+                editado = true;
+                break;
+            }
+        }
+
         return editado;
     }
 
     @Override
     public boolean addProduct(String name, ProductsTypes type) {
         boolean clonado = false;
-        for(Product pro:productos){
-            if(pro.getName().equals(name)&&pro.getTipo()==type){
+        for (Product pro : productos) {
+            if (pro.getName().equals(name) && pro.getTipo() == type) {
                 try {
-                    Product nuevo=(Product) pro.clone();
+                    Product nuevo = (Product) pro.clone();
                     nuevo.setStatus(Product.Status.AVAILABLE);
                     productos.add(nuevo);
-                    clonado=true;
+                    clonado = true;
                     break;
                 } catch (CloneNotSupportedException ex) {
                     Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
@@ -535,8 +545,8 @@ public class AppController implements IAppController {
         if (r.end.compareTo(r.finished) < 0) {
             precio += (precio * 0.15f);
         }
-        for(Product produc :productos){
-            if(produc.equals(r.pro)){
+        for (Product produc : productos) {
+            if (produc.equals(r.pro)) {
                 produc.setStatus(Product.Status.AVAILABLE);
                 break;
             }
@@ -775,7 +785,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean loadAllDDBB() {
-        return loadCatalogFromDDBB()&&loadClientsFromDDBB()&&loadReservationsFromDDBB();
+        return loadCatalogFromDDBB() && loadClientsFromDDBB() && loadReservationsFromDDBB();
     }
 
     @Override
@@ -948,70 +958,69 @@ public class AppController implements IAppController {
                 fechaend.appendChild(doc.createTextNode(c.end.toString()));
                 e.appendChild(fechaend);
                 Element fechadev = doc.createElement("FechaDevolución");
-                if(c.finished==null){
+                if (c.finished == null) {
                     fechadev.appendChild(doc.createTextNode("NO ENTREGADO"));
-                }else{
+                } else {
                     fechadev.appendChild(doc.createTextNode(c.finished.toString()));
                 }
-                
+
                 e.appendChild(fechadev);
-                
+
                 Element cliente = doc.createElement("Cliente");
                 Element id = doc.createElement("IDCliente");
                 id.appendChild(doc.createTextNode(c.cli.getID()));
                 cliente.appendChild(id);
-                Element name=doc.createElement("Nombre");
+                Element name = doc.createElement("Nombre");
                 name.appendChild(doc.createTextNode(c.cli.getName()));
                 cliente.appendChild(name);
-                Element telefono=doc.createElement("Telefono");
+                Element telefono = doc.createElement("Telefono");
                 telefono.appendChild(doc.createTextNode(c.cli.getPhone()));
                 cliente.appendChild(telefono);
-                Element fechahoracreacion=doc.createElement("FechaInscripcion");
+                Element fechahoracreacion = doc.createElement("FechaInscripcion");
                 fechahoracreacion.appendChild(doc.createTextNode(c.cli.getTime().toString()));
                 cliente.appendChild(fechahoracreacion);
                 e.appendChild(cliente);
-                
+
                 Element producto = doc.createElement("Producto");
-                 Element instancia;
-                if(c.pro instanceof Pelicula){
+                Element instancia;
+                if (c.pro instanceof Pelicula) {
                     instancia = doc.createElement("Pelicula");
-                    Element categoria=doc.createElement("CategoriaPelicula");
-                    categoria.appendChild(doc.createTextNode(String.valueOf(((Pelicula)c.pro).getCategory())));
+                    Element categoria = doc.createElement("CategoriaPelicula");
+                    categoria.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c.pro).getCategory())));
                     instancia.appendChild(categoria);
-                    Element edadmin=doc.createElement("EdadMinima");
-                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Pelicula)c.pro).getEdadmnima())));
+                    Element edadmin = doc.createElement("EdadMinima");
+                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Pelicula) c.pro).getEdadmnima())));
                     instancia.appendChild(edadmin);
-                }else if (c.pro instanceof Juego){
+                } else if (c.pro instanceof Juego) {
                     instancia = doc.createElement("Juego");
-                    Element categoria=doc.createElement("CategoriaJuego");
-                    categoria.appendChild(doc.createTextNode(String.valueOf(((Juego)c.pro).getCategory())));
+                    Element categoria = doc.createElement("CategoriaJuego");
+                    categoria.appendChild(doc.createTextNode(String.valueOf(((Juego) c.pro).getCategory())));
                     instancia.appendChild(categoria);
-                    Element edadmin=doc.createElement("EdadMinima");
-                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Juego)c.pro).getEdadmnima())));
+                    Element edadmin = doc.createElement("EdadMinima");
+                    edadmin.appendChild(doc.createTextNode(String.valueOf(((Juego) c.pro).getEdadmnima())));
                     instancia.appendChild(edadmin);
-                }else{
+                } else {
                     instancia = doc.createElement("Otro");
                 }
-                Element precio=doc.createElement("Precio");
+                Element precio = doc.createElement("Precio");
                 precio.appendChild(doc.createTextNode(String.valueOf(c.pro.getPrize())));
                 instancia.appendChild(precio);
-                Element nombre=doc.createElement("Nombre");
+                Element nombre = doc.createElement("Nombre");
                 nombre.appendChild(doc.createTextNode(c.pro.getName()));
                 instancia.appendChild(nombre);
-                Element descrip=doc.createElement("Descripcion");
+                Element descrip = doc.createElement("Descripcion");
                 descrip.appendChild(doc.createTextNode(c.pro.getDescription()));
                 instancia.appendChild(descrip);
-                Element key=doc.createElement("Key");
+                Element key = doc.createElement("Key");
                 key.appendChild(doc.createTextNode(c.pro.getKey()));
                 instancia.appendChild(key);
-                Element estadopro=doc.createElement("Estado");
+                Element estadopro = doc.createElement("Estado");
                 estadopro.appendChild(doc.createTextNode(String.valueOf(c.pro.getStatus())));
                 instancia.appendChild(estadopro);
-                
-            
+
                 producto.appendChild(instancia);
                 e.appendChild(producto);
-               
+
                 raiz.appendChild(e);
 
             }
@@ -1043,7 +1052,7 @@ public class AppController implements IAppController {
 
     @Override
     public boolean saveAllDDBB() {
-        return saveCatalogFromDDBB()&&saveClientsFromDDBB()&&saveReservationsFromDDBB();
+        return saveCatalogFromDDBB() && saveClientsFromDDBB() && saveReservationsFromDDBB();
     }
 
 }

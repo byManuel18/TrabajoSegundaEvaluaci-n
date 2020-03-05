@@ -824,7 +824,7 @@ public class AppController implements IAppController {
                     String fechadevol=eElement.getElementsByTagName("FechaDevolución").item(0).getTextContent();
                    
                     NodeList nClientes = doc.getElementsByTagName("Cliente");
-                    Node cNode = nClientes.item(0);
+                    Node cNode = nClientes.item(i);
                     eElement = (Element) cNode;
                     String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
                     String idclien = eElement.getElementsByTagName("IDCliente").item(0).getTextContent();
@@ -835,56 +835,31 @@ public class AppController implements IAppController {
                     Client c = new Client(idclien, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)), mes, Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
                             Integer.parseInt(fecha.substring(14, 16)), Integer.parseInt(fecha.substring(17, 19))), telef);
                     Product nuevo=null;
-                    NodeList nPeliculas = doc.getElementsByTagName("Pelicula");
-                    NodeList nOtro= doc.getElementsByTagName("Otro");
-                    NodeList nJuego = doc.getElementsByTagName("Juego");
-                    String nombrepro,precio,edadmin,categoria,tipo,descripcion,estado,key;
-                    if(nPeliculas.getLength()!=0){
-                        Node pNode = nPeliculas.item(0);
-                        eElement = (Element) pNode;
-                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
-                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
-                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                        categoria=eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
-                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
-                        nuevo= new Pelicula(nombrepro, descripcion, Double.parseDouble(precio),Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));
-                        nuevo.setStatus(devuelveestadoproducto(estado));
-                        nuevo.setKey(key);
-                    }else if(nJuego.getLength()!=0){
-                        Node jNode = nJuego.item(0);
-                        eElement = (Element) jNode;
-                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
-                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
-                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                        categoria=eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
-                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
-                        nuevo=new Juego(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
-                        nuevo.setStatus(devuelveestadoproducto(estado));
-                        nuevo.setKey(key);
-                    }else if(nOtro.getLength()!=0){
-                        Node oNode = nOtro.item(0);
-                        eElement = (Element) oNode;
-                        nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-                        descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-                        precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
-                        tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
-                        estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                        key=eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    NodeList nProducto = doc.getElementsByTagName("Producto");
+                    Node pNode = nProducto.item(i);
+                    String nombrepro,precio,edadmin,categoria,tipo,descripcion,estado,key=null;
+                    eElement = (Element) pNode;
+                    tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
+                    nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                    descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                    key=eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    if(tipo.equals("Otros")){
                         nuevo=new Others(nombrepro, descripcion, Double.parseDouble(precio));
-                        nuevo.setStatus(devuelveestadoproducto(estado));
-                        nuevo.setKey(key);
-                        nuevo.setTipo( devuelvetipoproducto(tipo));
+                        nuevo.setTipo(devuelvetipoproducto(tipo));
+   
+                    }else if(tipo.endsWith("Peliculas")){
+                        categoria=eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
+                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        nuevo=new Pelicula(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));
+                    }else{
+                        categoria=eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
+                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        nuevo=new Juego(nombre, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
                     }
-                    
-                    
-                    
-                    
+                    nuevo.setStatus(devuelveestadoproducto(estado));
+                    nuevo.setKey(key);
                     
                     Reservation nuevareser= new Reservation(nuevo, c);
                     nuevareser.setId(Integer.parseInt(id));

@@ -30,6 +30,7 @@ public class GUI {
         System.out.println(ni.listAllProducts());
          */
         System.out.println(ni.loadAllDDBB());
+        //System.out.println(ni.reserveProduct(ni.isAvailableProduct("Minecraft"), ni.devolverClienteExistente("20225087R")));
         
         //System.out.println(ni.closeReservation(ni.devolverUnaReserva(1)));
         //System.out.println(ni.listAllProducts());

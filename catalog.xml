@@ -8,7 +8,7 @@
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>
 <Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
+<Estado>RESERVED</Estado>
 </Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
@@ -18,7 +18,7 @@
 <Descripcion>Juego de cubos</Descripcion>
 <Precio>19.95</Precio>
 <Tipo>Juegos</Tipo>
-<Estado>AVAILABLE</Estado>
+<Estado>RESERVED</Estado>
 </Juego>
 <Pelicula>
 <Categoria>Action</Categoria>
@@ -28,7 +28,7 @@
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>
 <Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Pelicula>
 <Otro>
 <Key>9cb90242-b120-46</Key>

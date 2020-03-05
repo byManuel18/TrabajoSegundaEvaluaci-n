@@ -1147,6 +1147,9 @@ public class AppController implements IAppController {
                 Element precio = doc.createElement("Precio");
                 precio.appendChild(doc.createTextNode(String.valueOf(c.pro.getPrize())));
                 instancia.appendChild(precio);
+                Element tipopro = doc.createElement("TipoProducto");
+                tipopro.appendChild(doc.createTextNode(String.valueOf(c.pro.getTipo())));
+                instancia.appendChild(tipopro);
                 Element nombre = doc.createElement("Nombre");
                 nombre.appendChild(doc.createTextNode(c.pro.getName()));
                 instancia.appendChild(nombre);

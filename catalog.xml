@@ -10,44 +10,6 @@
 <Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
 </Pelicula>
-<Otro>
-<Key>9cb90242-b120-46</Key>
-<Nombre>Taza</Nombre>
-<Descripcion>Para beber</Descripcion>
-<Precio>3.95</Precio>
-<Tipo>Otros</Tipo>
-<Estado>AVAILABLE</Estado>
-</Otro>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>7e27754d-8a50-4c</Key>
-<Nombre>Minecraft</Nombre>
-<Descripcion>Hombres semidesnudos</Descripcion>
-<Precio>4.95</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>361f215c-9882-46</Key>
-<Nombre>300</Nombre>
-<Descripcion>Hombres semidesnudos</Descripcion>
-<Precio>4.95</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
-</Pelicula>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>87d7eb12-739e-4a</Key>
-<Nombre>Minecraft</Nombre>
-<Descripcion>Juego de cubos</Descripcion>
-<Precio>19.95</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>AVAILABLE</Estado>
-</Juego>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
@@ -58,4 +20,22 @@
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>361f215c-9882-46</Key>
+<Nombre>300</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>RESERVED</Estado>
+</Pelicula>
+<Otro>
+<Key>9cb90242-b120-46</Key>
+<Nombre>Taza</Nombre>
+<Descripcion>Para beber</Descripcion>
+<Precio>3.95</Precio>
+<Tipo>Otros</Tipo>
+<Estado>RESERVED</Estado>
+</Otro>
 </Catalogo>

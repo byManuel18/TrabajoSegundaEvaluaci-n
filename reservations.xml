@@ -25,4 +25,29 @@
 </Pelicula>
 </Producto>
 </Reserva>
+<Reserva>
+<ID>2</ID>
+<Estado>ACTIVE</Estado>
+<FechaInicio>2020-03-05</FechaInicio>
+<FechaLimite>2020-03-13</FechaLimite>
+<FechaDevolución>NO ENTREGADO</FechaDevolución>
+<Cliente>
+<IDCliente>20225087R</IDCliente>
+<Nombre>Manuel</Nombre>
+<Telefono>32523</Telefono>
+<FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
+</Cliente>
+<Producto>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>12</EdadMinima>
+<Precio>4.95</Precio>
+<TipoProducto>Peliculas</TipoProducto>
+<Nombre>300</Nombre>
+<Descripcion>Hombres semidesnudos</Descripcion>
+<Key>361f215c-9882-46</Key>
+<Estado>RESERVED</Estado>
+</Pelicula>
+</Producto>
+</Reserva>
 </Reservas>

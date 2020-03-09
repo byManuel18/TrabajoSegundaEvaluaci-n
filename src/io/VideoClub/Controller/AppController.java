@@ -55,7 +55,7 @@ public class AppController implements IAppController {
     private static AppController instancia = null;
 
     private Set<Product> productos;
-    public Set<IClient> clientes;
+    private Set<IClient> clientes;
     private Set<Reservation> reservas;
 
     private AppController() {
@@ -449,15 +449,11 @@ public class AppController implements IAppController {
         boolean clonado = false;
         for (Product pro : productos) {
             if (pro.getName().equals(name) && pro.getTipo() == type) {
-                try {
-                    Product nuevo = (Product) pro.clone();
-                    nuevo.setStatus(Product.Status.AVAILABLE);
-                    productos.add(nuevo);
-                    clonado = true;
-                    break;
-                } catch (CloneNotSupportedException ex) {
-                    Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Product nuevo = (Product) pro.doClone();
+                nuevo.setStatus(Product.Status.AVAILABLE);
+                productos.add(nuevo);
+                clonado = true;
+                break;
             }
         }
         return clonado;

@@ -6,6 +6,8 @@
 package io.VideoClub.Model;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Manueh
@@ -81,11 +83,19 @@ public abstract class Product extends Item implements Cloneable{
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    protected Object clone() throws CloneNotSupportedException {
         Product clone=(Product)super.clone(); //To change body of generated methods, choose Tools | Templates.
         clone.key=generateRandom16Chars();
         return (Object)clone;
     } 
+    
+    public Product doClone(){
+       try {
+           return (Product) this.clone();
+       } catch (CloneNotSupportedException ex) {
+           return null;
+       }
+    }
 
     @Override
     public String toString() {

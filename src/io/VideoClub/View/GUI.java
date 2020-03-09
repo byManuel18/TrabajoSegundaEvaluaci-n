@@ -15,6 +15,8 @@ import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Utilities.Utilities;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -24,31 +26,11 @@ import java.util.Set;
 public class GUI {
 static AppController ni=AppController.getInstance();
     public static void principal() {
-        
-        //System.out.println(ni.createClient("rqwe", "fasef", "ad", LocalDateTime.now()));
-        /*
-        System.out.println(ni.listAllProducts());
-        System.out.println(ni.loadCatalogFromDDBB());
-        System.out.println(ni.listAllProducts());
-         */
-        System.out.println(ni.loadAllDDBB());
-        //System.out.println(ni.reserveProduct(ni.isAvailableProduct("Minecraft"), ni.devolverClienteExistente("20225087R")));
-        
-        //System.out.println(ni.closeReservation(ni.devolverUnaReserva(1)));
-        //System.out.println(ni.listAllProducts());
-        //System.out.println(ni.listAllAmountOfProducts("Minecraft"));
-        //System.out.println("---------------");
-        //System.out.println(ni.addProduct("300", ProductsTypes.Peliculas));
-       // System.out.println(ni.listAllProducts());
-        //System.out.println(ni.listAllReservations());
-        //System.out.println(ni.saveAllDDBB());
-        
-        //System.out.println(ni.listAllAmountOfProducts("Minecraft"));
-        /* 
-        System.out.println(ni.listAllProducts());
-        System.out.println(ni.loadCatalogFromDDBB());
-        System.out.println(ni.listAllProducts());
-         */
+        if(ni.loadAllDDBB()){
+            Utilities.P("Base de datos cargada correctamente.");
+        }else{
+             Utilities.P("Base de datos no encontrada. Si es la primera vez que ejecuta el programa, este creará los archivos de guardado una vez cierre el programa.");
+        }
         PrimerMenu();
     }
 
@@ -71,7 +53,7 @@ static AppController ni=AppController.getInstance();
                     opcion2=Utilities.MenuListarProductor();
                     ControladorMenuProductos(opcion2);
                     
-                }while(opcion2!=11);
+                }while(opcion2!=12);
                 
                 break;
             case 2:
@@ -95,8 +77,11 @@ static AppController ni=AppController.getInstance();
     
     private static void ControladorMenuProductos(int op2){
         Set<Product> pro;
+        List<Product> lispro;
+        Map<Product,Integer> mappro;
         String nombre;
         ProductsTypes tipo=null;
+        Product.Status estadopro=null;
         int opListaPro=0;
         switch(op2){
             case 1:
@@ -155,16 +140,66 @@ static AppController ni=AppController.getInstance();
                 }
                 break;
             case 6:
+                do{
+                   opListaPro=Utilities.MenuEstadoProducto();
+                   estadopro=devolverEstadoProducto(opListaPro);
+                }while(estadopro==null);
+                pro=ni.listAllByStatus(estadopro);
+                if(!pro.isEmpty()){
+                    ListarSetProductos(pro);
+                }else{
+                    Utilities.P("Lista vacía.");
+                }
                 break;
             case 7:
+                lispro=ni.listAllDifferentMovies();
+                if(!lispro.isEmpty()){
+                    ListarListProductos(lispro);
+                }else{
+                    Utilities.P("No hay películas");
+                }
                 break;
             case 8:
+                lispro=ni.listAllDifferentGames();
+                if(!lispro.isEmpty()){
+                    ListarListProductos(lispro);
+                }else{
+                    Utilities.P("No hay Juegos");
+                }
                 break;
             case 9:
+                lispro=ni.listAllDifferentProducts();
+                if(!lispro.isEmpty()){
+                    ListarListProductos(lispro);
+                }else{
+                    Utilities.P("No hay Productos");
+                }
                 break;
             case 10:
+                nombre=Utilities.getString("Introduce el nombre del producto");
+                mappro=ni.listAllAmountOfProducts(nombre);
+                if(!mappro.isEmpty()){
+                    ListarMapProductos(mappro);
+                }else{
+                    Utilities.P("No hay Productos");
+                }
                 break;
             case 11:
+                nombre=Utilities.getString("Introduce el nombre del producto");
+                do{
+                    opListaPro=Utilities.MenuTipoProducto();
+                    tipo=devolverTypoProducto(opListaPro);
+                }while(tipo==null);
+                mappro=ni.listAllAmountOfProducts(tipo, nombre);
+                if(!mappro.isEmpty()){
+                    ListarMapProductos(mappro);
+                }else{
+                    Utilities.P("No hay Productos");
+                }
+                
+                break;
+            case 12:
+                Utilities.P("Volviendo al menú anterior.");
                 break;
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
@@ -250,5 +285,41 @@ static AppController ni=AppController.getInstance();
         }
         
     }
+    private static void ListarListProductos(List<Product> listap){
+        
+        if(!listap.isEmpty()){
+            for(Product p:listap){
+                Utilities.P(p.toString());
+            }
+        }else{
+            Utilities.P("Lista vacía.");
+        }
+        
+    }
+    private static void ListarMapProductos(Map<Product,Integer> listap){
+        
+        if(!listap.isEmpty()){
+            for(Map.Entry<Product,Integer> entry :listap.entrySet()){
+                Utilities.P(entry.getKey().toString()+" Cantidad ---> "+entry.getValue());
+            }
+        }else{
+            Utilities.P("Lista vacía.");
+        }
+        
+    }
+    private static Product.Status devolverEstadoProducto(int op){
+            Product.Status estado=null;
+            switch(op){
+                case 1:
+                    estado=Product.Status.AVAILABLE;
+                    break;
+                case 2:
+                    estado=Product.Status.RESERVED;
+                    break;
+                default:
+                    Utilities.P("Opción incorrecta. Prueba de nuevo.");
+            }
+            return estado;
+        }
 
 }

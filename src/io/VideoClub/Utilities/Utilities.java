@@ -197,9 +197,10 @@ public class Utilities {
         P("6)Listar por estado");
         P("7)Listar películas");
         P("8)Listar juegos");
-        P("9)Listar catidad de productos por nombre");
-        P("10)Listar catidad de productos por nombre y tipo");
-        P("11)Volver al menú anterior");
+        P("9)Listar otros");
+        P("10)Listar catidad de productos por nombre");
+        P("11)Listar catidad de productos por nombre y tipo");
+        P("12)Volver al menú anterior");
         p("> ");
         resultado = getInt();
 
@@ -254,6 +255,15 @@ public class Utilities {
         P("1)Juego");
         P("2)Otro");
         P("3)Película");
+        p("> ");
+        resultado=getInt();
+        return resultado;
+    }
+    public static int MenuEstadoProducto(){
+        int resultado=0;
+        P("Introduce el estado de Producto:");
+        P("1)Disponible");
+        P("2)No disponible");
         p("> ");
         resultado=getInt();
         return resultado;

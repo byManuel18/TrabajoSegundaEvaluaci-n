@@ -130,9 +130,12 @@ public class AppController implements IAppController {
     @Override
     public List<Product> listAllDifferentProducts() {
         List<Product> ordenado = new ArrayList<>();
-        for (Product product : ordenado) {
-            if (!comprobarInsert(ordenado, product)) {
-                ordenado.add(product);
+        for (Product product : productos) {
+            if (!comprobarInsert(ordenado, product)){
+                if (product instanceof Others) {
+                    ordenado.add(product);
+                }
+                
             }
         }
         return ordenado;

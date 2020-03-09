@@ -3,12 +3,12 @@
 <Pelicula>
 <Categoria>Action</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>361f215c-9882-46</Key>
-<Nombre>300</Nombre>
+<Key>690ad7db-e85f-49</Key>
+<Nombre>301</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>
 <Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
+<Estado>RESERVED</Estado>
 </Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
@@ -23,12 +23,12 @@
 <Pelicula>
 <Categoria>Action</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>690ad7db-e85f-49</Key>
-<Nombre>301</Nombre>
+<Key>361f215c-9882-46</Key>
+<Nombre>300</Nombre>
 <Descripcion>Hombres semidesnudos</Descripcion>
 <Precio>4.95</Precio>
 <Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Pelicula>
 <Otro>
 <Key>9cb90242-b120-46</Key>

@@ -24,9 +24,9 @@ import java.util.Set;
  * @author Manueh
  */
 public class GUI {
-static AppController ni=AppController.getInstance();
+private static AppController controlador=AppController.getInstance();
     public static void principal() {
-        if(ni.loadAllDDBB()){
+        if(controlador.loadAllDDBB()){
             Utilities.P("Base de datos cargada correctamente.");
         }else{
              Utilities.P("Base de datos no encontrada. Si es la primera vez que ejecuta el programa, este creará los archivos de guardado una vez cierre el programa.");
@@ -85,7 +85,7 @@ static AppController ni=AppController.getInstance();
         int opListaPro=0;
         switch(op2){
             case 1:
-                pro=ni.listAllProducts();
+                pro=controlador.listAllProducts();
                 if(!pro.isEmpty()){
                     ListarSetProductos(pro);
                 }else{
@@ -103,7 +103,7 @@ static AppController ni=AppController.getInstance();
                 break;
             case 3:
                 nombre=Utilities.getString("Introduce el nombre del producto");
-                pro=ni.listAllByName(nombre);
+                pro=controlador.listAllByName(nombre);
                 if(!pro.isEmpty()){
                     for(Product p:pro){
                        Utilities.P(p.toString());
@@ -119,7 +119,7 @@ static AppController ni=AppController.getInstance();
                     tipo=devolverTypoProducto(opListaPro);
                 }while(tipo==null);
                 
-                pro=ni.listAllByName(nombre, tipo);
+                pro=controlador.listAllByName(nombre, tipo);
                 if(!pro.isEmpty()){
                     ListarSetProductos(pro);
                 }else{
@@ -132,7 +132,7 @@ static AppController ni=AppController.getInstance();
                     opListaPro=Utilities.MenuTipoProducto();
                     tipo=devolverTypoProducto(opListaPro);
                 }while(tipo==null);
-                pro=ni.listAllByType(tipo);
+                pro=controlador.listAllByType(tipo);
                 if(!pro.isEmpty()){
                     ListarSetProductos(pro);
                 }else{
@@ -144,7 +144,7 @@ static AppController ni=AppController.getInstance();
                    opListaPro=Utilities.MenuEstadoProducto();
                    estadopro=devolverEstadoProducto(opListaPro);
                 }while(estadopro==null);
-                pro=ni.listAllByStatus(estadopro);
+                pro=controlador.listAllByStatus(estadopro);
                 if(!pro.isEmpty()){
                     ListarSetProductos(pro);
                 }else{
@@ -152,7 +152,7 @@ static AppController ni=AppController.getInstance();
                 }
                 break;
             case 7:
-                lispro=ni.listAllDifferentMovies();
+                lispro=controlador.listAllDifferentMovies();
                 if(!lispro.isEmpty()){
                     ListarListProductos(lispro);
                 }else{
@@ -160,7 +160,7 @@ static AppController ni=AppController.getInstance();
                 }
                 break;
             case 8:
-                lispro=ni.listAllDifferentGames();
+                lispro=controlador.listAllDifferentGames();
                 if(!lispro.isEmpty()){
                     ListarListProductos(lispro);
                 }else{
@@ -168,7 +168,7 @@ static AppController ni=AppController.getInstance();
                 }
                 break;
             case 9:
-                lispro=ni.listAllDifferentProducts();
+                lispro=controlador.listAllDifferentProducts();
                 if(!lispro.isEmpty()){
                     ListarListProductos(lispro);
                 }else{
@@ -177,7 +177,7 @@ static AppController ni=AppController.getInstance();
                 break;
             case 10:
                 nombre=Utilities.getString("Introduce el nombre del producto");
-                mappro=ni.listAllAmountOfProducts(nombre);
+                mappro=controlador.listAllAmountOfProducts(nombre);
                 if(!mappro.isEmpty()){
                     ListarMapProductos(mappro);
                 }else{
@@ -190,7 +190,7 @@ static AppController ni=AppController.getInstance();
                     opListaPro=Utilities.MenuTipoProducto();
                     tipo=devolverTypoProducto(opListaPro);
                 }while(tipo==null);
-                mappro=ni.listAllAmountOfProducts(tipo, nombre);
+                mappro=controlador.listAllAmountOfProducts(tipo, nombre);
                 if(!mappro.isEmpty()){
                     ListarMapProductos(mappro);
                 }else{
@@ -247,7 +247,7 @@ static AppController ni=AppController.getInstance();
     
     private static void ListarProductosOrdenados(CompararProductos.Criterio c){
         CompararProductos comparador=new CompararProductos(c);
-        Set<Product> pro=ni.listAllProducts(comparador);
+        Set<Product> pro=controlador.listAllProducts(comparador);
         if(!pro.isEmpty()){
             for(Product p:pro){
                 Utilities.P(p.toString());

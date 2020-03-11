@@ -8,7 +8,7 @@
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225087R</IDCliente>
-<Nombre>Manuel</Nombre>
+<NombreCliente>MANUEL</NombreCliente>
 <Telefono>32523</Telefono>
 <FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
 </Cliente>
@@ -16,8 +16,8 @@
 <Otro>
 <Precio>3.95</Precio>
 <TipoProducto>Otros</TipoProducto>
-<Nombre>Taza</Nombre>
-<Descripcion>Para beber</Descripcion>
+<Nombre>TAZA</Nombre>
+<Descripcion>PARA BEBER</Descripcion>
 <Key>9cb90242-b120-46</Key>
 <Estado>RESERVED</Estado>
 </Otro>
@@ -31,7 +31,7 @@
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225087R</IDCliente>
-<Nombre>Manuel</Nombre>
+<NombreCliente>MANUEL</NombreCliente>
 <Telefono>32523</Telefono>
 <FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
 </Cliente>
@@ -42,7 +42,7 @@
 <Precio>4.95</Precio>
 <TipoProducto>Peliculas</TipoProducto>
 <Nombre>301</Nombre>
-<Descripcion>Hombres semidesnudos</Descripcion>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
 <Key>690ad7db-e85f-49</Key>
 <Estado>RESERVED</Estado>
 </Pelicula>
@@ -56,7 +56,7 @@
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225087R</IDCliente>
-<Nombre>Manuel</Nombre>
+<NombreCliente>MANUEL</NombreCliente>
 <Telefono>32523</Telefono>
 <FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
 </Cliente>
@@ -66,7 +66,7 @@
 <EdadMinima>5</EdadMinima>
 <Precio>19.95</Precio>
 <TipoProducto>Juegos</TipoProducto>
-<Nombre>Manuel</Nombre>
+<Nombre>MINECRAFT</Nombre>
 <Descripcion>Juego de cubos</Descripcion>
 <Key>95f5c764-4f29-4f</Key>
 <Estado>RESERVED</Estado>

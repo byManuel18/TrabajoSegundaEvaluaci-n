@@ -38,9 +38,15 @@ public class CompararProductos implements Comparator<Product>{
         switch(this.criterio){
             case AtoZ:
                 resultado=o1.getName().compareTo(o2.getName());
+                if(resultado==0){
+                    resultado=o1.getKey().compareTo(o2.getKey());
+                }
                 break;
             case ZtoA:
                 resultado=o2.getName().compareTo(o1.getName());
+                if(resultado==0){
+                    resultado=o1.getKey().compareTo(o2.getKey());
+                }
                 break;
             case PorKeyAtoZ:
                 resultado=o1.getKey().compareTo(o2.getKey());
@@ -50,9 +56,21 @@ public class CompararProductos implements Comparator<Product>{
                 break;
             case MenosAMallorPrecio:
                 resultado=(int)(o1.getPrize()-o2.getPrize());
+                if(resultado==0){
+                    resultado=resultado=o1.getName().compareTo(o2.getName());
+                }
+                if(resultado==0){
+                    resultado=o1.getKey().compareTo(o2.getKey());
+                }
                 break;
             case MallorAMenorPrecio:
                  resultado=(int)(o2.getPrize()-o1.getPrize());
+                 if(resultado==0){
+                    resultado=resultado=o1.getName().compareTo(o2.getName());
+                }
+                 if(resultado==0){
+                    resultado=o1.getKey().compareTo(o2.getKey());
+                }
                 break;
                 
         }

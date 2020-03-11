@@ -825,7 +825,7 @@ public class AppController implements IAppController {
                     NodeList nClientes = doc.getElementsByTagName("Cliente");
                     Node cNode = nClientes.item(i);
                     eElement = (Element) cNode;
-                    String nombre = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    String nombre = eElement.getElementsByTagName("NombreCliente").item(0).getTextContent();
                     String idclien = eElement.getElementsByTagName("IDCliente").item(0).getTextContent();
                     String telef = eElement.getElementsByTagName("Telefono").item(0).getTextContent();
                     String fecha = eElement.getElementsByTagName("FechaInscripcion").item(0).getTextContent();
@@ -1086,7 +1086,7 @@ public class AppController implements IAppController {
                 Element id = doc.createElement("IDCliente");
                 id.appendChild(doc.createTextNode(c.cli.getID()));
                 cliente.appendChild(id);
-                Element name = doc.createElement("Nombre");
+                Element name = doc.createElement("NombreCliente");
                 name.appendChild(doc.createTextNode(c.cli.getName()));
                 cliente.appendChild(name);
                 Element telefono = doc.createElement("Telefono");

@@ -227,6 +227,7 @@ public class Utilities {
         P("1)Listar todos los clientes");
         P("2)Mostrar los clientes ordenados");
         P("3)Mostrar los clientes cuya reserva no ha finalizado");
+        P("4)Volver al menú anterior");
         p("> ");
         resultado = getInt();
 
@@ -294,5 +295,6 @@ public class Utilities {
         return resultado;
     }
     
+   
 
 }

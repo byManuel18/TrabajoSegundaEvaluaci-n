@@ -12,6 +12,7 @@ import io.VideoClub.Model.Comparadores.CompararaClientes;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
+import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Utilities.Utilities;
 import java.time.LocalDateTime;
@@ -62,6 +63,12 @@ public class GUI {
 
                 break;
             case 2:
+                do {
+
+                    opcion2 = Utilities.MenuListarClientes();
+                    ControladorMenuProductos(opcion2);
+
+                } while (opcion2 != 4);
                 break;
             case 3:
                 break;
@@ -263,6 +270,40 @@ public class GUI {
 
         }
 
+    }
+    private static void ControladorMenuListarClientes(int op){
+        Set<IClient> clientes;
+        switch(op){
+            case 1:
+                clientes=controlador.listAllClients();
+                if(!clientes.isEmpty()){
+                    for(IClient cli: clientes){
+                        Utilities.P(cli.toString());
+                    }
+                }else{
+                    Utilities.P("No hay clientes.");
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                clientes=controlador.listAllClientsWithReservationsNotFinished();
+                clientes=controlador.listAllClients();
+                if(!clientes.isEmpty()){
+                    for(IClient cli: clientes){
+                        Utilities.P(cli.toString());
+                    }
+                }else{
+                    Utilities.P("No hay clientes.");
+                }
+                break;
+            case 4:
+                Utilities.P("Volviendo al menú anterior.");
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+        
     }
     
     private static void BorrarProductosControlador(int op){

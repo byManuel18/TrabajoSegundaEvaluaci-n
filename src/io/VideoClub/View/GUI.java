@@ -327,7 +327,6 @@ public class GUI {
                 break;
             case 3:
                 clientes=controlador.listAllClientsWithReservationsNotFinished();
-                clientes=controlador.listAllClients();
                 if(!clientes.isEmpty()){
                     for(IClient cli: clientes){
                         Utilities.P(cli.toString());

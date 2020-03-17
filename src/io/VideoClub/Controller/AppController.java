@@ -246,7 +246,7 @@ public class AppController implements IAppController {
         Set<IClient> clientesconreservas = new HashSet<>();
         for (IClient c : clientes) {
             for (Reservation re : reservas) {
-                if (re.cli.equals(re) && re.status != Reservation.StatusReserve.FINISHED) {
+                if (re.cli.equals(c) && re.status != Reservation.StatusReserve.FINISHED) {
                     clientesconreservas.add(c);
                 }
             }

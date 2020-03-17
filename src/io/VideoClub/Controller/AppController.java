@@ -468,10 +468,10 @@ public class AppController implements IAppController {
      * @param name String
      * @return devuelve un booleano
      */
-    private boolean productoExistente(String name) {
+    public boolean productoExistente(String name,ProductsTypes tipo) {
         boolean existe = false;
         for (Product p : productos) {
-            if (p.getName().equals(name)) {
+            if (p.getName().equals(name)&&tipo==p.getTipo()) {
                 existe = true;
                 break;
             }
@@ -479,6 +479,24 @@ public class AppController implements IAppController {
         }
         return existe;
     }
+    /**
+     * Comprueba si un producto existe en el catalogo mediante su key 
+     *
+     * @param key String
+     * @return devuelve un booleano
+     */
+    public boolean productoExistentePorKey(String key) {
+        boolean existe = false;
+        for (Product p : productos) {
+            if (p.getKey().equals(key)) {
+                existe = true;
+                break;
+            }
+
+        }
+        return existe;
+    }
+    
 
     @Override
     public boolean removeProduct(String name, ProductsTypes ty) {
@@ -488,7 +506,7 @@ public class AppController implements IAppController {
             public boolean test(Object t) {
                 boolean procede = false;
                 Product produc = (Product) t;
-                procede = produc.getName().equals(name) && produc.getTipo() == ty;
+                procede = produc.getName().equals(name) && produc.getTipo() == ty&&produc.getStatus()==Product.Status.AVAILABLE;
                 return procede;
             }
         };
@@ -502,7 +520,9 @@ public class AppController implements IAppController {
         boolean result = false;
         for (Product pr : productos) {
             if (pr.getKey().equals(key)) {
-                result = productos.remove(pr);
+                if(pr.getStatus()==Product.Status.AVAILABLE){
+                    result = productos.remove(pr);
+                }
                 break;
             }
         }
@@ -529,11 +549,11 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public Product isAvailableProduct(String name) {
+    public Product isAvailableProduct(String name,ProductsTypes tipo) {
         Product p = null;
-        if (productoExistente(name)) {
+        if (productoExistente(name,tipo)) {
             for (Product pro : productos) {
-                if (pro.getName().equals(name) && pro.getStatus() == Product.Status.AVAILABLE) {
+                if (name!=null&&pro.getName().equals(name) && pro.getStatus() == Product.Status.AVAILABLE&&tipo==pro.getTipo()) {
                     p = pro;
                     break;
                 }

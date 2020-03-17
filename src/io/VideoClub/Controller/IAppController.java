@@ -150,7 +150,7 @@ public interface IAppController {
     
     boolean editProduct(String key, Product newP);
     
-    Product isAvailableProduct(String name);  //get product if yes
+    Product isAvailableProduct(String name,ProductsTypes tipo);  //get product if yes
     boolean reserveProduct(Product prod,IClient client);
     double closeReservation(Reservation r);  //-->> status finished  --> get prizetopay
     

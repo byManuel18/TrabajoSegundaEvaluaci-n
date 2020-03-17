@@ -147,6 +147,20 @@ public class Utilities {
         } while (!valid);
         return result;
     }
+    public static String getStringSinModicar() {
+        String result = "";
+        boolean valid = false;
+        do {
+            try {
+                result = keyboard.nextLine();
+                valid = true;
+
+            } catch (Exception ex) {
+                Utilities.P("Error unknown. Please, try it again: ");
+            }
+        } while (!valid);
+        return result;
+    }
 
     /**
      * Lee un string de teclado, imprimiendo previamente un mensaje
@@ -268,5 +282,17 @@ public class Utilities {
         resultado=getInt();
         return resultado;
     }
+    
+    public static int MenuBorrarProducto(){
+        int resultado=0;
+        P("¿Qué desea eliminar?");
+        P("1)Una existencia concreta");
+        P("2)Todas existencias de un producto");
+        P("3)Volver al menú anterior");
+        p("> ");
+        resultado=getInt();
+        return resultado;
+    }
+    
 
 }

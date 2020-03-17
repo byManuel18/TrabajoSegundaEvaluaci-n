@@ -82,7 +82,11 @@ public class GUI {
                 }else{
                 Utilities.P("No se ha podido crear correctamente");
                 }
-                
+            case 8:
+                do{ opcion2=Utilities.MenuBorrarProducto();
+                    BorrarProductosControlador(opcion2);
+                }while(opcion2!=3);
+                   
                 break;
 
             case 15:
@@ -259,6 +263,47 @@ public class GUI {
 
         }
 
+    }
+    
+    private static void BorrarProductosControlador(int op){
+        
+        switch(op){
+            case 1:
+                Utilities.p("Introduce la key del producto a eliminar: ");
+                String key=Utilities.getStringSinModicar();
+                if(controlador.productoExistentePorKey(key)){
+                 if(controlador.removeProduct(key)){
+                    Utilities.P("Producto con key: "+key+" borrado correctamente.");
+                    controlador.saveCatalogFromDDBB();
+                }else{
+                     Utilities.P("No se ha podido eliminar el producto. El producto está en uso.");
+                }   
+                }else{
+                    Utilities.P("No existe ningún producto con la key: "+key); 
+                }
+
+                break;
+            case 2:
+                String nombre=Utilities.getString("Inroduce el nombre del producto");
+                ProductsTypes tipo=devolverTypoProducto(Utilities.MenuTipoProducto());
+                if(controlador.productoExistente(nombre, tipo)){
+                    if(controlador.removeProduct(nombre, tipo)){
+                         Utilities.P("Productos con las cararterísticas indicadas borrados correctamente.");
+                         controlador.saveCatalogFromDDBB();
+                    }else{
+                        Utilities.P("No se ha podido eliminar el producto. El producto está en uso.");
+                    }
+                }else{
+                    Utilities.P("No existe ningún producto con las caracteeristicas indicadas."); 
+                }
+                break;
+            case 3:
+                 Utilities.P("Volviendo al menú anterior.");
+                break;
+                
+            default:
+              Utilities.P("Opción no válida, vuelve a intentarlo.");  
+        }
     }
 
     private static void ListarProductosOrdenados(CompararProductos.Criterio c) {

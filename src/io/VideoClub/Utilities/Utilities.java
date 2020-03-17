@@ -235,6 +235,20 @@ public class Utilities {
 
     }
     
+    public static int MenuListarClientesOrdenados(){
+        int op=0;
+        P("1)Por nombre de la A a la Z");
+        P("2)Por nombre de la Z a la A");
+        P("3)Por DNI de la A a la Z");
+        P("4)Por DNI de la Z a la A");
+        P("5)Fecha de inscripcion de Menor a Mayor");
+        P("6)Fecha de inscripcion de Mayor a Menor");
+        P("7)Volver al menú anterior");
+        p("> ");
+        op=getInt();
+        return op;
+    }
+    
     public static int MenuListarreservas() {
         int resultado = 0;
         

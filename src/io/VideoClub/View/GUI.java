@@ -66,7 +66,7 @@ public class GUI {
                 do {
 
                     opcion2 = Utilities.MenuListarClientes();
-                    ControladorMenuProductos(opcion2);
+                    ControladorMenuListarClientes(opcion2);
 
                 } while (opcion2 != 4);
                 break;
@@ -285,6 +285,12 @@ public class GUI {
                 }
                 break;
             case 2:
+                int opc=0;
+                do{
+                    opc=Utilities.MenuListarClientesOrdenados();
+                    MostrarClientessOrdenados(opc);
+                }while(opc!=7);
+                    
                 break;
             case 3:
                 clientes=controlador.listAllClientsWithReservationsNotFinished();
@@ -304,6 +310,42 @@ public class GUI {
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
         
+    }
+    private static void MostrarClientessOrdenados(int op) {
+        CompararaClientes.Criterio comp = null;
+        switch (op) {
+            case 1:
+                comp = CompararaClientes.Criterio.AtoZ;
+                ListarClientesOrdenados(comp);
+                break;
+            case 2:
+                comp = CompararaClientes.Criterio.ZtoA;
+                ListarClientesOrdenados(comp);
+                break;
+            case 3:
+                comp = CompararaClientes.Criterio.PorKeyAtoZ;
+                ListarClientesOrdenados(comp);
+                break;
+            case 4:
+                comp = CompararaClientes.Criterio.PorkeyZtoA;
+                ListarClientesOrdenados(comp);
+                break;
+            case 5:
+                comp = CompararaClientes.Criterio.FechaInscripciónMenorMayor;
+                ListarClientesOrdenados(comp);
+                break;
+            case 6:
+                comp = CompararaClientes.Criterio.FechaInscripciónMayorMenor;
+                ListarClientesOrdenados(comp);
+                break;
+            case 7:
+                Utilities.P("Volviendo al menú anterior.");
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+
+        }
+
     }
     
     private static void BorrarProductosControlador(int op){
@@ -353,6 +395,17 @@ public class GUI {
         if (!pro.isEmpty()) {
             for (Product p : pro) {
                 Utilities.P(p.toString());
+            }
+        } else {
+            Utilities.P("No existen Productos aún.");
+        }
+    }
+    private static void ListarClientesOrdenados(CompararaClientes.Criterio c) {
+        CompararaClientes comparador = new CompararaClientes(c);
+        Set<IClient> clien = controlador.listAllClients(comparador);
+        if (!clien.isEmpty()) {
+            for (IClient cl : clien) {
+                Utilities.P(cl.toString());
             }
         } else {
             Utilities.P("No existen Productos aún.");

@@ -18,6 +18,10 @@ public class Utilities {
     private static Scanner keyboard = new Scanner(System.in);
     private final static String EXPRESION_NOMBRE = "^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\']+[\\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])+"
             + "[\\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])?$";
+    private final static String EXPRESION_NUMEROFIJO="([+]34|[+]0034|34)?[ -]*(8|9)[ -]*([0-9][ -]*){8}";
+    private final static String EXPRESION_NUMEROMOVIL="([+]34|[+]0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}";
+    private final static String EXPRESION_DNI="^[0-9]{8,8}[A-Za-z]$";
+    
 
     /**
      * Método que valida un nombre
@@ -25,7 +29,7 @@ public class Utilities {
      * @param nombre el nombre a validar
      * @return devulve true si es un nombre válido y false si no lo es
      */
-    private static boolean validarNombre(String nombre) {
+    public static boolean validarNombre(String nombre) {
         boolean correcto = false;
         Pattern pat = Pattern.compile(EXPRESION_NOMBRE);
         Matcher mat = pat.matcher(nombre);
@@ -35,6 +39,38 @@ public class Utilities {
         }
 
         return correcto;
+    }
+    public static boolean validarTelf(String telf) {
+        boolean correcto = false;
+        Pattern pat = Pattern.compile(EXPRESION_NUMEROFIJO);
+        Matcher mat = pat.matcher(telf);
+
+        if (mat.matches()) {
+            correcto=true;
+        }else{
+            pat= Pattern.compile(EXPRESION_NUMEROMOVIL);
+            mat = pat.matcher(telf);
+            if(mat.matches()){
+                correcto=true;
+            }
+        }
+
+        return correcto;
+    }
+    
+    public static boolean validarDNI(String dni){
+        boolean resultado=false;
+        Pattern pat = Pattern.compile(EXPRESION_DNI);
+        Matcher mat = pat.matcher(dni);
+        char[] letras={'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        if (mat.matches()) {
+           int numerosdelacadena=Integer.parseInt(dni.substring(0, 8));
+           char letra=dni.charAt(8);
+           if(letras[numerosdelacadena%23]==letra){
+               resultado=true;
+           }
+        }
+        return resultado;
     }
 
     /**

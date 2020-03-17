@@ -73,6 +73,39 @@ public class GUI {
             case 3:
                 break;
             case 4:
+                String dnicliente,nombreclienbte,telefono;
+                do{
+                    do{
+                        dnicliente=Utilities.getString("Introduce el Dni del cliente"); 
+                        if(!Utilities.validarDNI(dnicliente)){
+                            Utilities.P("Formato de DNI no válido.");
+                        }
+                    }while(!Utilities.validarDNI(dnicliente));
+                    if(controlador.existeCliente(dnicliente)){
+                        Utilities.P("Ya existe un contacto con ese dni.");
+                    }
+                }while(controlador.existeCliente(dnicliente));
+                
+               
+                do{
+                   nombreclienbte=Utilities.getString("Introduce el Nombre del cliente");
+                   if(!Utilities.validarNombre(nombreclienbte)){
+                        Utilities.P("Formato de Nombre no válido.");
+                    }
+                }while(!Utilities.validarNombre(nombreclienbte));
+              
+                do{
+                    telefono=Utilities.getString("Itroduce el número de telefono");
+                    if(!Utilities.validarTelf(telefono)){
+                        Utilities.P("Formato de telefono no válido.");
+                    }
+                }while(!Utilities.validarTelf(telefono));
+                if(controlador.createClient(dnicliente, nombreclienbte, telefono ,LocalDateTime.now())){
+                   Utilities.P("Cliente creado correctamente.");
+                   controlador.saveClientsFromDDBB();
+                }else{
+                    Utilities.P("No se ha podido crear el nuevo cliente");
+                }
                 break;
             case 5:
                 break;

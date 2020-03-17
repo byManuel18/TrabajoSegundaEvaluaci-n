@@ -128,6 +128,24 @@ public class GUI {
                 }while(opcion2!=3);
                    
                 break;
+            case 11:
+                do{
+                    dnicliente=Utilities.getString("Introduce el dni del Cliente a eliminar");
+                    if(!Utilities.validarDNI(dnicliente)){
+                        Utilities.P("Formato de Dni no válido.");
+                    }
+                }while(!Utilities.validarDNI(dnicliente));
+                if(controlador.existeCliente(dnicliente)){
+                    if( controlador.removeClient(dnicliente)){
+                        Utilities.P("Cliente eliminado correctamente.");
+                        controlador.saveClientsFromDDBB();
+                    }else{
+                        Utilities.P("No se ha podido borrar el cliente porque tiene reservas pendientes.");
+                    }
+                }else
+                    Utilities.P("No existe un cliente con ese DNI.");
+               
+                break;
 
             case 15:
 

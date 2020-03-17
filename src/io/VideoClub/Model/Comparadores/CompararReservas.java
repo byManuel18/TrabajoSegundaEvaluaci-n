@@ -44,15 +44,27 @@ public class CompararReservas implements Comparator<Reservation>{
                 break;
             case FechaInicioReserva:
                 resultado=o1.ini.compareTo(o2.ini);
+                if(resultado==0){
+                    resultado=o1.getId()-o2.getId();
+                }
                 break;
             case NombreCliente:
                 resultado=o1.cli.getName().compareTo(o2.cli.getName());
+                if(resultado==0){
+                    resultado=o1.getId()-o2.getId();
+                }
                 break;
             case MenosAMallorPrecio:
                 resultado=(int)(o1.pro.getPrize()-o2.pro.getPrize());
+                if(resultado==0){
+                    resultado=o1.getId()-o2.getId();
+                }
                 break;
             case MallorAMenorPrecio:
                 resultado=(int)(o2.pro.getPrize()-o1.pro.getPrize());
+                if(resultado==0){
+                    resultado=o1.getId()-o2.getId();
+                }
                 break;
         }
         return resultado;

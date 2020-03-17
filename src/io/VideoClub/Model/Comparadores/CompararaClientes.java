@@ -36,21 +36,40 @@ public class CompararaClientes implements Comparator<Client>{
         switch(criterio){
             case AtoZ:
                 resultado=o1.getName().compareTo(o2.getName());
+                if(resultado==0){
+                    resultado=resultado=o1.getID().compareTo(o2.getID());
+                }
                 break;
             case ZtoA:
                 resultado=o2.getName().compareTo(o1.getName());
+                if(resultado==0){
+                    resultado=resultado=o1.getID().compareTo(o2.getID());
+                }
                 break;
             case PorKeyAtoZ:
                 resultado=o1.getID().compareTo(o2.getID());
+                
                 break;  
             case PorkeyZtoA:
                 resultado=o2.getID().compareTo(o1.getID());
                 break;
             case FechaInscripciónMenorMayor:
                 resultado=o1.getTime().compareTo(o2.getTime());
+                if(resultado==0){
+                    resultado=o1.getName().compareTo(o2.getName());
+                }
+                if(resultado==0){
+                    resultado=o1.getID().compareTo(o2.getID());
+                }
                 break;
             case FechaInscripciónMayorMenor:
                  resultado=o2.getTime().compareTo(o1.getTime());
+                 if(resultado==0){
+                    resultado=o1.getName().compareTo(o2.getName());
+                }
+                if(resultado==0){
+                    resultado=o1.getID().compareTo(o2.getID());
+                }
                 break;
         }
         return resultado;

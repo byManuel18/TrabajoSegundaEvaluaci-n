@@ -8,12 +8,14 @@ package io.VideoClub.View;
 import io.VideoClub.Controller.AppController;
 import io.VideoClub.Model.Client;
 import io.VideoClub.Model.Comparadores.CompararProductos;
+import io.VideoClub.Model.Comparadores.CompararReservas;
 import io.VideoClub.Model.Comparadores.CompararaClientes;
 import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
 import io.VideoClub.Model.Product;
+import io.VideoClub.Model.Reservation;
 import io.VideoClub.Utilities.Utilities;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -71,6 +73,10 @@ public class GUI {
                 } while (opcion2 != 4);
                 break;
             case 3:
+                do{
+                    opcion2=Utilities.MenuListarreservas();
+                    ControladorMenuListarReservas(opcion2);
+                }while(opcion2!=4);
                 break;
             case 4:
                 String dnicliente,nombreclienbte,telefono;
@@ -128,6 +134,10 @@ public class GUI {
                 }while(opcion2!=3);
                    
                 break;
+            case 9:
+                break;
+            case 10:
+                break;
             case 11:
                 do{
                     dnicliente=Utilities.getString("Introduce el dni del Cliente a eliminar");
@@ -146,9 +156,16 @@ public class GUI {
                     Utilities.P("No existe un cliente con ese DNI.");
                
                 break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
 
             case 15:
-
+                controlador.saveAllDDBB();
+                Utilities.P("Saliendo de la aplicación.");  
                 break;
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
@@ -398,6 +415,109 @@ public class GUI {
 
     }
     
+    private static void ControladorMenuListarReservas(int op){
+        Set<Reservation> reser;
+        switch(op){
+            case 1:
+                reser=controlador.listAllReservations();
+                ListarReservas(reser);
+                break;
+            case 2:
+                int opcioncomparadorreser=0;
+                while(opcioncomparadorreser!=7){
+                    do{
+                        opcioncomparadorreser=Utilities.MenuOPcionOrdenarReserva();
+                    }while(opcioncomparadorreser!=7&&devolverCompararReserva(opcioncomparadorreser)==null);
+                    if(opcioncomparadorreser!=7){
+                        CompararReservas c=new CompararReservas(devolverCompararReserva(opcioncomparadorreser));
+                        reser=controlador.listAllReservations(c);
+                        ListarReservas(reser);
+                    }
+                    
+                }
+                
+                break;
+            case 3:
+                int opcionestadoreser=0;
+                while(opcionestadoreser!=4){
+                   do{
+                    opcionestadoreser=Utilities.MenuOPcionEstadoReserva();
+                   }while(devolverEstadoReserva(opcionestadoreser)==null&&opcionestadoreser!=4); 
+                   if(opcionestadoreser!=4){
+                    reser=controlador.listAllReservations(devolverEstadoReserva(opcionestadoreser));
+                    ListarReservas(reser);   
+                   }
+                }
+                
+                break;
+            case 4:
+                Utilities.P("Volviendo al menú anterior.");
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+    }
+    private static void ListarReservas(Set<Reservation> reser){
+        if(!reser.isEmpty()){
+            for(Reservation r:reser){
+                Utilities.P(r.toString());
+            }
+        }else{
+             Utilities.P("No hay reservas.");
+        }
+    }
+    
+    private static Reservation.StatusReserve devolverEstadoReserva(int op){
+        Reservation.StatusReserve status=null;
+        switch(op){
+            case 1:
+                status=Reservation.StatusReserve.ACTIVE;
+                break;
+            case 2:
+                status=Reservation.StatusReserve.FINISHED;
+                break;
+            case 3:
+                status=Reservation.StatusReserve.PENDING;
+                break;
+            case 4:
+                Utilities.P("Volviendo al menú anterior");
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+        return status;
+    }
+    
+    private static CompararReservas.Criterio devolverCompararReserva(int op){
+        CompararReservas.Criterio criterio=null;
+        switch(op){
+            case 1:
+                criterio=CompararReservas.Criterio.IdMenoraMayor;
+                break;
+            case 2:
+                criterio=CompararReservas.Criterio.IdMayoraMenor;
+                break;
+            case 3:
+                criterio=CompararReservas.Criterio.FechaInicioReserva;
+                break;
+            case 4:
+                criterio=CompararReservas.Criterio.NombreCliente;
+                break;
+            case 5:
+                criterio=CompararReservas.Criterio.MenosAMallorPrecio;
+                break;
+            case 6:
+                criterio=CompararReservas.Criterio.MallorAMenorPrecio;
+                break;
+            case 7:
+                Utilities.P("Volviendo al menú anterior");
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+        return criterio;
+        
+    }
     private static void BorrarProductosControlador(int op){
         
         switch(op){

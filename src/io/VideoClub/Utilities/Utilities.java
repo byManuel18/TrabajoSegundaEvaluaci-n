@@ -291,6 +291,37 @@ public class Utilities {
         P("1)Listar todas las reservas");
         P("2)Mostrar las reservas ordenadas");
         P("3)Mostrar las reservas por estado");
+        P("4)Volver al menú anterior");
+        p("> ");
+        resultado = getInt();
+
+        return resultado;
+
+    }
+    
+        public static int MenuOPcionEstadoReserva() {
+        int resultado = 0;
+        
+        P("1)Activas");
+        P("2)Finalizadas");
+        P("3)Pendientes");
+        P("4)Volver al menú anterior");
+        p("> ");
+        resultado = getInt();
+
+        return resultado;
+
+    }
+        public static int MenuOPcionOrdenarReserva() {
+        int resultado = 0;
+        
+        P("1)ID menor a mayor");
+        P("2)ID mayor a menor");
+        P("3)Fecha de inicio reserva");
+        P("4)Nombre cliente");
+        P("5)Menor a mayor precio");
+        P("6)Mayor a menor precio");
+        P("7)Volver al menú anterior");
         p("> ");
         resultado = getInt();
 

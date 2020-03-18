@@ -580,11 +580,11 @@ public class AppController implements IAppController {
     public double closeReservation(Reservation r) {
         double precio = 0;
         precio = r.pro.getPrize();
-        r.status = Reservation.StatusReserve.FINISHED;
         r.finished = LocalDate.now();
-        if (r.end.compareTo(r.finished) < 0) {
+        if (r.status==Reservation.StatusReserve.PENDING) {
             precio += (precio * 0.15f);
         }
+        r.status = Reservation.StatusReserve.FINISHED;
         for (Product produc : productos) {
             if (produc.equals(r.pro)) {
                 produc.setStatus(Product.Status.AVAILABLE);

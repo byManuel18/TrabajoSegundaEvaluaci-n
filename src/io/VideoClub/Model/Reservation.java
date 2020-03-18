@@ -75,7 +75,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "Producto=" + pro + ", Cliente=" + cli + ", Inicio=" + ini + ", Fin=" + end + ", Finished=" + finished + ", Estado=" + status + '}';
+        return "Reservation --> ID:"+ id + " {Producto=" + pro + ", Cliente=" + cli + ", Inicio=" + ini + ", Fin=" + end + ", Finished=" + finished + ", Estado=" + status + '}';
     }
 
    

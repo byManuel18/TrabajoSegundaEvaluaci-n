@@ -36,10 +36,10 @@ public class CompararReservas implements Comparator<Reservation>{
     public int compare(Reservation o1, Reservation o2) {
         int resultado=0;
         switch(criterio){
-            case IdMayoraMenor:
+            case IdMenoraMayor:
                 resultado=o1.getId()-o2.getId();
                 break;
-            case IdMenoraMayor:
+            case IdMayoraMenor:
                 resultado=o2.getId()-o1.getId();
                 break;
             case FechaInicioReserva:

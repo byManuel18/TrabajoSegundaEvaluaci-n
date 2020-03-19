@@ -114,6 +114,11 @@ public class GUI {
                 }
                 break;
             case 5:
+                do{
+                    opcion2=Utilities.MenuCrearProductos();
+                    ControladorMenuCrearProductos(opcion2);
+                    
+                }while(opcion2!=4);
                 break;
             case 6:
                 nombre = Utilities.getString("Introduce el nombre del producto");
@@ -122,12 +127,12 @@ public class GUI {
                     opcionTipo = Utilities.MenuTipoProducto();
                     tipo = devolverTypoProducto(opcionTipo);
                 } while (tipo == null);
-                if(controlador.addProduct(nombre, tipo)){
-                   Utilities.P("Se ha podido crear correctamente");
-                   controlador.saveCatalogFromDDBB();
+                
+                if(Anadirexistencia(1, nombre, tipo)){
                 }else{
                 Utilities.P("No se ha podido crear correctamente");
                 }
+                break;
             case 8:
                 do{ opcion2=Utilities.MenuBorrarProducto();
                     BorrarProductosControlador(opcion2);
@@ -169,6 +174,57 @@ public class GUI {
                 break;
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+    }
+    
+    private static void ControladorMenuCrearProductos(int op){
+        String name,descripcion="";
+        int edadmin,opcioncate=0;
+        double precio=0;
+        
+       
+        switch(op){
+            case 1:
+                name=Utilities.getString("Introduce el nombre de la película");
+                if(controlador.productoExistente(name, ProductsTypes.Peliculas)){
+                    Utilities.P("Ya existe un producto con ese nombre");
+                    do{
+                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
+                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Peliculas)){
+                            Utilities.P("Se ha añadido una existencia al catálogo");
+                        }else{
+                             Utilities.P("No se ha creado existencia");
+                        }
+                    }while(opcioncate!=2);
+                }else{
+                    descripcion=Utilities.getString("Introduce la descripción de la Película");
+                    edadmin=Utilities.getInt("Introduce la edad mínima");
+                    Utilities.p("Introduce el precio del producto: ");
+                    precio=Utilities.getDouble();
+                    MovieCategory categoriapeli=null;
+                    do{
+                        opcioncate=Utilities.MenuDevolverTipoPeli();
+                        categoriapeli=DevolverTipoPelicula(opcioncate);
+                    }while(categoriapeli==null);
+                    if(controlador.createMovie(ProductsTypes.Peliculas, name, descripcion,categoriapeli,edadmin, precio)){
+                        controlador.saveCatalogFromDDBB();
+                        Utilities.P("Película creada correctamente.");
+                }else{
+                     Utilities.P("No se ha podido crear el producto.");
+                    }
+                }
+                
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                Utilities.P("Volviendo al menú anterior.");
+                break;
+            default:
+             Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
 
@@ -599,6 +655,45 @@ public class GUI {
         }
         return tipo;
     }
+    
+    private static MovieCategory DevolverTipoPelicula(int opcion){
+        MovieCategory categoria=null;
+        switch(opcion){
+            case 1:
+                categoria=MovieCategory.Horror;
+                break;
+            case 2:
+                categoria=MovieCategory.Love;
+                break;
+            case 3:
+                categoria=MovieCategory.Action;
+                break;
+            case 4:
+                categoria=MovieCategory.SciFi;
+                break;
+            default:
+                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+        }
+        return categoria;
+    }
+    
+    private static GameCategory DevolverTipoJuego(int opcion){
+        GameCategory categoria=null;
+        switch(opcion){
+            case 1:
+                categoria=GameCategory.Adeventures;
+                break;
+            case 2:
+                categoria=GameCategory.Cars;
+                break;
+            case 3:
+                categoria=GameCategory.Shooter;
+                break;
+            default:
+                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+        }
+        return categoria;
+    }
 
     private static void ListarSetProductos(Set<Product> listap) {
 
@@ -649,6 +744,20 @@ public class GUI {
                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
         }
         return estado;
+    }
+    private static boolean Anadirexistencia(int op,String name,ProductsTypes tipo){
+        boolean creado=false;
+        switch(op){
+            case 1:
+                creado=controlador.addProduct(name, tipo);
+                controlador.saveCatalogFromDDBB();
+                break;
+            case 2:
+                break;
+            default:
+                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+        }
+        return creado;
     }
 
 }

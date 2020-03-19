@@ -235,6 +235,16 @@ public class Utilities {
 
         return opcion;
     }
+    public static int MenuCrearProductos(){
+        int resultad=0;
+        P("1)Crear Película");
+        P("2)Crear Juego");
+        P("3)Crear Otro");
+        P("4)Volver al menú anterior");
+        p("> ");
+        resultad=getInt();
+        return resultad;
+    }
 
     public static int MenuListarProductor() {
         int resultado = 0;
@@ -374,6 +384,29 @@ public class Utilities {
         p("> ");
         resultado=getInt();
         return resultado;
+    }
+    
+    public static int MenuDevolverTipoPeli(){
+        int op=0;
+        P("1)Horror");
+        P("2)Amor");
+        P("3)Acción");
+        P("4)Ciencia ficción");
+       
+        op=getInt();
+        
+        return op;
+    }
+    
+    public static int MenuSioNoAñadirExistencia(){
+        int op=0;
+        P("¿Desea añadir existenciade ese producto?");
+        P("1)Sí");
+        P("2)No");
+        p("> ");
+        op=getInt();
+        return op;
+        
     }
     
    

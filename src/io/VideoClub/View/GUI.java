@@ -33,9 +33,12 @@ public class GUI {
     public static void principal() {
         if (controlador.loadAllDDBB()) {
             Utilities.P("Base de datos cargada correctamente.");
+            controlador.UpgradearReservas();
+            controlador.saveReservationsFromDDBB();
         } else {
             Utilities.P("Base de datos no encontrada. Si es la primera vez que ejecuta el programa, este creará los archivos de guardado una vez cierre el programa.");
         }
+        
         PrimerMenu();
     }
 

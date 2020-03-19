@@ -605,6 +605,13 @@ public class AppController implements IAppController {
         return re;
 
     }
+    public void UpgradearReservas(){
+        for(Reservation re:reservas){
+            if(re.end.compareTo(LocalDate.now())<0&&re.status!=Reservation.StatusReserve.FINISHED){
+                re.status=Reservation.StatusReserve.PENDING;
+            }
+        }
+    }
 
     @Override
     public boolean loadCatalogFromDDBB() {
@@ -774,6 +781,8 @@ public class AppController implements IAppController {
         }
         return cate;
     }
+    
+            
 
     @Override
     public boolean loadClientsFromDDBB() {

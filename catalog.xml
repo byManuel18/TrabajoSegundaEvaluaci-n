@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Catalogo>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>690ad7db-e85f-49</Key>
+<Nombre>301</Nombre>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>RESERVED</Estado>
+</Pelicula>
+<Otro>
+<Key>9cb90242-b120-46</Key>
+<Nombre>TAZA</Nombre>
+<Descripcion>PARA BEBER</Descripcion>
+<Precio>3.95</Precio>
+<Tipo>Otros</Tipo>
+<Estado>RESERVED</Estado>
+</Otro>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>12</EdadMinima>
@@ -20,26 +38,6 @@
 <Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
 </Pelicula>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>690ad7db-e85f-49</Key>
-<Nombre>301</Nombre>
-<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
-<Precio>4.95</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
-</Pelicula>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>95f5c764-4f29-4f</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>RESERVED</Estado>
-</Juego>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>12</EdadMinima>
@@ -50,12 +48,14 @@
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
-<Otro>
-<Key>9cb90242-b120-46</Key>
-<Nombre>TAZA</Nombre>
-<Descripcion>PARA BEBER</Descripcion>
-<Precio>3.95</Precio>
-<Tipo>Otros</Tipo>
+<Juego>
+<Categoria>Adeventures</Categoria>
+<EdadMinima>5</EdadMinima>
+<Key>95f5c764-4f29-4f</Key>
+<Nombre>MINECRAFT</Nombre>
+<Descripcion>JUEGO DE CUBOS</Descripcion>
+<Precio>19.95</Precio>
+<Tipo>Juegos</Tipo>
 <Estado>RESERVED</Estado>
-</Otro>
+</Juego>
 </Catalogo>

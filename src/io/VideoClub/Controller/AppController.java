@@ -72,6 +72,7 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Product> listAllProducts() {
+        
         return productos;
     }
 
@@ -440,13 +441,13 @@ public class AppController implements IAppController {
 
         for (IClient cli : clientes) {
             if (cli.getID().equals(e.getID())) {
-               /* cli=e;*/
-                cli.setName(e.getName());
+                /*cli.setName(e.getName());
                 cli.setPhone(e.getPhone());
-                cli.setTime(e.getTime());
-                
-             
-               editado = true;
+                cli.setTime(e.getTime());*/ 
+                clientes.remove(cli);
+                clientes.add(e);
+               
+                editado = true;
                 saveClientsFromDDBB();
                 break;
             }
@@ -617,7 +618,7 @@ public class AppController implements IAppController {
         return re;
 
     }
-
+    
     public void UpgradearReservas() {
         for (Reservation re : reservas) {
             if (re.end.compareTo(LocalDate.now()) < 0 && re.status != Reservation.StatusReserve.FINISHED) {

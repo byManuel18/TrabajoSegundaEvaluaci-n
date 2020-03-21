@@ -252,6 +252,29 @@ public class GUI {
                 }
                 break;
             case 3:
+                name=Utilities.getString("Introduce el nombre del producto");
+                 if(controlador.productoExistente(name, ProductsTypes.Otros)){
+                    Utilities.P("Ya existe un producto con ese nombre");
+                    do{
+                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
+                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Otros)){
+                            Utilities.P("Se ha añadido una existencia al catálogo");
+                        }else{
+                             Utilities.P("No se ha creado existencia");
+                        }
+                    }while(opcioncate!=2);
+                }else{
+                    descripcion=Utilities.getString("Introduce la descripción del producto");
+                    Utilities.p("Introduce el precio del producto: ");
+                    precio=Utilities.getDouble();
+                   
+                    if(controlador.createProduct(name, descripcion,precio)){
+                        controlador.saveCatalogFromDDBB();
+                        Utilities.P("Producto creado correctamente.");
+                }else{
+                     Utilities.P("No se ha podido crear el producto.");
+                    }
+                }
                 break;
             case 4:
                 Utilities.P("Volviendo al menú anterior.");

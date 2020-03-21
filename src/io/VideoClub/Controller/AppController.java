@@ -882,7 +882,7 @@ public class AppController implements IAppController {
                     String nombrepro, precio, edadmin, categoria, tipo, descripcion, estado, key = null;
                     eElement = (Element) pNode;
                     tipo = eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
-                    nombrepro = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    nombrepro = eElement.getElementsByTagName("NombreProducto").item(0).getTextContent();
                     precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
                     descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
                     key = eElement.getElementsByTagName("Key").item(0).getTextContent();
@@ -898,7 +898,7 @@ public class AppController implements IAppController {
                     } else {
                         categoria = eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
                         edadmin = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                        nuevo = new Juego(nombre, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
+                        nuevo = new Juego(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
                     }
                     nuevo.setStatus(devuelveestadoproducto(estado));
                     nuevo.setKey(key);
@@ -1167,7 +1167,7 @@ public class AppController implements IAppController {
                 Element tipopro = doc.createElement("TipoProducto");
                 tipopro.appendChild(doc.createTextNode(String.valueOf(c.pro.getTipo())));
                 instancia.appendChild(tipopro);
-                Element nombre = doc.createElement("Nombre");
+                Element nombre = doc.createElement("NombreProducto");
                 nombre.appendChild(doc.createTextNode(c.pro.getName()));
                 instancia.appendChild(nombre);
                 Element descrip = doc.createElement("Descripcion");

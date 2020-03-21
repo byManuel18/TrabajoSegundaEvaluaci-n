@@ -10,7 +10,7 @@
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>MANUEL GUERRERO</NombreCliente>
 <Telefono>655444333</Telefono>
-<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
+<FechaInscripcion>2020-03-21T20:14:13</FechaInscripcion>
 </Cliente>
 <Producto>
 <Juego>
@@ -18,7 +18,7 @@
 <EdadMinima>5</EdadMinima>
 <Precio>19.95</Precio>
 <TipoProducto>Juegos</TipoProducto>
-<Nombre>MANUEL G</Nombre>
+<NombreProducto>MINECRATf</NombreProducto>
 <Descripcion>Juego de cubos</Descripcion>
 <Key>95f5c764-4f29-4f</Key>
 <Estado>RESERVED</Estado>
@@ -35,13 +35,13 @@
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>MANUEL GUERRERO</NombreCliente>
 <Telefono>655444333</Telefono>
-<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
+<FechaInscripcion>2020-03-21T20:14:13</FechaInscripcion>
 </Cliente>
 <Producto>
 <Otro>
 <Precio>3.95</Precio>
 <TipoProducto>Otros</TipoProducto>
-<Nombre>TAZA</Nombre>
+<NombreProducto>TAZA</NombreProducto>
 <Descripcion>PARA BEBER</Descripcion>
 <Key>9cb90242-b120-46</Key>
 <Estado>RESERVED</Estado>
@@ -58,7 +58,7 @@
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>MANUEL GUERRERO</NombreCliente>
 <Telefono>655444333</Telefono>
-<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
+<FechaInscripcion>2020-03-21T20:14:13</FechaInscripcion>
 </Cliente>
 <Producto>
 <Pelicula>
@@ -66,7 +66,7 @@
 <EdadMinima>12</EdadMinima>
 <Precio>4.95</Precio>
 <TipoProducto>Peliculas</TipoProducto>
-<Nombre>301</Nombre>
+<NombreProducto>301</NombreProducto>
 <Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
 <Key>690ad7db-e85f-49</Key>
 <Estado>RESERVED</Estado>

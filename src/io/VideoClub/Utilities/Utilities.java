@@ -397,6 +397,16 @@ public class Utilities {
         
         return op;
     }
+    public static int MenuDevolverTipoJuego(){
+        int op=0;
+        P("1)Adeventures");
+        P("2)Cars");
+        P("3)Shooters");
+       
+        op=getInt();
+        
+        return op;
+    }
     
     public static int MenuSioNoAñadirExistencia(){
         int op=0;

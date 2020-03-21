@@ -145,6 +145,7 @@ public class GUI {
             case 9:
                 break;
             case 10:
+                
                 break;
             case 11:
                 do{
@@ -165,6 +166,7 @@ public class GUI {
                
                 break;
             case 12:
+                
                 break;
             case 13:
                 break;
@@ -220,6 +222,34 @@ public class GUI {
                 
                 break;
             case 2:
+                name=Utilities.getString("Introduce el nombre del videojuego");
+                if(controlador.productoExistente(name, ProductsTypes.Juegos)){
+                    Utilities.P("Ya existe un producto con ese nombre");
+                    do{
+                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
+                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Juegos)){
+                            Utilities.P("Se ha añadido una existencia al catálogo");
+                        }else{
+                             Utilities.P("No se ha creado existencia");
+                        }
+                    }while(opcioncate!=2);
+                }else{
+                    descripcion=Utilities.getString("Introduce la descripción del videojuego");
+                    edadmin=Utilities.getInt("Introduce la edad mínima");
+                    Utilities.p("Introduce el precio del producto: ");
+                    precio=Utilities.getDouble();
+                    GameCategory categoriajuego=null;
+                    do{
+                        opcioncate=Utilities.MenuDevolverTipoJuego();
+                        categoriajuego=DevolverTipoJuego(opcioncate);
+                    }while(categoriajuego==null);
+                    if(controlador.createGame(ProductsTypes.Peliculas, name, descripcion,categoriajuego,edadmin, precio)){
+                        controlador.saveCatalogFromDDBB();
+                        Utilities.P("Videojuego creado correctamente.");
+                }else{
+                     Utilities.P("No se ha podido crear el producto.");
+                    }
+                }
                 break;
             case 3:
                 break;

@@ -1,35 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Catalogo>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>690ad7db-e85f-49</Key>
-<Nombre>301</Nombre>
-<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
-<Precio>4.95</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
-</Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>5e1f7129-2a01-4f</Key>
-<Nombre>FIFA</Nombre>
-<Descripcion>FUTBOL</Descripcion>
-<Precio>15.0</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>AVAILABLE</Estado>
-</Juego>
-<Pelicula>
-<Categoria>Love</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>45266984-a0bf-4e</Key>
-<Nombre>TORRENTE4</Nombre>
-<Descripcion>ESPA�A</Descripcion>
-<Precio>5.0</Precio>
+<Key>d40f3323-2f9d-40</Key>
+<Nombre>DMC</Nombre>
+<Descripcion>MATA DEMONIOS</Descripcion>
+<Precio>30.0</Precio>
 <Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
-</Pelicula>
+</Juego>
 <Pelicula>
 <Categoria>Action</Categoria>
 <EdadMinima>12</EdadMinima>
@@ -39,6 +19,16 @@
 <Precio>4.95</Precio>
 <Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
+</Pelicula>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>690ad7db-e85f-49</Key>
+<Nombre>301</Nombre>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>RESERVED</Estado>
 </Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
@@ -53,11 +43,11 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>12</EdadMinima>
-<Key>d40f3323-2f9d-40</Key>
-<Nombre>DMC</Nombre>
-<Descripcion>MATA DEMONIOS</Descripcion>
-<Precio>30.0</Precio>
-<Tipo>Peliculas</Tipo>
+<Key>5e1f7129-2a01-4f</Key>
+<Nombre>FIFA</Nombre>
+<Descripcion>FUTBOL</Descripcion>
+<Precio>15.0</Precio>
+<Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
 <Otro>

@@ -222,12 +222,11 @@ public class Utilities {
         P("7)Editar producto");
         P("8)Borrar producto");
         P("9)Consultar productos disponibles");
-        P("10)Añadir cliente");
-        P("11)Borrar cliente");
-        P("12)Editar cliente");
-        P("13)Hacer reserva");
-        P("14)Cerrar reserva");
-        P("15)Salir");
+        P("10)Borrar cliente");
+        P("11)Editar cliente");
+        P("12)Hacer reserva");
+        P("13)Cerrar reserva");
+        P("14)Salir");
         P("-------------------------------------");
         p("> ");
 

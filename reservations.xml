@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Reservas>
 <Reserva>
-<ID>2</ID>
+<ID>3</ID>
 <Estado>PENDING</Estado>
 <FechaInicio>2020-03-05</FechaInicio>
 <FechaLimite>2020-03-13</FechaLimite>
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
-<NombreCliente>MANUEL</NombreCliente>
-<Telefono>32523</Telefono>
-<FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
+<NombreCliente>MANUEL GUERRERO</NombreCliente>
+<Telefono>655444333</Telefono>
+<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
 </Cliente>
 <Producto>
-<Pelicula>
-<CategoriaPelicula>Action</CategoriaPelicula>
-<EdadMinima>12</EdadMinima>
-<Precio>4.95</Precio>
-<TipoProducto>Peliculas</TipoProducto>
-<Nombre>301</Nombre>
-<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
-<Key>690ad7db-e85f-49</Key>
+<Juego>
+<CategoriaJuego>Adeventures</CategoriaJuego>
+<EdadMinima>5</EdadMinima>
+<Precio>19.95</Precio>
+<TipoProducto>Juegos</TipoProducto>
+<Nombre>MANUEL G</Nombre>
+<Descripcion>Juego de cubos</Descripcion>
+<Key>95f5c764-4f29-4f</Key>
 <Estado>RESERVED</Estado>
-</Pelicula>
+</Juego>
 </Producto>
 </Reserva>
 <Reserva>
@@ -33,9 +33,9 @@
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
-<NombreCliente>MANUEL</NombreCliente>
-<Telefono>32523</Telefono>
-<FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
+<NombreCliente>MANUEL GUERRERO</NombreCliente>
+<Telefono>655444333</Telefono>
+<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
 </Cliente>
 <Producto>
 <Otro>
@@ -49,28 +49,28 @@
 </Producto>
 </Reserva>
 <Reserva>
-<ID>3</ID>
+<ID>2</ID>
 <Estado>PENDING</Estado>
 <FechaInicio>2020-03-05</FechaInicio>
 <FechaLimite>2020-03-13</FechaLimite>
 <FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
-<NombreCliente>MANUEL</NombreCliente>
-<Telefono>32523</Telefono>
-<FechaInscripcion>2020-03-05T08:49:54</FechaInscripcion>
+<NombreCliente>MANUEL GUERRERO</NombreCliente>
+<Telefono>655444333</Telefono>
+<FechaInscripcion>2020-03-21T20:14:13.438</FechaInscripcion>
 </Cliente>
 <Producto>
-<Juego>
-<CategoriaJuego>Adeventures</CategoriaJuego>
-<EdadMinima>5</EdadMinima>
-<Precio>19.95</Precio>
-<TipoProducto>Juegos</TipoProducto>
-<Nombre>MANUEL</Nombre>
-<Descripcion>Juego de cubos</Descripcion>
-<Key>95f5c764-4f29-4f</Key>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>12</EdadMinima>
+<Precio>4.95</Precio>
+<TipoProducto>Peliculas</TipoProducto>
+<Nombre>301</Nombre>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Key>690ad7db-e85f-49</Key>
 <Estado>RESERVED</Estado>
-</Juego>
+</Pelicula>
 </Producto>
 </Reserva>
 </Reservas>

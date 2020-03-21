@@ -131,11 +131,11 @@ public class AppController implements IAppController {
     public List<Product> listAllDifferentProducts() {
         List<Product> ordenado = new ArrayList<>();
         for (Product product : productos) {
-            if (!comprobarInsert(ordenado, product)){
+            if (!comprobarInsert(ordenado, product)) {
                 if (product instanceof Others) {
                     ordenado.add(product);
                 }
-                
+
             }
         }
         return ordenado;
@@ -203,7 +203,8 @@ public class AppController implements IAppController {
     }
 
     /**
-     *Cuenta los productos que hay en la lista segun el nombre pasado
+     * Cuenta los productos que hay en la lista segun el nombre pasado
+     *
      * @param name String
      * @return devuelve un entero
      */
@@ -391,12 +392,12 @@ public class AppController implements IAppController {
     @Override
     public boolean removeClient(String id) {
         boolean borrado = false;
-        if(id!=null){
+        if (id != null) {
             if (existeCliente(id) && !comprobarssiclientetienereserva(devolverClienteExistente(id))) {
                 borrado = clientes.remove(devolverClienteExistente(id));
-             }
+            }
         }
-        
+
         return borrado;
     }
 
@@ -439,14 +440,25 @@ public class AppController implements IAppController {
 
         for (IClient cli : clientes) {
             if (cli.getID().equals(e.getID())) {
+               /* cli=e;*/
                 cli.setName(e.getName());
                 cli.setPhone(e.getPhone());
                 cli.setTime(e.getTime());
-                editado = true;
+                
+             
+               editado = true;
+                saveClientsFromDDBB();
                 break;
             }
         }
-
+        if (editado == true) {
+            for (Reservation r : reservas) {
+                if (r.cli.getID().equals(e.getID())) {
+                    r.cli = e;
+                }
+            }
+            saveReservationsFromDDBB();
+        }
         return editado;
     }
 
@@ -471,10 +483,10 @@ public class AppController implements IAppController {
      * @param name String
      * @return devuelve un booleano
      */
-    public boolean productoExistente(String name,ProductsTypes tipo) {
+    public boolean productoExistente(String name, ProductsTypes tipo) {
         boolean existe = false;
         for (Product p : productos) {
-            if (p.getName().equals(name)&&tipo==p.getTipo()) {
+            if (p.getName().equals(name) && tipo == p.getTipo()) {
                 existe = true;
                 break;
             }
@@ -482,8 +494,9 @@ public class AppController implements IAppController {
         }
         return existe;
     }
+
     /**
-     * Comprueba si un producto existe en el catalogo mediante su key 
+     * Comprueba si un producto existe en el catalogo mediante su key
      *
      * @param key String
      * @return devuelve un booleano
@@ -499,7 +512,6 @@ public class AppController implements IAppController {
         }
         return existe;
     }
-    
 
     @Override
     public boolean removeProduct(String name, ProductsTypes ty) {
@@ -509,7 +521,7 @@ public class AppController implements IAppController {
             public boolean test(Object t) {
                 boolean procede = false;
                 Product produc = (Product) t;
-                procede = produc.getName().equals(name) && produc.getTipo() == ty&&produc.getStatus()==Product.Status.AVAILABLE;
+                procede = produc.getName().equals(name) && produc.getTipo() == ty && produc.getStatus() == Product.Status.AVAILABLE;
                 return procede;
             }
         };
@@ -523,7 +535,7 @@ public class AppController implements IAppController {
         boolean result = false;
         for (Product pr : productos) {
             if (pr.getKey().equals(key)) {
-                if(pr.getStatus()==Product.Status.AVAILABLE){
+                if (pr.getStatus() == Product.Status.AVAILABLE) {
                     result = productos.remove(pr);
                 }
                 break;
@@ -552,11 +564,11 @@ public class AppController implements IAppController {
     }
 
     @Override
-    public Product isAvailableProduct(String name,ProductsTypes tipo) {
+    public Product isAvailableProduct(String name, ProductsTypes tipo) {
         Product p = null;
-        if (productoExistente(name,tipo)) {
+        if (productoExistente(name, tipo)) {
             for (Product pro : productos) {
-                if (name!=null&&pro.getName().equals(name) && pro.getStatus() == Product.Status.AVAILABLE&&tipo==pro.getTipo()) {
+                if (name != null && pro.getName().equals(name) && pro.getStatus() == Product.Status.AVAILABLE && tipo == pro.getTipo()) {
                     p = pro;
                     break;
                 }
@@ -581,7 +593,7 @@ public class AppController implements IAppController {
         double precio = 0;
         precio = r.pro.getPrize();
         r.finished = LocalDate.now();
-        if (r.status==Reservation.StatusReserve.PENDING) {
+        if (r.status == Reservation.StatusReserve.PENDING) {
             precio += (precio * 0.15f);
         }
         r.status = Reservation.StatusReserve.FINISHED;
@@ -605,10 +617,11 @@ public class AppController implements IAppController {
         return re;
 
     }
-    public void UpgradearReservas(){
-        for(Reservation re:reservas){
-            if(re.end.compareTo(LocalDate.now())<0&&re.status!=Reservation.StatusReserve.FINISHED){
-                re.status=Reservation.StatusReserve.PENDING;
+
+    public void UpgradearReservas() {
+        for (Reservation re : reservas) {
+            if (re.end.compareTo(LocalDate.now()) < 0 && re.status != Reservation.StatusReserve.FINISHED) {
+                re.status = Reservation.StatusReserve.PENDING;
             }
         }
     }
@@ -781,8 +794,6 @@ public class AppController implements IAppController {
         }
         return cate;
     }
-    
-            
 
     @Override
     public boolean loadClientsFromDDBB() {
@@ -848,12 +859,12 @@ public class AppController implements IAppController {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     //String id=eElement.getAttribute("id");
-                    String id=eElement.getElementsByTagName("ID").item(0).getTextContent();
-                    String estadoreser=eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                    String fechainicio=eElement.getElementsByTagName("FechaInicio").item(0).getTextContent();
-                    String fechalimite=eElement.getElementsByTagName("FechaLimite").item(0).getTextContent();
-                    String fechadevol=eElement.getElementsByTagName("FechaDevolución").item(0).getTextContent();
-                   
+                    String id = eElement.getElementsByTagName("ID").item(0).getTextContent();
+                    String estadoreser = eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    String fechainicio = eElement.getElementsByTagName("FechaInicio").item(0).getTextContent();
+                    String fechalimite = eElement.getElementsByTagName("FechaLimite").item(0).getTextContent();
+                    String fechadevol = eElement.getElementsByTagName("FechaDevolución").item(0).getTextContent();
+
                     NodeList nClientes = doc.getElementsByTagName("Cliente");
                     Node cNode = nClientes.item(i);
                     eElement = (Element) cNode;
@@ -865,42 +876,42 @@ public class AppController implements IAppController {
 
                     Client c = new Client(idclien, nombre, LocalDateTime.of(Integer.parseInt(fecha.substring(0, 4)), mes, Integer.parseInt(fecha.substring(8, 10)), Integer.parseInt(fecha.substring(11, 13)),
                             Integer.parseInt(fecha.substring(14, 16)), Integer.parseInt(fecha.substring(17, 19))), telef);
-                    Product nuevo=null;
+                    Product nuevo = null;
                     NodeList nProducto = doc.getElementsByTagName("Producto");
                     Node pNode = nProducto.item(i);
-                    String nombrepro,precio,edadmin,categoria,tipo,descripcion,estado,key=null;
+                    String nombrepro, precio, edadmin, categoria, tipo, descripcion, estado, key = null;
                     eElement = (Element) pNode;
-                    tipo=eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
-                    nombrepro=eElement.getElementsByTagName("Nombre").item(0).getTextContent();
-                    precio=eElement.getElementsByTagName("Precio").item(0).getTextContent();
-                    descripcion=eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
-                    key=eElement.getElementsByTagName("Key").item(0).getTextContent();
-                    estado=eElement.getElementsByTagName("Estado").item(0).getTextContent();
-                    if(tipo.equals("Otros")){
-                        nuevo=new Others(nombrepro, descripcion, Double.parseDouble(precio));
+                    tipo = eElement.getElementsByTagName("TipoProducto").item(0).getTextContent();
+                    nombrepro = eElement.getElementsByTagName("Nombre").item(0).getTextContent();
+                    precio = eElement.getElementsByTagName("Precio").item(0).getTextContent();
+                    descripcion = eElement.getElementsByTagName("Descripcion").item(0).getTextContent();
+                    key = eElement.getElementsByTagName("Key").item(0).getTextContent();
+                    estado = eElement.getElementsByTagName("Estado").item(0).getTextContent();
+                    if (tipo.equals("Otros")) {
+                        nuevo = new Others(nombrepro, descripcion, Double.parseDouble(precio));
                         nuevo.setTipo(devuelvetipoproducto(tipo));
-   
-                    }else if(tipo.endsWith("Peliculas")){
-                        categoria=eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
-                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                        nuevo=new Pelicula(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));
-                    }else{
-                        categoria=eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
-                        edadmin=eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
-                        nuevo=new Juego(nombre, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
+
+                    } else if (tipo.endsWith("Peliculas")) {
+                        categoria = eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
+                        edadmin = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        nuevo = new Pelicula(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));
+                    } else {
+                        categoria = eElement.getElementsByTagName("CategoriaJuego").item(0).getTextContent();
+                        edadmin = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
+                        nuevo = new Juego(nombre, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriajuego(categoria));
                     }
                     nuevo.setStatus(devuelveestadoproducto(estado));
                     nuevo.setKey(key);
-                    
-                    Reservation nuevareser= new Reservation(nuevo, c);
+
+                    Reservation nuevareser = new Reservation(nuevo, c);
                     nuevareser.setId(Integer.parseInt(id));
-                    nuevareser.status=devulveValorEstadoReserva(estadoreser);
-                    nuevareser.ini=LocalDate.of(Integer.parseInt(fechainicio.substring(0, 4)), Integer.parseInt(fechainicio.substring(6, 7)), Integer.parseInt(fechainicio.substring(8)));
-                    nuevareser.end=LocalDate.of(Integer.parseInt(fechalimite.substring(0, 4)), Integer.parseInt(fechalimite.substring(6, 7)), Integer.parseInt(fechalimite.substring(8)));
-                    if(!fechadevol.equals("NO ENTREGADO")){
-                        nuevareser.finished=LocalDate.of(Integer.parseInt(fechadevol.substring(0, 4)), Integer.parseInt(fechadevol.substring(6, 7)), Integer.parseInt(fechadevol.substring(8)));
+                    nuevareser.status = devulveValorEstadoReserva(estadoreser);
+                    nuevareser.ini = LocalDate.of(Integer.parseInt(fechainicio.substring(0, 4)), Integer.parseInt(fechainicio.substring(6, 7)), Integer.parseInt(fechainicio.substring(8)));
+                    nuevareser.end = LocalDate.of(Integer.parseInt(fechalimite.substring(0, 4)), Integer.parseInt(fechalimite.substring(6, 7)), Integer.parseInt(fechalimite.substring(8)));
+                    if (!fechadevol.equals("NO ENTREGADO")) {
+                        nuevareser.finished = LocalDate.of(Integer.parseInt(fechadevol.substring(0, 4)), Integer.parseInt(fechadevol.substring(6, 7)), Integer.parseInt(fechadevol.substring(8)));
                     }
-                    
+
                     reservas.add(nuevareser);
                 }
             }
@@ -914,18 +925,18 @@ public class AppController implements IAppController {
         }
         return cargado;
     }
-    
-    private Reservation.StatusReserve devulveValorEstadoReserva(String cadena){
-        Reservation.StatusReserve estado=null;
-        switch(cadena){
+
+    private Reservation.StatusReserve devulveValorEstadoReserva(String cadena) {
+        Reservation.StatusReserve estado = null;
+        switch (cadena) {
             case "ACTIVE":
-                 estado=Reservation.StatusReserve.ACTIVE;
+                estado = Reservation.StatusReserve.ACTIVE;
                 break;
             case "FINISHED":
-                 estado=Reservation.StatusReserve.FINISHED;
+                estado = Reservation.StatusReserve.FINISHED;
                 break;
             case "PENDING":
-                estado=Reservation.StatusReserve.PENDING;
+                estado = Reservation.StatusReserve.PENDING;
                 break;
         }
         return estado;

@@ -38,7 +38,7 @@ public class GUI {
         } else {
             Utilities.P("Base de datos no encontrada. Si es la primera vez que ejecuta el programa, este creará los archivos de guardado una vez cierre el programa.");
         }
-        
+
         PrimerMenu();
     }
 
@@ -48,7 +48,7 @@ public class GUI {
         do {
             opcion = Utilities.Menu();
             ControladorPrimerMenu(opcion);
-        } while (opcion != 15);
+        } while (opcion != 14);
 
     }
 
@@ -76,52 +76,53 @@ public class GUI {
                 } while (opcion2 != 4);
                 break;
             case 3:
-                do{
-                    opcion2=Utilities.MenuListarreservas();
+                do {
+                    opcion2 = Utilities.MenuListarreservas();
                     ControladorMenuListarReservas(opcion2);
-                }while(opcion2!=4);
+                } while (opcion2 != 4);
                 break;
             case 4:
-                String dnicliente,nombreclienbte,telefono;
-                do{
-                    do{
-                        dnicliente=Utilities.getString("Introduce el Dni del cliente"); 
-                        if(!Utilities.validarDNI(dnicliente)){
+                String dnicliente,
+                 nombreclienbte,
+                 telefono;
+                do {
+                    do {
+                        dnicliente = Utilities.getString("Introduce el Dni del cliente");
+                        if (!Utilities.validarDNI(dnicliente)) {
                             Utilities.P("Formato de DNI no válido.");
                         }
-                    }while(!Utilities.validarDNI(dnicliente));
-                    if(controlador.existeCliente(dnicliente)){
+                    } while (!Utilities.validarDNI(dnicliente));
+                    if (controlador.existeCliente(dnicliente)) {
                         Utilities.P("Ya existe un contacto con ese dni.");
                     }
-                }while(controlador.existeCliente(dnicliente));
-                
-               
-                do{
-                   nombreclienbte=Utilities.getString("Introduce el Nombre del cliente");
-                   if(!Utilities.validarNombre(nombreclienbte)){
+                } while (controlador.existeCliente(dnicliente));
+
+                do {
+                    nombreclienbte = Utilities.getString("Introduce el Nombre del cliente");
+                    if (!Utilities.validarNombre(nombreclienbte)) {
                         Utilities.P("Formato de Nombre no válido.");
                     }
-                }while(!Utilities.validarNombre(nombreclienbte));
-              
-                do{
-                    telefono=Utilities.getString("Itroduce el número de telefono");
-                    if(!Utilities.validarTelf(telefono)){
+                } while (!Utilities.validarNombre(nombreclienbte));
+
+                do {
+                    telefono = Utilities.getString("Itroduce el número de telefono");
+                    if (!Utilities.validarTelf(telefono)) {
                         Utilities.P("Formato de telefono no válido.");
                     }
-                }while(!Utilities.validarTelf(telefono));
-                if(controlador.createClient(dnicliente, nombreclienbte, telefono ,LocalDateTime.now())){
-                   Utilities.P("Cliente creado correctamente.");
-                   controlador.saveClientsFromDDBB();
-                }else{
+                } while (!Utilities.validarTelf(telefono));
+                if (controlador.createClient(dnicliente, nombreclienbte, telefono, LocalDateTime.now())) {
+                    Utilities.P("Cliente creado correctamente.");
+                    controlador.saveClientsFromDDBB();
+                } else {
                     Utilities.P("No se ha podido crear el nuevo cliente");
                 }
                 break;
             case 5:
-                do{
-                    opcion2=Utilities.MenuCrearProductos();
+                do {
+                    opcion2 = Utilities.MenuCrearProductos();
                     ControladorMenuCrearProductos(opcion2);
-                    
-                }while(opcion2!=4);
+
+                } while (opcion2 != 4);
                 break;
             case 6:
                 nombre = Utilities.getString("Introduce el nombre del producto");
@@ -130,149 +131,190 @@ public class GUI {
                     opcionTipo = Utilities.MenuTipoProducto();
                     tipo = devolverTypoProducto(opcionTipo);
                 } while (tipo == null);
-                
-                if(Anadirexistencia(1, nombre, tipo)){
-                }else{
-                Utilities.P("No se ha podido crear correctamente");
+
+                if (Anadirexistencia(1, nombre, tipo)) {
+                } else {
+                    Utilities.P("No se ha podido crear correctamente");
                 }
                 break;
             case 8:
-                do{ opcion2=Utilities.MenuBorrarProducto();
+                do {
+                    opcion2 = Utilities.MenuBorrarProducto();
                     BorrarProductosControlador(opcion2);
-                }while(opcion2!=3);
-                   
+                } while (opcion2 != 3);
+
                 break;
             case 9:
-                break;
-            case 10:
-                
-                break;
-            case 11:
-                do{
-                    dnicliente=Utilities.getString("Introduce el dni del Cliente a eliminar");
-                    if(!Utilities.validarDNI(dnicliente)){
-                        Utilities.P("Formato de Dni no válido.");
+                Product p = null;
+                nombre = Utilities.getString("Introduce el nombre del producto");
+                do {
+                    int opcionTipo = 0;
+                    opcionTipo = Utilities.MenuTipoProducto();
+                    tipo = devolverTypoProducto(opcionTipo);
+                } while (tipo == null);
+                if (controlador.productoExistente(nombre, tipo)) {
+                    p = controlador.isAvailableProduct(nombre, tipo);
+                    if (p == null) {
+                        Utilities.P("No esta disponible el producto introducido");
+                    } else {
+                        Utilities.P(p.toString());
                     }
-                }while(!Utilities.validarDNI(dnicliente));
-                if(controlador.existeCliente(dnicliente)){
-                    if( controlador.removeClient(dnicliente)){
-                        Utilities.P("Cliente eliminado correctamente.");
-                        controlador.saveClientsFromDDBB();
-                    }else{
-                        Utilities.P("No se ha podido borrar el cliente porque tiene reservas pendientes.");
-                    }
-                }else
-                    Utilities.P("No existe un cliente con ese DNI.");
-               
-                break;
-            case 12:
-                
-                break;
-            case 13:
-                break;
-            case 14:
+                } else {
+                    Utilities.P("No existe e producto en el catalogo");
+                }
+
                 break;
 
-            case 15:
+            case 10:
+                do {
+                    dnicliente = Utilities.getString("Introduce el dni del Cliente a eliminar");
+                    if (!Utilities.validarDNI(dnicliente)) {
+                        Utilities.P("Formato de Dni no válido.");
+                    }
+                } while (!Utilities.validarDNI(dnicliente));
+                if (controlador.existeCliente(dnicliente)) {
+                    if (controlador.removeClient(dnicliente)) {
+                        Utilities.P("Cliente eliminado correctamente.");
+                        controlador.saveClientsFromDDBB();
+                    } else {
+                        Utilities.P("No se ha podido borrar el cliente porque tiene reservas pendientes.");
+                    }
+                } else {
+                    Utilities.P("No existe un cliente con ese DNI.");
+                }
+
+                break;
+            case 11:
+                String dni = Utilities.getString("Introduce el DNI del Cliente");
+                if (controlador.existeCliente(dni)) {
+                    do {
+                        telefono = Utilities.getString("Introduce el nuevo telefono");
+                        if (!Utilities.validarTelf(telefono)) {
+                            Utilities.P("El formato del telefono no es correcto");
+                        }
+                    } while (!Utilities.validarTelf(telefono));
+                    do {
+                        nombre = Utilities.getString("Introduce el nuevo nombre");
+                        if (!Utilities.validarNombre(nombre)) {
+                            Utilities.P("El formato del nombre no es correcto");
+                        }
+                    } while (!Utilities.validarNombre(nombre));
+                    IClient c = new Client(dni, nombre, LocalDateTime.now(), telefono);
+                    if (controlador.editClient(c)) {
+                        Utilities.P("Se ha editado correctamente");
+                    } else {
+                        Utilities.P("El cliente no se ha podido editar");
+                    }
+                } else {
+                    Utilities.P("No existe el cliente");
+                }
+
+                break;
+            case 12:
+
+                break;
+            case 13:
+
+                break;
+
+            case 14:
                 controlador.saveAllDDBB();
-                Utilities.P("Saliendo de la aplicación.");  
+                Utilities.P("Saliendo de la aplicación.");
                 break;
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
-    
-    private static void ControladorMenuCrearProductos(int op){
-        String name,descripcion="";
-        int edadmin,opcioncate=0;
-        double precio=0;
-        
-       
-        switch(op){
+
+    private static void ControladorMenuCrearProductos(int op) {
+        String name, descripcion = "";
+        int edadmin, opcioncate = 0;
+        double precio = 0;
+
+        switch (op) {
             case 1:
-                name=Utilities.getString("Introduce el nombre de la película");
-                if(controlador.productoExistente(name, ProductsTypes.Peliculas)){
+                name = Utilities.getString("Introduce el nombre de la película");
+                if (controlador.productoExistente(name, ProductsTypes.Peliculas)) {
                     Utilities.P("Ya existe un producto con ese nombre");
-                    do{
-                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
-                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Peliculas)){
+                    do {
+                        opcioncate = Utilities.MenuSioNoAñadirExistencia();
+                        if (Anadirexistencia(opcioncate, name, ProductsTypes.Peliculas)) {
                             Utilities.P("Se ha añadido una existencia al catálogo");
-                        }else{
-                             Utilities.P("No se ha creado existencia");
+                        } else {
+                            Utilities.P("No se ha creado existencia");
                         }
-                    }while(opcioncate!=2);
-                }else{
-                    descripcion=Utilities.getString("Introduce la descripción de la Película");
-                    edadmin=Utilities.getInt("Introduce la edad mínima");
+                    } while (opcioncate != 2);
+                } else {
+                    descripcion = Utilities.getString("Introduce la descripción de la Película");
+                    edadmin = Utilities.getInt("Introduce la edad mínima");
                     Utilities.p("Introduce el precio del producto: ");
-                    precio=Utilities.getDouble();
-                    MovieCategory categoriapeli=null;
-                    do{
-                        opcioncate=Utilities.MenuDevolverTipoPeli();
-                        categoriapeli=DevolverTipoPelicula(opcioncate);
-                    }while(categoriapeli==null);
-                    if(controlador.createMovie(ProductsTypes.Peliculas, name, descripcion,categoriapeli,edadmin, precio)){
+                    precio = Utilities.getDouble();
+                    MovieCategory categoriapeli = null;
+                    do {
+                        opcioncate = Utilities.MenuDevolverTipoPeli();
+                        categoriapeli = DevolverTipoPelicula(opcioncate);
+                    } while (categoriapeli == null);
+                    if (controlador.createMovie(ProductsTypes.Peliculas, name, descripcion, categoriapeli, edadmin, precio)) {
                         controlador.saveCatalogFromDDBB();
                         Utilities.P("Película creada correctamente.");
-                }else{
-                     Utilities.P("No se ha podido crear el producto.");
+                    } else {
+                        Utilities.P("No se ha podido crear el producto.");
                     }
                 }
-                
-                
+
                 break;
             case 2:
-                name=Utilities.getString("Introduce el nombre del videojuego");
-                if(controlador.productoExistente(name, ProductsTypes.Juegos)){
+                name = Utilities.getString("Introduce el nombre del videojuego");
+                if (controlador.productoExistente(name, ProductsTypes.Juegos)) {
                     Utilities.P("Ya existe un producto con ese nombre");
-                    do{
-                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
-                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Juegos)){
+                    do {
+                        opcioncate = Utilities.MenuSioNoAñadirExistencia();
+                        if (Anadirexistencia(opcioncate, name, ProductsTypes.Juegos)) {
                             Utilities.P("Se ha añadido una existencia al catálogo");
-                        }else{
-                             Utilities.P("No se ha creado existencia");
+                        } else {
+                            Utilities.P("No se ha creado existencia");
                         }
-                    }while(opcioncate!=2);
-                }else{
-                    descripcion=Utilities.getString("Introduce la descripción del videojuego");
-                    edadmin=Utilities.getInt("Introduce la edad mínima");
+                    } while (opcioncate != 2);
+                } else {
+                    descripcion = Utilities.getString("Introduce la descripción del videojuego");
+                    edadmin = Utilities.getInt("Introduce la edad mínima");
                     Utilities.p("Introduce el precio del producto: ");
-                    precio=Utilities.getDouble();
-                    GameCategory categoriajuego=null;
-                    do{
-                        opcioncate=Utilities.MenuDevolverTipoJuego();
-                        categoriajuego=DevolverTipoJuego(opcioncate);
-                    }while(categoriajuego==null);
-                    if(controlador.createGame(ProductsTypes.Peliculas, name, descripcion,categoriajuego,edadmin, precio)){
+                    precio = Utilities.getDouble();
+                    GameCategory categoriajuego = null;
+                    do {
+                        opcioncate = Utilities.MenuDevolverTipoJuego();
+                        categoriajuego = DevolverTipoJuego(opcioncate);
+                    } while (categoriajuego == null);
+                    if (controlador.createGame(ProductsTypes.Juegos, name, descripcion, categoriajuego, edadmin, precio)) {
                         controlador.saveCatalogFromDDBB();
                         Utilities.P("Videojuego creado correctamente.");
-                }else{
-                     Utilities.P("No se ha podido crear el producto.");
+                    } else {
+                        Utilities.P("No se ha podido crear el producto.");
                     }
                 }
                 break;
             case 3:
-                name=Utilities.getString("Introduce el nombre del producto");
-                 if(controlador.productoExistente(name, ProductsTypes.Otros)){
+                name = Utilities.getString("Introduce el nombre del producto");
+                if (controlador.productoExistente(name, ProductsTypes.Otros)) {
                     Utilities.P("Ya existe un producto con ese nombre");
-                    do{
-                        opcioncate=Utilities.MenuSioNoAñadirExistencia();
-                        if(Anadirexistencia(opcioncate, name, ProductsTypes.Otros)){
+                    do {
+                        opcioncate = Utilities.MenuSioNoAñadirExistencia();
+                        if (Anadirexistencia(opcioncate, name, ProductsTypes.Otros)) {
                             Utilities.P("Se ha añadido una existencia al catálogo");
-                        }else{
-                             Utilities.P("No se ha creado existencia");
+                        } else {
+                            Utilities.P("No se ha creado existencia");
                         }
-                    }while(opcioncate!=2);
-                }else{
-                    descripcion=Utilities.getString("Introduce la descripción del producto");
+                    } while (opcioncate != 2);
+                } else {
+                    descripcion = Utilities.getString("Introduce la descripción del producto");
                     Utilities.p("Introduce el precio del producto: ");
-                    precio=Utilities.getDouble();
-                   
-                    if(controlador.createProduct(name, descripcion,precio)){
+                    precio = Utilities.getDouble();
+
+                    if (controlador.createProduct(name, descripcion, precio)) {
                         controlador.saveCatalogFromDDBB();
                         Utilities.P("Producto creado correctamente.");
-                }else{
-                     Utilities.P("No se ha podido crear el producto.");
+                    } else {
+                        Utilities.P("No se ha podido crear el producto.");
                     }
                 }
                 break;
@@ -280,7 +322,7 @@ public class GUI {
                 Utilities.P("Volviendo al menú anterior.");
                 break;
             default:
-             Utilities.P("Opción no válida, vuelve a intentarlo.");
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
 
@@ -451,34 +493,35 @@ public class GUI {
         }
 
     }
-    private static void ControladorMenuListarClientes(int op){
+
+    private static void ControladorMenuListarClientes(int op) {
         Set<IClient> clientes;
-        switch(op){
+        switch (op) {
             case 1:
-                clientes=controlador.listAllClients();
-                if(!clientes.isEmpty()){
-                    for(IClient cli: clientes){
+                clientes = controlador.listAllClients();
+                if (!clientes.isEmpty()) {
+                    for (IClient cli : clientes) {
                         Utilities.P(cli.toString());
                     }
-                }else{
+                } else {
                     Utilities.P("No hay clientes.");
                 }
                 break;
             case 2:
-                int opc=0;
-                do{
-                    opc=Utilities.MenuListarClientesOrdenados();
+                int opc = 0;
+                do {
+                    opc = Utilities.MenuListarClientesOrdenados();
                     MostrarClientessOrdenados(opc);
-                }while(opc!=7);
-                    
+                } while (opc != 7);
+
                 break;
             case 3:
-                clientes=controlador.listAllClientsWithReservationsNotFinished();
-                if(!clientes.isEmpty()){
-                    for(IClient cli: clientes){
+                clientes = controlador.listAllClientsWithReservationsNotFinished();
+                if (!clientes.isEmpty()) {
+                    for (IClient cli : clientes) {
                         Utilities.P(cli.toString());
                     }
-                }else{
+                } else {
                     Utilities.P("No hay clientes.");
                 }
                 break;
@@ -488,8 +531,9 @@ public class GUI {
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
-        
+
     }
+
     private static void MostrarClientessOrdenados(int op) {
         CompararaClientes.Criterio comp = null;
         switch (op) {
@@ -526,41 +570,41 @@ public class GUI {
         }
 
     }
-    
-    private static void ControladorMenuListarReservas(int op){
+
+    private static void ControladorMenuListarReservas(int op) {
         Set<Reservation> reser;
-        switch(op){
+        switch (op) {
             case 1:
-                reser=controlador.listAllReservations();
+                reser = controlador.listAllReservations();
                 ListarReservas(reser);
                 break;
             case 2:
-                int opcioncomparadorreser=0;
-                while(opcioncomparadorreser!=7){
-                    do{
-                        opcioncomparadorreser=Utilities.MenuOPcionOrdenarReserva();
-                    }while(opcioncomparadorreser!=7&&devolverCompararReserva(opcioncomparadorreser)==null);
-                    if(opcioncomparadorreser!=7){
-                        CompararReservas c=new CompararReservas(devolverCompararReserva(opcioncomparadorreser));
-                        reser=controlador.listAllReservations(c);
+                int opcioncomparadorreser = 0;
+                while (opcioncomparadorreser != 7) {
+                    do {
+                        opcioncomparadorreser = Utilities.MenuOPcionOrdenarReserva();
+                    } while (opcioncomparadorreser != 7 && devolverCompararReserva(opcioncomparadorreser) == null);
+                    if (opcioncomparadorreser != 7) {
+                        CompararReservas c = new CompararReservas(devolverCompararReserva(opcioncomparadorreser));
+                        reser = controlador.listAllReservations(c);
                         ListarReservas(reser);
                     }
-                    
+
                 }
-                
+
                 break;
             case 3:
-                int opcionestadoreser=0;
-                while(opcionestadoreser!=4){
-                   do{
-                    opcionestadoreser=Utilities.MenuOPcionEstadoReserva();
-                   }while(devolverEstadoReserva(opcionestadoreser)==null&&opcionestadoreser!=4); 
-                   if(opcionestadoreser!=4){
-                    reser=controlador.listAllReservations(devolverEstadoReserva(opcionestadoreser));
-                    ListarReservas(reser);   
-                   }
+                int opcionestadoreser = 0;
+                while (opcionestadoreser != 4) {
+                    do {
+                        opcionestadoreser = Utilities.MenuOPcionEstadoReserva();
+                    } while (devolverEstadoReserva(opcionestadoreser) == null && opcionestadoreser != 4);
+                    if (opcionestadoreser != 4) {
+                        reser = controlador.listAllReservations(devolverEstadoReserva(opcionestadoreser));
+                        ListarReservas(reser);
+                    }
                 }
-                
+
                 break;
             case 4:
                 Utilities.P("Volviendo al menú anterior.");
@@ -569,27 +613,28 @@ public class GUI {
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
-    private static void ListarReservas(Set<Reservation> reser){
-        if(!reser.isEmpty()){
-            for(Reservation r:reser){
+
+    private static void ListarReservas(Set<Reservation> reser) {
+        if (!reser.isEmpty()) {
+            for (Reservation r : reser) {
                 Utilities.P(r.toString());
             }
-        }else{
-             Utilities.P("No hay reservas.");
+        } else {
+            Utilities.P("No hay reservas.");
         }
     }
-    
-    private static Reservation.StatusReserve devolverEstadoReserva(int op){
-        Reservation.StatusReserve status=null;
-        switch(op){
+
+    private static Reservation.StatusReserve devolverEstadoReserva(int op) {
+        Reservation.StatusReserve status = null;
+        switch (op) {
             case 1:
-                status=Reservation.StatusReserve.ACTIVE;
+                status = Reservation.StatusReserve.ACTIVE;
                 break;
             case 2:
-                status=Reservation.StatusReserve.FINISHED;
+                status = Reservation.StatusReserve.FINISHED;
                 break;
             case 3:
-                status=Reservation.StatusReserve.PENDING;
+                status = Reservation.StatusReserve.PENDING;
                 break;
             case 4:
                 Utilities.P("Volviendo al menú anterior");
@@ -599,27 +644,27 @@ public class GUI {
         }
         return status;
     }
-    
-    private static CompararReservas.Criterio devolverCompararReserva(int op){
-        CompararReservas.Criterio criterio=null;
-        switch(op){
+
+    private static CompararReservas.Criterio devolverCompararReserva(int op) {
+        CompararReservas.Criterio criterio = null;
+        switch (op) {
             case 1:
-                criterio=CompararReservas.Criterio.IdMenoraMayor;
+                criterio = CompararReservas.Criterio.IdMenoraMayor;
                 break;
             case 2:
-                criterio=CompararReservas.Criterio.IdMayoraMenor;
+                criterio = CompararReservas.Criterio.IdMayoraMenor;
                 break;
             case 3:
-                criterio=CompararReservas.Criterio.FechaInicioReserva;
+                criterio = CompararReservas.Criterio.FechaInicioReserva;
                 break;
             case 4:
-                criterio=CompararReservas.Criterio.NombreCliente;
+                criterio = CompararReservas.Criterio.NombreCliente;
                 break;
             case 5:
-                criterio=CompararReservas.Criterio.MenosAMallorPrecio;
+                criterio = CompararReservas.Criterio.MenosAMallorPrecio;
                 break;
             case 6:
-                criterio=CompararReservas.Criterio.MallorAMenorPrecio;
+                criterio = CompararReservas.Criterio.MallorAMenorPrecio;
                 break;
             case 7:
                 Utilities.P("Volviendo al menú anterior");
@@ -628,46 +673,47 @@ public class GUI {
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
         return criterio;
-        
+
     }
-    private static void BorrarProductosControlador(int op){
-        
-        switch(op){
+
+    private static void BorrarProductosControlador(int op) {
+
+        switch (op) {
             case 1:
                 Utilities.p("Introduce la key del producto a eliminar: ");
-                String key=Utilities.getStringSinModicar();
-                if(controlador.productoExistentePorKey(key)){
-                 if(controlador.removeProduct(key)){
-                    Utilities.P("Producto con key: "+key+" borrado correctamente.");
-                    controlador.saveCatalogFromDDBB();
-                }else{
-                     Utilities.P("No se ha podido eliminar el producto. El producto está en uso.");
-                }   
-                }else{
-                    Utilities.P("No existe ningún producto con la key: "+key); 
+                String key = Utilities.getStringSinModicar();
+                if (controlador.productoExistentePorKey(key)) {
+                    if (controlador.removeProduct(key)) {
+                        Utilities.P("Producto con key: " + key + " borrado correctamente.");
+                        controlador.saveCatalogFromDDBB();
+                    } else {
+                        Utilities.P("No se ha podido eliminar el producto. El producto está en uso.");
+                    }
+                } else {
+                    Utilities.P("No existe ningún producto con la key: " + key);
                 }
 
                 break;
             case 2:
-                String nombre=Utilities.getString("Inroduce el nombre del producto");
-                ProductsTypes tipo=devolverTypoProducto(Utilities.MenuTipoProducto());
-                if(controlador.productoExistente(nombre, tipo)){
-                    if(controlador.removeProduct(nombre, tipo)){
-                         Utilities.P("Productos con las cararterísticas indicadas borrados correctamente.");
-                         controlador.saveCatalogFromDDBB();
-                    }else{
+                String nombre = Utilities.getString("Inroduce el nombre del producto");
+                ProductsTypes tipo = devolverTypoProducto(Utilities.MenuTipoProducto());
+                if (controlador.productoExistente(nombre, tipo)) {
+                    if (controlador.removeProduct(nombre, tipo)) {
+                        Utilities.P("Productos con las cararterísticas indicadas borrados correctamente.");
+                        controlador.saveCatalogFromDDBB();
+                    } else {
                         Utilities.P("No se ha podido eliminar el producto. El producto está en uso.");
                     }
-                }else{
-                    Utilities.P("No existe ningún producto con las caracteeristicas indicadas."); 
+                } else {
+                    Utilities.P("No existe ningún producto con las caracteeristicas indicadas.");
                 }
                 break;
             case 3:
-                 Utilities.P("Volviendo al menú anterior.");
+                Utilities.P("Volviendo al menú anterior.");
                 break;
-                
+
             default:
-              Utilities.P("Opción no válida, vuelve a intentarlo.");  
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
     }
 
@@ -682,6 +728,7 @@ public class GUI {
             Utilities.P("No existen Productos aún.");
         }
     }
+
     private static void ListarClientesOrdenados(CompararaClientes.Criterio c) {
         CompararaClientes comparador = new CompararaClientes(c);
         Set<IClient> clien = controlador.listAllClients(comparador);
@@ -711,42 +758,42 @@ public class GUI {
         }
         return tipo;
     }
-    
-    private static MovieCategory DevolverTipoPelicula(int opcion){
-        MovieCategory categoria=null;
-        switch(opcion){
+
+    private static MovieCategory DevolverTipoPelicula(int opcion) {
+        MovieCategory categoria = null;
+        switch (opcion) {
             case 1:
-                categoria=MovieCategory.Horror;
+                categoria = MovieCategory.Horror;
                 break;
             case 2:
-                categoria=MovieCategory.Love;
+                categoria = MovieCategory.Love;
                 break;
             case 3:
-                categoria=MovieCategory.Action;
+                categoria = MovieCategory.Action;
                 break;
             case 4:
-                categoria=MovieCategory.SciFi;
+                categoria = MovieCategory.SciFi;
                 break;
             default:
-                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+                Utilities.P("Opción incorrecta. Prueba de nuevo.");
         }
         return categoria;
     }
-    
-    private static GameCategory DevolverTipoJuego(int opcion){
-        GameCategory categoria=null;
-        switch(opcion){
+
+    private static GameCategory DevolverTipoJuego(int opcion) {
+        GameCategory categoria = null;
+        switch (opcion) {
             case 1:
-                categoria=GameCategory.Adeventures;
+                categoria = GameCategory.Adeventures;
                 break;
             case 2:
-                categoria=GameCategory.Cars;
+                categoria = GameCategory.Cars;
                 break;
             case 3:
-                categoria=GameCategory.Shooter;
+                categoria = GameCategory.Shooter;
                 break;
             default:
-                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+                Utilities.P("Opción incorrecta. Prueba de nuevo.");
         }
         return categoria;
     }
@@ -801,17 +848,18 @@ public class GUI {
         }
         return estado;
     }
-    private static boolean Anadirexistencia(int op,String name,ProductsTypes tipo){
-        boolean creado=false;
-        switch(op){
+
+    private static boolean Anadirexistencia(int op, String name, ProductsTypes tipo) {
+        boolean creado = false;
+        switch (op) {
             case 1:
-                creado=controlador.addProduct(name, tipo);
+                creado = controlador.addProduct(name, tipo);
                 controlador.saveCatalogFromDDBB();
                 break;
             case 2:
                 break;
             default:
-                 Utilities.P("Opción incorrecta. Prueba de nuevo.");
+                Utilities.P("Opción incorrecta. Prueba de nuevo.");
         }
         return creado;
     }

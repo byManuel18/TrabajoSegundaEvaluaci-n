@@ -30,6 +30,7 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Cursor;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -72,7 +73,7 @@ public class AppController implements IAppController {
 
     @Override
     public Set<Product> listAllProducts() {
-        
+
         return productos;
     }
 
@@ -441,12 +442,9 @@ public class AppController implements IAppController {
 
         for (IClient cli : clientes) {
             if (cli.getID().equals(e.getID())) {
-                /*cli.setName(e.getName());
-                cli.setPhone(e.getPhone());
-                cli.setTime(e.getTime());*/ 
                 clientes.remove(cli);
                 clientes.add(e);
-               
+
                 editado = true;
                 saveClientsFromDDBB();
                 break;
@@ -545,18 +543,17 @@ public class AppController implements IAppController {
 
         return result;
     }
-
+    
+    
     @Override
     public boolean editProduct(String key, Product newP) {
         boolean editado = false;
         for (Product pr : productos) {
-            if (pr.getKey().equals(key)) {
-                pr.setName(newP.getName());
-                pr.setPrize(newP.getPrize());
-                pr.setStatus(newP.getStatus());
-                pr.setTipo(newP.getTipo());
-                pr.setDescription(newP.getDescription());
+            if (pr.getKey().equals(key) && pr.getStatus() != Product.Status.RESERVED) {
+               productos.remove(pr);
+               productos.add(newP);
                 editado = true;
+                saveCatalogFromDDBB();
                 break;
             }
         }
@@ -578,12 +575,38 @@ public class AppController implements IAppController {
         return p;
     }
 
+    public boolean isAvailableProduct(String key) {
+       boolean result=false;
+        
+            for (Product pro : productos) {
+                if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE ) {
+                    result=true;
+                    break;
+                }
+            }
+        
+        return result;
+    }
+    public Product devuelveUnProductoDisponible(String key) {
+       Product p = null;
+        
+            for (Product pro : productos) {
+                if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE ) {
+                    p=pro;
+                    break;
+                }
+            }
+        
+        return p;
+    }
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
         boolean reservado = true;
         if (prod != null && prod.getStatus() == Product.Status.AVAILABLE && client != null) {
             reservado = reservas.add(new Reservation(prod, client));
             prod.setStatus(Product.Status.RESERVED);
+            saveCatalogFromDDBB();
+            saveReservationsFromDDBB();
         }
         return reservado;
 
@@ -618,7 +641,7 @@ public class AppController implements IAppController {
         return re;
 
     }
-    
+
     public void UpgradearReservas() {
         for (Reservation re : reservas) {
             if (re.end.compareTo(LocalDate.now()) < 0 && re.status != Reservation.StatusReserve.FINISHED) {

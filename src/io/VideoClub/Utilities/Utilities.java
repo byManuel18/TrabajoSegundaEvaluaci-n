@@ -226,7 +226,8 @@ public class Utilities {
         P("11)Editar cliente");
         P("12)Hacer reserva");
         P("13)Cerrar reserva");
-        P("14)Salir");
+        P("14)Consultar ganancias");
+        P("15)Salir");
         P("-------------------------------------");
         p("> ");
 

@@ -14,6 +14,9 @@ import io.VideoClub.Model.Enums.GameCategory;
 import io.VideoClub.Model.Enums.MovieCategory;
 import io.VideoClub.Model.Enums.ProductsTypes;
 import io.VideoClub.Model.IClient;
+import io.VideoClub.Model.Juego;
+import io.VideoClub.Model.Others;
+import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import io.VideoClub.Utilities.Utilities;
@@ -21,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import jdk.nashorn.internal.parser.TokenType;
 
 /**
  *
@@ -48,7 +52,7 @@ public class GUI {
         do {
             opcion = Utilities.Menu();
             ControladorPrimerMenu(opcion);
-        } while (opcion != 14);
+        } while (opcion != 15);
 
     }
 
@@ -137,6 +141,54 @@ public class GUI {
                     Utilities.P("No se ha podido crear correctamente");
                 }
                 break;
+            case 7:
+                Utilities.p("Introduce el ID del producto: ");
+                String key = Utilities.getStringSinModicar();
+                if (controlador.productoExistentePorKey(key)) {
+                    if (controlador.isAvailableProduct(key)) {
+                        nombre = Utilities.getString("Introduce el nuevo nombre del producto");
+                        Utilities.p("Introduce el nuevo precio: ");
+                        double precio = Utilities.getDouble();
+                        String descripcion = Utilities.getString("Introduce una nueva descripcion");
+
+                        do {
+                            int opcionTipo = 0;
+                            opcionTipo = Utilities.MenuTipoProducto();
+                            tipo = devolverTypoProducto(opcionTipo);
+                        } while (tipo == null);
+                        Product p;
+                        if (tipo == ProductsTypes.Otros) {
+                            p = new Others(nombre, descripcion, precio);
+                            p.setTipo(tipo);
+                        } else if (tipo == ProductsTypes.Peliculas) {
+                            MovieCategory categoriaPelicula;
+                            do {
+                                int opcioncate = Utilities.MenuDevolverTipoPeli();
+                                categoriaPelicula = DevolverTipoPelicula(opcioncate);
+                            } while (categoriaPelicula == null);
+                            p = new Pelicula(nombre, descripcion, precio, Utilities.getInt("Introduce la edad minima"), tipo, categoriaPelicula);
+                        } else {
+                            GameCategory categoriajuego;
+                            do {
+                                int opcioncate = Utilities.MenuDevolverTipoJuego();
+                                categoriajuego = DevolverTipoJuego(opcioncate);
+                            } while (categoriajuego == null);
+                            p = new Juego(nombre, descripcion, precio, Utilities.getInt("Introduce la edad minima"), tipo, categoriajuego);
+                        }
+                        p.setKey(key);
+                        if (p != null && controlador.editProduct(key, p)) {
+                            Utilities.P("Se ha editado correctamente");
+                        } else {
+                            Utilities.P("No se ha podido editar");
+                        }
+                    } else {
+
+                        Utilities.P("El producto está reservado");
+                    }
+                } else {
+                    Utilities.P("No existe el producto");
+                }
+                break;
             case 8:
                 do {
                     opcion2 = Utilities.MenuBorrarProducto();
@@ -211,13 +263,46 @@ public class GUI {
 
                 break;
             case 12:
-
+                IClient c = null;
+                Product pro = null;
+                do {
+                    do {
+                        dni = Utilities.getString("Introduzca el DNI del cliente");
+                        if (!Utilities.validarDNI(dni)) {
+                            Utilities.P("El DNI no es valido");
+                        }
+                    } while (!Utilities.validarDNI(dni));
+                    c = controlador.devolverClienteExistente(dni);
+                    if (c == null) {
+                        Utilities.P("No existe el cliente");
+                    }
+                } while (c == null);
+                do{
+                   Utilities.p("Introduce el ID del producto: ");
+                  key = Utilities.getStringSinModicar();
+                    if(!controlador.productoExistentePorKey(key)){
+                        Utilities.P("El producto no existe");
+                    }else{
+                    if(controlador.isAvailableProduct(key)){
+                       pro=controlador.devuelveUnProductoDisponible(key);
+                      }else{
+                     Utilities.P("El producto no está disponible");
+                      }
+                    }
+                }while(pro==null);
+                if(controlador.reserveProduct(pro, c)){
+                Utilities.P("Se ha hecho de forma correcta la reserva");
+                }else{
+                Utilities.P("No se ha podido realizar la reserva");
+                }
                 break;
             case 13:
-
+                
                 break;
-
             case 14:
+                
+                break;
+            case 15:
                 controlador.saveAllDDBB();
                 Utilities.P("Saliendo de la aplicación.");
                 break;

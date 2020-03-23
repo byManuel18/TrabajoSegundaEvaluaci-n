@@ -915,7 +915,7 @@ public class AppController implements IAppController {
                         nuevo = new Others(nombrepro, descripcion, Double.parseDouble(precio));
                         nuevo.setTipo(devuelvetipoproducto(tipo));
 
-                    } else if (tipo.endsWith("Peliculas")) {
+                    } else if (tipo.equals("Peliculas")) {
                         categoria = eElement.getElementsByTagName("CategoriaPelicula").item(0).getTextContent();
                         edadmin = eElement.getElementsByTagName("EdadMinima").item(0).getTextContent();
                         nuevo = new Pelicula(nombrepro, descripcion, Double.parseDouble(precio), Integer.parseInt(edadmin), devuelvetipoproducto(tipo), devuelvecategoriapeli(categoria));

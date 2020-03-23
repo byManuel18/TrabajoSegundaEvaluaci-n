@@ -1,32 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Catalogo>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>d40f3323-2f9d-40</Key>
-<Nombre>DMC</Nombre>
-<Descripcion>MATA DEMONIOS</Descripcion>
-<Precio>30.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
-</Juego>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>15</EdadMinima>
-<Key>361f215c-9882-46</Key>
-<Nombre>304</Nombre>
-<Descripcion>AHORA ES UN JUEGO</Descripcion>
-<Precio>8.0</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>AVAILABLE</Estado>
-</Juego>
 <Pelicula>
 <Categoria>Action</Categoria>
-<EdadMinima>12</EdadMinima>
-<Key>690ad7db-e85f-49</Key>
-<Nombre>301</Nombre>
-<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
-<Precio>4.95</Precio>
+<EdadMinima>6</EdadMinima>
+<Key>dd1e15ed-b750-49</Key>
+<Nombre>PACOLO</Nombre>
+<Descripcion>LA VIDA DE PACOLO</Descripcion>
+<Precio>3.0</Precio>
 <Tipo>Peliculas</Tipo>
 <Estado>RESERVED</Estado>
 </Pelicula>
@@ -36,8 +16,38 @@
 <Descripcion>PARA BEBER</Descripcion>
 <Precio>3.95</Precio>
 <Tipo>Otros</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Otro>
+<Juego>
+<Categoria>Adeventures</Categoria>
+<EdadMinima>15</EdadMinima>
+<Key>361f215c-9882-46</Key>
+<Nombre>304</Nombre>
+<Descripcion>AHORA ES UN JUEGO</Descripcion>
+<Precio>8.0</Precio>
+<Tipo>Juegos</Tipo>
+<Estado>RESERVED</Estado>
+</Juego>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>12</EdadMinima>
+<Key>690ad7db-e85f-49</Key>
+<Nombre>301</Nombre>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Precio>4.95</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
+<Juego>
+<Categoria>Shooter</Categoria>
+<EdadMinima>6</EdadMinima>
+<Key>526a98e0-b3ef-48</Key>
+<Nombre>UNO</Nombre>
+<Descripcion>CARTAS</Descripcion>
+<Precio>5.0</Precio>
+<Tipo>Juegos</Tipo>
+<Estado>RESERVED</Estado>
+</Juego>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>

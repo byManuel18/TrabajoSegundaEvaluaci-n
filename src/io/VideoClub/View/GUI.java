@@ -20,7 +20,9 @@ import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import io.VideoClub.Utilities.Utilities;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -277,30 +279,39 @@ public class GUI {
                         Utilities.P("No existe el cliente");
                     }
                 } while (c == null);
-                do{
-                   Utilities.p("Introduce el ID del producto: ");
-                  key = Utilities.getStringSinModicar();
-                    if(!controlador.productoExistentePorKey(key)){
+                do {
+                    Utilities.p("Introduce el ID del producto: ");
+                    key = Utilities.getStringSinModicar();
+                    if (!controlador.productoExistentePorKey(key)) {
                         Utilities.P("El producto no existe");
-                    }else{
-                    if(controlador.isAvailableProduct(key)){
-                       pro=controlador.devuelveUnProductoDisponible(key);
-                      }else{
-                     Utilities.P("El producto no está disponible");
-                      }
+                    } else if (controlador.isAvailableProduct(key)) {
+                        pro = controlador.devuelveUnProductoDisponible(key);
+                    } else {
+                        Utilities.P("El producto no está disponible");
                     }
-                }while(pro==null);
-                if(controlador.reserveProduct(pro, c)){
-                Utilities.P("Se ha hecho de forma correcta la reserva");
-                }else{
-                Utilities.P("No se ha podido realizar la reserva");
+                } while (pro == null);
+                if (controlador.reserveProduct(pro, c)) {
+                    Utilities.P("Se ha hecho de forma correcta la reserva");
+                } else {
+                    Utilities.P("No se ha podido realizar la reserva");
                 }
                 break;
             case 13:
-                
+                Reservation r = null;
+                int id = Utilities.getInt("Introduzca el ID de la reserva");
+                r = controlador.devolverUnaReserva(id);
+                if (r != null) {
+                    float precio = (float) controlador.closeReservation(r);
+                    Utilities.P("Importe de la reserva: " + precio + " €");
+                } else {
+                    Utilities.P("No se ha podido realizar el cierre la reserva");
+                }
                 break;
             case 14:
-                
+                do {
+                    opcion2 = Utilities.MenuGanancias();
+                    controladorMenuGanancias(opcion2);
+                } while (opcion2 != 4);
                 break;
             case 15:
                 controlador.saveAllDDBB();
@@ -662,6 +673,7 @@ public class GUI {
             case 1:
                 reser = controlador.listAllReservations();
                 ListarReservas(reser);
+
                 break;
             case 2:
                 int opcioncomparadorreser = 0;
@@ -949,4 +961,27 @@ public class GUI {
         return creado;
     }
 
+    private static void controladorMenuGanancias(int op) {
+
+        switch (op) {
+            case 1:
+                Utilities.P("" + controlador.getIncommings());
+                break;
+            case 2:
+                int año = Utilities.getInt("Introduzca el año");
+                int mes = Utilities.getInt("Introduzca el mes");
+                int dia = Utilities.getInt("Introduzca el dia");
+                LocalDate from= LocalDate.of(año, mes, dia);
+                  Utilities.P(""+controlador.getIncommings(from));
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            default:
+                Utilities.P("Opción no válida, vuelve a intentarlo.");
+        }
+    }
 }

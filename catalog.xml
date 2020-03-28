@@ -8,7 +8,7 @@
 <Descripcion>LA VIDA DE PACOLO</Descripcion>
 <Precio>3.0</Precio>
 <Tipo>Peliculas</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Pelicula>
 <Otro>
 <Key>9cb90242-b120-46</Key>
@@ -26,7 +26,7 @@
 <Descripcion>AHORA ES UN JUEGO</Descripcion>
 <Precio>8.0</Precio>
 <Tipo>Juegos</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Juego>
 <Pelicula>
 <Categoria>Action</Categoria>
@@ -46,7 +46,7 @@
 <Descripcion>CARTAS</Descripcion>
 <Precio>5.0</Precio>
 <Tipo>Juegos</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Juego>
 <Juego>
 <Categoria>Adeventures</Categoria>
@@ -56,6 +56,6 @@
 <Descripcion>JUEGO DE CUBOS</Descripcion>
 <Precio>19.95</Precio>
 <Tipo>Juegos</Tipo>
-<Estado>RESERVED</Estado>
+<Estado>AVAILABLE</Estado>
 </Juego>
 </Catalogo>

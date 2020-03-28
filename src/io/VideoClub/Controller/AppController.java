@@ -617,6 +617,7 @@ public class AppController implements IAppController {
         double precio = 0;
         precio = r.pro.getPrize();
         r.finished = LocalDate.now();
+        
         if (r.status == Reservation.StatusReserve.PENDING) {
             precio += (precio * 0.15f);
         }
@@ -627,6 +628,8 @@ public class AppController implements IAppController {
                 break;
             }
         }
+        saveCatalogFromDDBB();
+       saveReservationsFromDDBB();
         return precio;
     }
 

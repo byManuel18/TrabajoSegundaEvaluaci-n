@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Reservas>
 <Reserva>
+<ID>5</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-28</FechaInicio>
+<FechaLimite>2020-03-27</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>12</EdadMinima>
+<Precio>4.95</Precio>
+<TipoProducto>Peliculas</TipoProducto>
+<NombreProducto>301</NombreProducto>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Key>690ad7db-e85f-49</Key>
+<Estado>RESERVED</Estado>
+</Pelicula>
+</Producto>
+</Reserva>
+<Reserva>
 <ID>3</ID>
-<Estado>ACTIVE</Estado>
+<Estado>FINISHED</Estado>
 <FechaInicio>2020-03-23</FechaInicio>
 <FechaLimite>2020-03-31</FechaLimite>
-<FechaDevolución>NO ENTREGADO</FechaDevolución>
+<FechaDevolución>2020-03-28</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>PERICO JIMENEZ</NombreCliente>
@@ -26,11 +51,36 @@
 </Producto>
 </Reserva>
 <Reserva>
+<ID>4</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-23</FechaInicio>
+<FechaLimite>2020-03-27</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Juego>
+<CategoriaJuego>Shooter</CategoriaJuego>
+<EdadMinima>6</EdadMinima>
+<Precio>5.0</Precio>
+<TipoProducto>Juegos</TipoProducto>
+<NombreProducto>UNO</NombreProducto>
+<Descripcion>CARTAS</Descripcion>
+<Key>526a98e0-b3ef-48</Key>
+<Estado>RESERVED</Estado>
+</Juego>
+</Producto>
+</Reserva>
+<Reserva>
 <ID>2</ID>
-<Estado>ACTIVE</Estado>
+<Estado>FINISHED</Estado>
 <FechaInicio>2020-03-23</FechaInicio>
 <FechaLimite>2020-03-31</FechaLimite>
-<FechaDevolución>NO ENTREGADO</FechaDevolución>
+<FechaDevolución>2020-03-28</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>PERICO JIMENEZ</NombreCliente>
@@ -52,10 +102,10 @@
 </Reserva>
 <Reserva>
 <ID>1</ID>
-<Estado>ACTIVE</Estado>
+<Estado>FINISHED</Estado>
 <FechaInicio>2020-03-23</FechaInicio>
-<FechaLimite>2020-03-31</FechaLimite>
-<FechaDevolución>NO ENTREGADO</FechaDevolución>
+<FechaLimite>2020-03-27</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>PERICO JIMENEZ</NombreCliente>
@@ -71,31 +121,6 @@
 <NombreProducto>304</NombreProducto>
 <Descripcion>AHORA ES UN JUEGO</Descripcion>
 <Key>361f215c-9882-46</Key>
-<Estado>RESERVED</Estado>
-</Juego>
-</Producto>
-</Reserva>
-<Reserva>
-<ID>4</ID>
-<Estado>ACTIVE</Estado>
-<FechaInicio>2020-03-23</FechaInicio>
-<FechaLimite>2020-03-31</FechaLimite>
-<FechaDevolución>NO ENTREGADO</FechaDevolución>
-<Cliente>
-<IDCliente>20225097R</IDCliente>
-<NombreCliente>PERICO JIMENEZ</NombreCliente>
-<Telefono>636252145</Telefono>
-<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
-</Cliente>
-<Producto>
-<Juego>
-<CategoriaJuego>Shooter</CategoriaJuego>
-<EdadMinima>6</EdadMinima>
-<Precio>5.0</Precio>
-<TipoProducto>Juegos</TipoProducto>
-<NombreProducto>UNO</NombreProducto>
-<Descripcion>CARTAS</Descripcion>
-<Key>526a98e0-b3ef-48</Key>
 <Estado>RESERVED</Estado>
 </Juego>
 </Producto>

@@ -18,10 +18,9 @@ public class Utilities {
     private static Scanner keyboard = new Scanner(System.in);
     private final static String EXPRESION_NOMBRE = "^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\']+[\\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])+"
             + "[\\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\\'])?$";
-    private final static String EXPRESION_NUMEROFIJO="([+]34|[+]0034|34)?[ -]*(8|9)[ -]*([0-9][ -]*){8}";
-    private final static String EXPRESION_NUMEROMOVIL="([+]34|[+]0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}";
-    private final static String EXPRESION_DNI="^[0-9]{8,8}[A-Za-z]$";
-    
+    private final static String EXPRESION_NUMEROFIJO = "([+]34|[+]0034|34)?[ -]*(8|9)[ -]*([0-9][ -]*){8}";
+    private final static String EXPRESION_NUMEROMOVIL = "([+]34|[+]0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}";
+    private final static String EXPRESION_DNI = "^[0-9]{8,8}[A-Za-z]$";
 
     /**
      * Método que valida un nombre
@@ -40,35 +39,36 @@ public class Utilities {
 
         return correcto;
     }
+
     public static boolean validarTelf(String telf) {
         boolean correcto = false;
         Pattern pat = Pattern.compile(EXPRESION_NUMEROFIJO);
         Matcher mat = pat.matcher(telf);
 
         if (mat.matches()) {
-            correcto=true;
-        }else{
-            pat= Pattern.compile(EXPRESION_NUMEROMOVIL);
+            correcto = true;
+        } else {
+            pat = Pattern.compile(EXPRESION_NUMEROMOVIL);
             mat = pat.matcher(telf);
-            if(mat.matches()){
-                correcto=true;
+            if (mat.matches()) {
+                correcto = true;
             }
         }
 
         return correcto;
     }
-    
-    public static boolean validarDNI(String dni){
-        boolean resultado=false;
+
+    public static boolean validarDNI(String dni) {
+        boolean resultado = false;
         Pattern pat = Pattern.compile(EXPRESION_DNI);
         Matcher mat = pat.matcher(dni);
-        char[] letras={'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+        char[] letras = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
         if (mat.matches()) {
-           int numerosdelacadena=Integer.parseInt(dni.substring(0, 8));
-           char letra=dni.charAt(8);
-           if(letras[numerosdelacadena%23]==letra){
-               resultado=true;
-           }
+            int numerosdelacadena = Integer.parseInt(dni.substring(0, 8));
+            char letra = dni.charAt(8);
+            if (letras[numerosdelacadena % 23] == letra) {
+                resultado = true;
+            }
         }
         return resultado;
     }
@@ -183,6 +183,7 @@ public class Utilities {
         } while (!valid);
         return result;
     }
+
     public static String getStringSinModicar() {
         String result = "";
         boolean valid = false;
@@ -211,7 +212,6 @@ public class Utilities {
 
     public static int Menu() {
         int opcion;
-
         P("-----Bienvenido al videoclub-----");
         P("1)Listar productos");
         P("2)Mostrar clientes");
@@ -235,14 +235,15 @@ public class Utilities {
 
         return opcion;
     }
-    public static int MenuCrearProductos(){
-        int resultad=0;
+
+    public static int MenuCrearProductos() {
+        int resultad = 0;
         P("1)Crear Película");
         P("2)Crear Juego");
         P("3)Crear Otro");
         P("4)Volver al menú anterior");
         p("> ");
-        resultad=getInt();
+        resultad = getInt();
         return resultad;
     }
 
@@ -269,7 +270,7 @@ public class Utilities {
 
     public static int MenuListarClientes() {
         int resultado = 0;
-        
+
         P("1)Listar todos los clientes");
         P("2)Mostrar los clientes ordenados");
         P("3)Mostrar los clientes cuya reserva no ha finalizado");
@@ -280,9 +281,9 @@ public class Utilities {
         return resultado;
 
     }
-    
-    public static int MenuListarClientesOrdenados(){
-        int op=0;
+
+    public static int MenuListarClientesOrdenados() {
+        int op = 0;
         P("1)Por nombre de la A a la Z");
         P("2)Por nombre de la Z a la A");
         P("3)Por DNI de la A a la Z");
@@ -291,13 +292,13 @@ public class Utilities {
         P("6)Fecha de inscripcion de Mayor a Menor");
         P("7)Volver al menú anterior");
         p("> ");
-        op=getInt();
+        op = getInt();
         return op;
     }
-    
+
     public static int MenuListarreservas() {
         int resultado = 0;
-        
+
         P("1)Listar todas las reservas");
         P("2)Mostrar las reservas ordenadas");
         P("3)Mostrar las reservas por estado");
@@ -308,10 +309,10 @@ public class Utilities {
         return resultado;
 
     }
-    
-        public static int MenuOPcionEstadoReserva() {
+
+    public static int MenuOPcionEstadoReserva() {
         int resultado = 0;
-        
+
         P("1)Activas");
         P("2)Finalizadas");
         P("3)Pendientes");
@@ -322,9 +323,10 @@ public class Utilities {
         return resultado;
 
     }
-        public static int MenuOPcionOrdenarReserva() {
+
+    public static int MenuOPcionOrdenarReserva() {
         int resultado = 0;
-        
+
         P("1)ID menor a mayor");
         P("2)ID mayor a menor");
         P("3)Fecha de inicio reserva");
@@ -338,10 +340,10 @@ public class Utilities {
         return resultado;
 
     }
-    
-    public static int MenuOrdenarProductos(){
+
+    public static int MenuOrdenarProductos() {
         int resultado = 0;
-        
+
         P("1)De la A a la Z");
         P("2)De la Z a la A");
         P("3)De Mayor a Menor precio");
@@ -354,71 +356,81 @@ public class Utilities {
 
         return resultado;
     }
-    
-    public static int MenuTipoProducto(){
-        int resultado=0;
+
+    public static int MenuTipoProducto() {
+        int resultado = 0;
         P("Introduce el tipo de Producto:");
         P("1)Juego");
         P("2)Otro");
         P("3)Película");
         p("> ");
-        resultado=getInt();
+        resultado = getInt();
         return resultado;
     }
-    public static int MenuEstadoProducto(){
-        int resultado=0;
+
+    public static int MenuEstadoProducto() {
+        int resultado = 0;
         P("Introduce el estado de Producto:");
         P("1)Disponible");
         P("2)No disponible");
         p("> ");
-        resultado=getInt();
+        resultado = getInt();
         return resultado;
     }
-    
-    public static int MenuBorrarProducto(){
-        int resultado=0;
+
+    public static int MenuBorrarProducto() {
+        int resultado = 0;
         P("¿Qué desea eliminar?");
         P("1)Una existencia concreta");
         P("2)Todas existencias de un producto");
         P("3)Volver al menú anterior");
         p("> ");
-        resultado=getInt();
+        resultado = getInt();
         return resultado;
     }
-    
-    public static int MenuDevolverTipoPeli(){
-        int op=0;
+
+    public static int MenuDevolverTipoPeli() {
+        int op = 0;
         P("1)Horror");
         P("2)Amor");
         P("3)Acción");
         P("4)Ciencia ficción");
-       
-        op=getInt();
-        
+
+        op = getInt();
+
         return op;
     }
-    public static int MenuDevolverTipoJuego(){
-        int op=0;
+
+    public static int MenuDevolverTipoJuego() {
+        int op = 0;
         P("1)Adeventures");
         P("2)Cars");
         P("3)Shooters");
-       
-        op=getInt();
-        
+
+        op = getInt();
+
         return op;
     }
-    
-    public static int MenuSioNoAñadirExistencia(){
-        int op=0;
+
+    public static int MenuSioNoAñadirExistencia() {
+        int op = 0;
         P("¿Desea añadir existenciade ese producto?");
         P("1)Sí");
         P("2)No");
         p("> ");
-        op=getInt();
+        op = getInt();
         return op;
-        
-    }
-    
-   
 
+    }
+    public static int MenuGanancias() {
+        int op = 0;
+        P("1)Ganancias hasta el presente");
+        P("2)Ganancias desde la fecha indicada, hasta el presente");
+        P("3)Ganancias desde dos fechas indicadas");
+        P("3)Ganancias por clientes");
+        p("> ");
+        op = getInt();
+        return op;
+
+    }
 }

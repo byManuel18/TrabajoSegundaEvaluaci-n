@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 package io;
+
 import io.VideoClub.View.GUI;
+
 /**
  *
  * @author Manueh
  */
 public class App {
+
     public static void main(String[] args) {
         GUI.principal();
-        
+
     }
 }

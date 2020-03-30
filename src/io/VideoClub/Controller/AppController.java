@@ -196,12 +196,23 @@ public class AppController implements IAppController {
         int num = contarProductos(name);
         Map<Product, Integer> listado = new HashMap<>();
         for (Product p : productos) {
-            if (p.getName().equals(name)) {
+            if (p.getName().equals(name) && p.getStatus() == Product.Status.AVAILABLE && !productoIntroducido(listado, p)) {
                 listado.put(p, num);
             }
         }
         return listado;
 
+    }
+
+    private boolean productoIntroducido(Map<Product, Integer> lista, Product pr) {
+        boolean result = false;
+        for (Map.Entry<Product, Integer> entry : lista.entrySet()) {
+            if (entry.getKey().getName().equals(pr.getName()) && pr.getTipo() == entry.getKey().getTipo()) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     /**
@@ -282,7 +293,7 @@ public class AppController implements IAppController {
 
     @Override
     public double getIncommings() {
-        return getIncommings(LocalDate.of(0, 0, 0), LocalDate.now());
+        return getIncommings(LocalDate.MIN, LocalDate.now());
     }
 
     @Override
@@ -543,15 +554,14 @@ public class AppController implements IAppController {
 
         return result;
     }
-    
-    
+
     @Override
     public boolean editProduct(String key, Product newP) {
         boolean editado = false;
         for (Product pr : productos) {
             if (pr.getKey().equals(key) && pr.getStatus() != Product.Status.RESERVED) {
-               productos.remove(pr);
-               productos.add(newP);
+                productos.remove(pr);
+                productos.add(newP);
                 editado = true;
                 saveCatalogFromDDBB();
                 break;
@@ -576,29 +586,31 @@ public class AppController implements IAppController {
     }
 
     public boolean isAvailableProduct(String key) {
-       boolean result=false;
-        
-            for (Product pro : productos) {
-                if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE ) {
-                    result=true;
-                    break;
-                }
+        boolean result = false;
+
+        for (Product pro : productos) {
+            if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE) {
+                result = true;
+                break;
             }
-        
+        }
+
         return result;
     }
+
     public Product devuelveUnProductoDisponible(String key) {
-       Product p = null;
-        
-            for (Product pro : productos) {
-                if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE ) {
-                    p=pro;
-                    break;
-                }
+        Product p = null;
+
+        for (Product pro : productos) {
+            if (key != null && pro.getKey().equals(key) && pro.getStatus() == Product.Status.AVAILABLE) {
+                p = pro;
+                break;
             }
-        
+        }
+
         return p;
     }
+
     @Override
     public boolean reserveProduct(Product prod, IClient client) {
         boolean reservado = true;
@@ -617,9 +629,11 @@ public class AppController implements IAppController {
         double precio = 0;
         precio = r.pro.getPrize();
         r.finished = LocalDate.now();
-        
+
         if (r.status == Reservation.StatusReserve.PENDING) {
             precio += (precio * 0.15f);
+            r.pro.setPrize(precio);
+            precio = r.pro.getPrize();
         }
         r.status = Reservation.StatusReserve.FINISHED;
         for (Product produc : productos) {
@@ -629,7 +643,7 @@ public class AppController implements IAppController {
             }
         }
         saveCatalogFromDDBB();
-       saveReservationsFromDDBB();
+        saveReservationsFromDDBB();
         return precio;
     }
 
@@ -651,6 +665,17 @@ public class AppController implements IAppController {
                 re.status = Reservation.StatusReserve.PENDING;
             }
         }
+    }
+
+    public Reservation devolverReservaIdproduct(String id) {
+        Reservation r = null;
+        for (Reservation reserv : reservas) {
+            if (reserv.pro.getKey().equals(id)) {
+                r = reserv;
+                break;
+            }
+        }
+        return r;
     }
 
     @Override

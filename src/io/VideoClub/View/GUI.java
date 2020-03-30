@@ -20,9 +20,11 @@ import io.VideoClub.Model.Pelicula;
 import io.VideoClub.Model.Product;
 import io.VideoClub.Model.Reservation;
 import io.VideoClub.Utilities.Utilities;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,6 +37,7 @@ import jdk.nashorn.internal.parser.TokenType;
 public class GUI {
 
     private static AppController controlador = AppController.getInstance();
+    private static DecimalFormat decimal = new DecimalFormat("#.00");
 
     public static void principal() {
         if (controlador.loadAllDDBB()) {
@@ -131,16 +134,20 @@ public class GUI {
                 } while (opcion2 != 4);
                 break;
             case 6:
-                nombre = Utilities.getString("Introduce el nombre del producto");
-                do {
-                    int opcionTipo = 0;
-                    opcionTipo = Utilities.MenuTipoProducto();
-                    tipo = devolverTypoProducto(opcionTipo);
-                } while (tipo == null);
+                Utilities.p("Introduce el Key del producto: ");
+                nombre = Utilities.getStringSinModicar();
+                Product prod = null;
+                prod = controlador.devuelveUnProductoDisponible(nombre);
+                if (prod != null) {
+                    int exist = Utilities.getInt("Introduce el numero de copias");
+                    for (int i = 0; i < exist; i++) {
+                        controlador.addProduct(prod.getName(), prod.getTipo());
+                    }
+                    Utilities.P("Se ha añadido al existencia con exito");
+                    controlador.saveCatalogFromDDBB();
 
-                if (Anadirexistencia(1, nombre, tipo)) {
                 } else {
-                    Utilities.P("No se ha podido crear correctamente");
+                    Utilities.P("No existe el producto");
                 }
                 break;
             case 7:
@@ -291,7 +298,14 @@ public class GUI {
                     }
                 } while (pro == null);
                 if (controlador.reserveProduct(pro, c)) {
-                    Utilities.P("Se ha hecho de forma correcta la reserva");
+                    if (pro instanceof Others) {
+                        Utilities.P("Importe de la compra: " + decimal.format(controlador.closeReservation(controlador.devolverReservaIdproduct(pro.getKey()))) + " €");
+                        controlador.removeProduct(pro.getKey());
+                        controlador.saveCatalogFromDDBB();
+                    } else {
+                        Utilities.P("Se ha hecho de forma correcta la reserva");
+                    }
+
                 } else {
                     Utilities.P("No se ha podido realizar la reserva");
                 }
@@ -302,7 +316,7 @@ public class GUI {
                 r = controlador.devolverUnaReserva(id);
                 if (r != null) {
                     float precio = (float) controlador.closeReservation(r);
-                    Utilities.P("Importe de la reserva: " + precio + " €");
+                    Utilities.P("Importe de la reserva: " + decimal.format(precio) + " €");
                 } else {
                     Utilities.P("No se ha podido realizar el cierre la reserva");
                 }
@@ -311,7 +325,7 @@ public class GUI {
                 do {
                     opcion2 = Utilities.MenuGanancias();
                     controladorMenuGanancias(opcion2);
-                } while (opcion2 != 4);
+                } while (opcion2 != 5);
                 break;
             case 15:
                 controlador.saveAllDDBB();
@@ -965,20 +979,42 @@ public class GUI {
 
         switch (op) {
             case 1:
-                Utilities.P("" + controlador.getIncommings());
+                Utilities.P("" + decimal.format((float) controlador.getIncommings()));
                 break;
             case 2:
                 int año = Utilities.getInt("Introduzca el año");
                 int mes = Utilities.getInt("Introduzca el mes");
                 int dia = Utilities.getInt("Introduzca el dia");
-                LocalDate from= LocalDate.of(año, mes, dia);
-                  Utilities.P(""+controlador.getIncommings(from));
+                try {
+                    LocalDate from = LocalDate.of(año, mes, dia);
+                    Utilities.P("" + decimal.format((float) controlador.getIncommings(from)));
+                } catch (Exception e) {
+                    Utilities.P("Formato de Fecha incorrecto");
+                }
                 break;
             case 3:
-
+                try {
+                    LocalDate from = LocalDate.of(Utilities.getInt("Introduzca el año del principio"), Utilities.getInt("Introduzca el mes del principio"), Utilities.getInt("Introduzca el dia del principio"));
+                    LocalDate to = LocalDate.of(Utilities.getInt("Introduzca el año del final"), Utilities.getInt("Introduzca el mes del final"), Utilities.getInt("Introduzca el dia del final"));
+                    Utilities.P("" + decimal.format((float) controlador.getIncommings(from, to)));
+                } catch (Exception e) {
+                    Utilities.P("Formato de Fecha incorrecto");
+                }
                 break;
             case 4:
 
+                Map<IClient, Double> list = controlador.resumeAllIncomingsByClient();
+                if (!list.isEmpty()) {
+                    for (Map.Entry<IClient, Double> entry : list.entrySet()) {
+                        double cant = entry.getValue();
+                        Utilities.P(entry.getKey().toString() + " Cantidad ---> " + decimal.format((float) cant) + "€");
+                    }
+                } else {
+                    Utilities.P("Lista vacía.");
+                }
+
+                break;
+            case 5:
                 break;
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");

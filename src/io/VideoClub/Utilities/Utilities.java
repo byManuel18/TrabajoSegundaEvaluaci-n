@@ -427,7 +427,8 @@ public class Utilities {
         P("1)Ganancias hasta el presente");
         P("2)Ganancias desde la fecha indicada, hasta el presente");
         P("3)Ganancias desde dos fechas indicadas");
-        P("3)Ganancias por clientes");
+        P("4)Ganancias por clientes");
+        P("5)Salir");
         p("> ");
         op = getInt();
         return op;

@@ -88,7 +88,10 @@ public abstract class Product extends Item implements Cloneable{
         clone.key=generateRandom16Chars();
         return (Object)clone;
     } 
-    
+    /**
+     * Clona un producto
+     * @return devuelve un producto
+     */
     public Product doClone(){
        try {
            return (Product) this.clone();

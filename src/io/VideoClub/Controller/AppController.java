@@ -414,6 +414,13 @@ public class AppController implements IAppController {
         return borrado;
     }
 
+    /**
+     * Comprueba si un cliente tiene reservas que no estén finalizadas
+     *
+     * @param c recibe un Cliente
+     * @return devuelve un boolean true si el cliente tiene reservas, y false si
+     * no
+     */
     private boolean comprobarssiclientetienereserva(Client c) {
         boolean tiene = false;
         for (Reservation reser : reservas) {
@@ -425,6 +432,12 @@ public class AppController implements IAppController {
         return tiene;
     }
 
+    /**
+     * Comprueba si existe un cliente pasandole un id (DNI)
+     *
+     * @param id String
+     * @return devuelve un boolean true si el cliente existe, y false si no
+     */
     public boolean existeCliente(String id) {
         boolean existe = false;
         for (IClient client : clientes) {
@@ -436,6 +449,11 @@ public class AppController implements IAppController {
         return existe;
     }
 
+    /**
+     *Devuelve un cliente si existe, pasandole un id (DNI)
+     * @param id String
+     * @return devuelve un cliente
+     */
     public Client devolverClienteExistente(String id) {
         Client devolver = null;
         for (IClient c : clientes) {
@@ -584,7 +602,12 @@ public class AppController implements IAppController {
         }
         return p;
     }
-
+    /**
+     * Comprueba si un producto esta disponible mediante la key
+     * @param key String
+     * @return devuelve un boolean
+     * true si está disponible el producto, y false si no
+     */
     public boolean isAvailableProduct(String key) {
         boolean result = false;
 
@@ -597,7 +620,11 @@ public class AppController implements IAppController {
 
         return result;
     }
-
+    /**
+     * Devuelve un producto si esta disponible mediante la key
+     * @param key String
+     * @return Producto
+     */
     public Product devuelveUnProductoDisponible(String key) {
         Product p = null;
 
@@ -646,7 +673,11 @@ public class AppController implements IAppController {
         saveReservationsFromDDBB();
         return precio;
     }
-
+    /**
+     * Devuelve una reserva mediante su numero id
+     * @param numeroid int
+     * @return devuelve una reserva
+     */
     public Reservation devolverUnaReserva(int numeroid) {
         Reservation re = null;
         for (Reservation reser : reservas) {
@@ -658,7 +689,10 @@ public class AppController implements IAppController {
         return re;
 
     }
-
+    
+    /**
+     * Actualiza las reservas
+     */
     public void UpgradearReservas() {
         for (Reservation re : reservas) {
             if (re.end.compareTo(LocalDate.now()) < 0 && re.status != Reservation.StatusReserve.FINISHED) {
@@ -666,7 +700,11 @@ public class AppController implements IAppController {
             }
         }
     }
-
+    /**
+     * Devuelve una reserva pasandole la key de un producto
+     * @param id String
+     * @return devuelve una reserva
+     */
     public Reservation devolverReservaIdproduct(String id) {
         Reservation r = null;
         for (Reservation reserv : reservas) {
@@ -780,7 +818,7 @@ public class AppController implements IAppController {
         }
         return cargado;
     }
-
+    
     private Product.Status devuelveestadoproducto(String cadena) {
         Product.Status est = null;
         switch (cadena) {

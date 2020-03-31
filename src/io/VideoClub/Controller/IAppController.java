@@ -132,9 +132,28 @@ public interface IAppController {
      */
     Set<Reservation> listAllReservations(Reservation.StatusReserve status);
     
+    /**
+     * Obtener todoas las ganacias del videoclub
+     * @return devuelve la cantidad (double)
+     */
     double getIncommings();
+    /**
+     * Obteniene las ganacias del videoclub desde una fecha indicada hasta el presente
+     * @param from fecha (LocalDate)
+     * @return devuelve la cantidad (double)
+     */
     double getIncommings(LocalDate from);
+    /**
+     * Obteniene las ganacias del videoclub entre dos fechas
+     * @param from fecha inicio (LocalDate)
+     * @param to fecha final (LocalDate)
+     * @return devuelve la cantidad (double)
+     */
     double getIncommings(LocalDate from, LocalDate to);
+    /**
+     * Ganancias obtenidad por cada cliente
+     * @return devuelve un Map con la key clinete y el valor total de las reservas cerradas del cliente
+     */
     Map<IClient,Double> resumeAllIncomingsByClient();
     
     /**
@@ -168,11 +187,49 @@ public interface IAppController {
      */
     boolean createGame(ProductsTypes type, String name, String description, GameCategory cat,int minAge, double prize);
     
+    /**
+     * Crea un cliente
+     * @param id String
+     * @param name String
+     * @param phone String
+     * @param time LocalDateTime (Fecha de creación)
+     * @return devuelve un boolean
+     * Si es true crea el cliente, y si es false no
+     */
     boolean createClient(String id,String name,String phone,LocalDateTime time);
-    boolean removeClient(String id);  //if has reservations cant be deleted
+    /**
+     * Elimina un cliente pasandole su id(DNI)
+     * Si tiene reservas no puede ser borrado
+     * @param id String
+     * @return devuelve un boolean
+     * Si es true borra el cliente, y si es false no
+     */
+    boolean removeClient(String id);  
+    /**
+     * Edita un cliente, pasandole el cliente a editar
+     * @param e IClient (Cliente)
+     * @return devuelve un boolean
+     * Si es true edita el cliente, y si es false no
+     */
     boolean editClient(IClient e);
     
+    /**
+     * Añade la existencia de un producto existente
+     * Recibe el nombre y tipo del producto
+     * @param name String
+     * @param type ProductTypes
+     * @return devuelve un boolean
+     * Si es true añade la existencia, y si es false no
+     */
     boolean addProduct(String name, ProductsTypes type);
+    /**
+     * Borra todas la existencias del producto indicado
+     * Recibe el nombre y tipo del producto
+     * @param name String
+     * @param ty ProductTypes
+     * @return devuelve un boolean
+     * Si es true borra las existencias, y si es false no
+     */
     boolean removeProduct(String name,ProductsTypes ty);
     
     /**
@@ -189,7 +246,20 @@ public interface IAppController {
      * @return devuelve el prodcuto
      */
     Product isAvailableProduct(String name,ProductsTypes tipo);  //get product if yes
+    /**
+     * Hace una reserva
+     * Recibe el producto y el cliente
+     * @param prod Product
+     * @param client IClient
+     * @return devuelve un boolean
+     * Si es true hace la reserva, y si es false no 
+     */
     boolean reserveProduct(Product prod,IClient client);
+    /**
+     * Cierra una reserva pasandole una reserva
+     * @param r Reservation (Reserva)
+     * @return devuelve el valor de la reserva
+     */
     double closeReservation(Reservation r);  //-->> status finished  --> get prizetopay
     
     /**

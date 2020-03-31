@@ -40,6 +40,12 @@ public class Utilities {
         return correcto;
     }
 
+    /**
+     * Comprueba si el formato del telefono pasado (String) es valido
+     *
+     * @param telf String
+     * @return devuelve un boolean, True si es valido, y false si no
+     */
     public static boolean validarTelf(String telf) {
         boolean correcto = false;
         Pattern pat = Pattern.compile(EXPRESION_NUMEROFIJO);
@@ -58,6 +64,12 @@ public class Utilities {
         return correcto;
     }
 
+    /**
+     * Comprueba si el formato del dni pasado (String) es valido
+     *
+     * @param dni String
+     * @return devuelve un boolean, True si es valido, y false si no
+     */
     public static boolean validarDNI(String dni) {
         boolean resultado = false;
         Pattern pat = Pattern.compile(EXPRESION_DNI);
@@ -183,7 +195,10 @@ public class Utilities {
         } while (!valid);
         return result;
     }
-
+    /**
+     * Devuelve un String sin modificar
+     * @return String
+     */
     public static String getStringSinModicar() {
         String result = "";
         boolean valid = false;
@@ -422,6 +437,7 @@ public class Utilities {
         return op;
 
     }
+
     public static int MenuGanancias() {
         int op = 0;
         P("1)Ganancias hasta el presente");

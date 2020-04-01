@@ -934,10 +934,20 @@ public class GUI {
     }
 
     private static void ListarMapProductos(Map<Product, Integer> listap) {
-
+        Utilities.P("Productos disponibles:");
         if (!listap.isEmpty()) {
             for (Map.Entry<Product, Integer> entry : listap.entrySet()) {
-                Utilities.P(entry.getKey().toString() + " Cantidad ---> " + entry.getValue());
+                // Utilities.P(entry.getKey().toString() + " Cantidad ---> " + entry.getValue());
+      Utilities.p("Nombre: " + entry.getKey().getName() + ", Descripción: " + entry.getKey().getDescription() + ", Precio:" + entry.getKey().getPrize() + ", Tipo:" + entry.getKey().getTipo() );
+                if (entry.getKey() instanceof Juego) {
+                  Juego j= (Juego)entry.getKey();
+                   Utilities.p(", Categoria: "+j.getCategory()+", Edad minima: "+j.getEdadmnima());
+                }else if(entry.getKey() instanceof Pelicula){
+                Pelicula j= (Pelicula)entry.getKey();
+                   Utilities.p(", Categoria: "+j.getCategory()+", Edad minima: "+j.getEdadmnima());
+                }
+                Utilities.p(" Cantidad ---> " + entry.getValue()+"\n");
+                
             }
         } else {
             Utilities.P("Lista vacía.");

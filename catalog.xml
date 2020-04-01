@@ -10,6 +10,16 @@
 <Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
 </Pelicula>
+<Pelicula>
+<Categoria>Horror</Categoria>
+<EdadMinima>-1</EdadMinima>
+<Key>a9b1797d-5fb0-44</Key>
+<Nombre>MINECRAFT</Nombre>
+<Descripcion>MINE PERO PELI</Descripcion>
+<Precio>13.0</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>15</EdadMinima>
@@ -33,22 +43,22 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
-<Key>95f5c764-4f29-4f</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>RESERVED</Estado>
-</Juego>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
 <Key>0022d2c1-dc6c-48</Key>
 <Nombre>MINECRAFT</Nombre>
 <Descripcion>JUEGO DE CUBOS</Descripcion>
 <Precio>19.95</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
+</Juego>
+<Juego>
+<Categoria>Adeventures</Categoria>
+<EdadMinima>5</EdadMinima>
+<Key>95f5c764-4f29-4f</Key>
+<Nombre>MINECRAFT</Nombre>
+<Descripcion>JUEGO DE CUBOS</Descripcion>
+<Precio>19.95</Precio>
+<Tipo>Juegos</Tipo>
+<Estado>RESERVED</Estado>
 </Juego>
 <Juego>
 <Categoria>Shooter</Categoria>
@@ -63,23 +73,13 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
-<Key>0358a16c-6c67-40</Key>
+<Key>1d35f287-bc11-40</Key>
 <Nombre>MINECRAFT</Nombre>
 <Descripcion>JUEGO DE CUBOS</Descripcion>
 <Precio>19.95</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
-<Pelicula>
-<Categoria>Horror</Categoria>
-<EdadMinima>-1</EdadMinima>
-<Key>a9b1797d-5fb0-44</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>MINE PERO PELI</Descripcion>
-<Precio>13.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
@@ -93,7 +93,7 @@
 <Juego>
 <Categoria>Adeventures</Categoria>
 <EdadMinima>5</EdadMinima>
-<Key>1d35f287-bc11-40</Key>
+<Key>0358a16c-6c67-40</Key>
 <Nombre>MINECRAFT</Nombre>
 <Descripcion>JUEGO DE CUBOS</Descripcion>
 <Precio>19.95</Precio>

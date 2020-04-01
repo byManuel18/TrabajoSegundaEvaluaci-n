@@ -193,7 +193,7 @@ public class AppController implements IAppController {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
-        
+
         Map<Product, Integer> listado = new HashMap<>();
         for (Product p : productos) {
             if (p.getName().equals(name) && p.getStatus() == Product.Status.AVAILABLE && !productoIntroducido(listado, p)) {
@@ -205,6 +205,13 @@ public class AppController implements IAppController {
 
     }
 
+    /**
+     *Comprueba si un producto esta introducido en la lista del map
+     * @param lista lsita tipo Map (Map<Product, Integer>)
+     * @param pr Producto
+     * @return devuelve un boolean
+     * Si devuelve true está el producto introducido, Y false no
+     */
     private boolean productoIntroducido(Map<Product, Integer> lista, Product pr) {
         boolean result = false;
         for (Map.Entry<Product, Integer> entry : lista.entrySet()) {
@@ -217,7 +224,7 @@ public class AppController implements IAppController {
     }
 
     /**
-     * Cuenta los productos que hay en la lista segun el nombre pasado
+     * Cuenta los productos que hay en la lista segun el producto pasado
      *
      * @param name String
      * @return devuelve un entero
@@ -225,7 +232,7 @@ public class AppController implements IAppController {
     private int contarProductos(Product pr) {
         int num = 0;
         for (Product p : productos) {
-            if (p.getName().equals(pr.getName())&&p.getStatus()==Product.Status.AVAILABLE&&p.getTipo()==pr.getTipo()) {
+            if (p.getName().equals(pr.getName()) && p.getStatus() == Product.Status.AVAILABLE && p.getTipo() == pr.getTipo()) {
                 num++;
             }
         }
@@ -234,11 +241,11 @@ public class AppController implements IAppController {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        
+
         Map<Product, Integer> listado = new HashMap<>();
         for (Product p : productos) {
             int num = contarProductos(p);
-            if (p.getName().equals(name) && p.getTipo() == type&&!productoIntroducido(listado, p)) {
+            if (p.getName().equals(name) && p.getTipo() == type && !productoIntroducido(listado, p)) {
                 listado.put(p, num);
             }
         }
@@ -452,7 +459,8 @@ public class AppController implements IAppController {
     }
 
     /**
-     *Devuelve un cliente si existe, pasandole un id (DNI)
+     * Devuelve un cliente si existe, pasandole un id (DNI)
+     *
      * @param id String
      * @return devuelve un cliente
      */
@@ -604,11 +612,13 @@ public class AppController implements IAppController {
         }
         return p;
     }
+
     /**
      * Comprueba si un producto esta disponible mediante la key
+     *
      * @param key String
-     * @return devuelve un boolean
-     * true si está disponible el producto, y false si no
+     * @return devuelve un boolean true si está disponible el producto, y false
+     * si no
      */
     public boolean isAvailableProduct(String key) {
         boolean result = false;
@@ -622,8 +632,10 @@ public class AppController implements IAppController {
 
         return result;
     }
+
     /**
      * Devuelve un producto si esta disponible mediante la key
+     *
      * @param key String
      * @return Producto
      */
@@ -675,8 +687,10 @@ public class AppController implements IAppController {
         saveReservationsFromDDBB();
         return precio;
     }
+
     /**
      * Devuelve una reserva mediante su numero id
+     *
      * @param numeroid int
      * @return devuelve una reserva
      */
@@ -691,7 +705,7 @@ public class AppController implements IAppController {
         return re;
 
     }
-    
+
     /**
      * Actualiza las reservas
      */
@@ -702,8 +716,10 @@ public class AppController implements IAppController {
             }
         }
     }
+
     /**
      * Devuelve una reserva pasandole la key de un producto
+     *
      * @param id String
      * @return devuelve una reserva
      */
@@ -820,7 +836,7 @@ public class AppController implements IAppController {
         }
         return cargado;
     }
-    
+
     private Product.Status devuelveestadoproducto(String cadena) {
         Product.Status est = null;
         switch (cadena) {

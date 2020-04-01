@@ -102,7 +102,7 @@ public abstract class Product extends Item implements Cloneable{
 
     @Override
     public String toString() {
-        return ">"+ "Key: "+ key +" Tipo: "+tipo +" Nombre: " +super.name+" Descripción: "+super.description+" Precio: "+super.prize+ " Estado: "+status;
+        return ">"+ "Key: "+ key +" Tipo: "+tipo +" Nombre: " +super.name+" Descripción: "+super.description+" Precio: "+super.prize+ "€ Estado: "+status;
     }
     
     

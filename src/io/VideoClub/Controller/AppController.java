@@ -193,10 +193,11 @@ public class AppController implements IAppController {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(String name) {
-        int num = contarProductos(name);
+        
         Map<Product, Integer> listado = new HashMap<>();
         for (Product p : productos) {
             if (p.getName().equals(name) && p.getStatus() == Product.Status.AVAILABLE && !productoIntroducido(listado, p)) {
+                int num = contarProductos(p);
                 listado.put(p, num);
             }
         }
@@ -221,10 +222,10 @@ public class AppController implements IAppController {
      * @param name String
      * @return devuelve un entero
      */
-    private int contarProductos(String name) {
+    private int contarProductos(Product pr) {
         int num = 0;
         for (Product p : productos) {
-            if (p.getName().equals(name)) {
+            if (p.getName().equals(pr.getName())&&p.getStatus()==Product.Status.AVAILABLE&&p.getTipo()==pr.getTipo()) {
                 num++;
             }
         }
@@ -233,10 +234,11 @@ public class AppController implements IAppController {
 
     @Override
     public Map<Product, Integer> listAllAmountOfProducts(ProductsTypes type, String name) {
-        int num = contarProductos(name);
+        
         Map<Product, Integer> listado = new HashMap<>();
         for (Product p : productos) {
-            if (p.getName().equals(name) && p.getTipo() == type) {
+            int num = contarProductos(p);
+            if (p.getName().equals(name) && p.getTipo() == type&&!productoIntroducido(listado, p)) {
                 listado.put(p, num);
             }
         }

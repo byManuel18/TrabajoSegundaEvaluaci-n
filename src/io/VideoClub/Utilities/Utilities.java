@@ -271,9 +271,9 @@ public class Utilities {
         P("4)Listar pot tipo y nombre");
         P("5)Listar por tipo");
         P("6)Listar por estado");
-        P("7)Listar películas");
-        P("8)Listar juegos");
-        P("9)Listar otros");
+        P("7)Listar diferentes películas");
+        P("8)Listar diferentes juegos");
+        P("9)Listar diferentes otros");
         P("10)Listar catidad de productos por nombre");
         P("11)Listar catidad de productos por nombre y tipo");
         P("12)Volver al menú anterior");

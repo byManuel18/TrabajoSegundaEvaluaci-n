@@ -988,7 +988,7 @@ public class GUI {
 
         switch (op) {
             case 1:
-                Utilities.P("" + decimal.format((float) controlador.getIncommings()));
+                Utilities.P("Total ganado: "+ decimal.format((float) controlador.getIncommings())+"€");
                 break;
             case 2:
                 int año = Utilities.getInt("Introduzca el año");
@@ -996,7 +996,7 @@ public class GUI {
                 int dia = Utilities.getInt("Introduzca el dia");
                 try {
                     LocalDate from = LocalDate.of(año, mes, dia);
-                    Utilities.P("" + decimal.format((float) controlador.getIncommings(from)));
+                    Utilities.P("Total ganado: "+ decimal.format((float) controlador.getIncommings(from))+"€");
                 } catch (Exception e) {
                     Utilities.P("Formato de Fecha incorrecto");
                 }
@@ -1005,7 +1005,7 @@ public class GUI {
                 try {
                     LocalDate from = LocalDate.of(Utilities.getInt("Introduzca el año del principio"), Utilities.getInt("Introduzca el mes del principio"), Utilities.getInt("Introduzca el dia del principio"));
                     LocalDate to = LocalDate.of(Utilities.getInt("Introduzca el año del final"), Utilities.getInt("Introduzca el mes del final"), Utilities.getInt("Introduzca el dia del final"));
-                    Utilities.P("" + decimal.format((float) controlador.getIncommings(from, to)));
+                    Utilities.P("Total ganado: "+ decimal.format((float) controlador.getIncommings(from, to))+"€");
                 } catch (Exception e) {
                     Utilities.P("Formato de Fecha incorrecto");
                 }

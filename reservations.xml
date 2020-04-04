@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Reservas>
 <Reserva>
-<ID>5</ID>
-<Estado>FINISHED</Estado>
-<FechaInicio>2020-03-28</FechaInicio>
-<FechaLimite>2020-03-27</FechaLimite>
-<FechaDevolución>2020-03-28</FechaDevolución>
-<Cliente>
-<IDCliente>20225097R</IDCliente>
-<NombreCliente>PERICO JIMENEZ</NombreCliente>
-<Telefono>636252145</Telefono>
-<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
-</Cliente>
-<Producto>
-<Pelicula>
-<CategoriaPelicula>Action</CategoriaPelicula>
-<EdadMinima>12</EdadMinima>
-<Precio>4.95</Precio>
-<TipoProducto>Peliculas</TipoProducto>
-<NombreProducto>301</NombreProducto>
-<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
-<Key>690ad7db-e85f-49</Key>
-<Estado>RESERVED</Estado>
-</Pelicula>
-</Producto>
-</Reserva>
-<Reserva>
 <ID>7</ID>
 <Estado>FINISHED</Estado>
 <FechaInicio>2020-03-30</FechaInicio>
@@ -44,102 +19,6 @@
 <NombreProducto>TAZA</NombreProducto>
 <Descripcion>PARA BEBER</Descripcion>
 <Key>969053ad-5b6f-4a</Key>
-<Estado>AVAILABLE</Estado>
-</Otro>
-</Producto>
-</Reserva>
-<Reserva>
-<ID>8</ID>
-<Estado>ACTIVE</Estado>
-<FechaInicio>2020-03-30</FechaInicio>
-<FechaLimite>2020-04-07</FechaLimite>
-<FechaDevolución>NO ENTREGADO</FechaDevolución>
-<Cliente>
-<IDCliente>20225097R</IDCliente>
-<NombreCliente>PERICO JIMENEZ</NombreCliente>
-<Telefono>636252145</Telefono>
-<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
-</Cliente>
-<Producto>
-<Juego>
-<CategoriaJuego>Adeventures</CategoriaJuego>
-<EdadMinima>5</EdadMinima>
-<Precio>19.95</Precio>
-<TipoProducto>Juegos</TipoProducto>
-<NombreProducto>MINECRAFT</NombreProducto>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Key>95f5c764-4f29-4f</Key>
-<Estado>RESERVED</Estado>
-</Juego>
-</Producto>
-</Reserva>
-<Reserva>
-<ID>3</ID>
-<Estado>FINISHED</Estado>
-<FechaInicio>2020-03-23</FechaInicio>
-<FechaLimite>2020-03-31</FechaLimite>
-<FechaDevolución>2020-03-28</FechaDevolución>
-<Cliente>
-<IDCliente>20225097R</IDCliente>
-<NombreCliente>PERICO JIMENEZ</NombreCliente>
-<Telefono>636252145</Telefono>
-<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
-</Cliente>
-<Producto>
-<Pelicula>
-<CategoriaPelicula>Action</CategoriaPelicula>
-<EdadMinima>6</EdadMinima>
-<Precio>3.0</Precio>
-<TipoProducto>Peliculas</TipoProducto>
-<NombreProducto>PACOLO</NombreProducto>
-<Descripcion>LA VIDA DE PACOLO</Descripcion>
-<Key>dd1e15ed-b750-49</Key>
-<Estado>RESERVED</Estado>
-</Pelicula>
-</Producto>
-</Reserva>
-<Reserva>
-<ID>6</ID>
-<Estado>FINISHED</Estado>
-<FechaInicio>2020-03-30</FechaInicio>
-<FechaLimite>2020-03-29</FechaLimite>
-<FechaDevolución>2020-03-30</FechaDevolución>
-<Cliente>
-<IDCliente>31886242P</IDCliente>
-<NombreCliente>PACO CANDELA</NombreCliente>
-<Telefono>632145987</Telefono>
-<FechaInscripcion>2020-03-30T18:32:23</FechaInscripcion>
-</Cliente>
-<Producto>
-<Otro>
-<Precio>4.542500023543835</Precio>
-<TipoProducto>Otros</TipoProducto>
-<NombreProducto>TAZA</NombreProducto>
-<Descripcion>PARA BEBER</Descripcion>
-<Key>9cb90242-b120-46</Key>
-<Estado>RESERVED</Estado>
-</Otro>
-</Producto>
-</Reserva>
-<Reserva>
-<ID>9</ID>
-<Estado>FINISHED</Estado>
-<FechaInicio>2020-04-01</FechaInicio>
-<FechaLimite>2020-04-09</FechaLimite>
-<FechaDevolución>2020-04-01</FechaDevolución>
-<Cliente>
-<IDCliente>20225097R</IDCliente>
-<NombreCliente>PERICO JIMENEZ</NombreCliente>
-<Telefono>636252145</Telefono>
-<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
-</Cliente>
-<Producto>
-<Otro>
-<Precio>15.0</Precio>
-<TipoProducto>Otros</TipoProducto>
-<NombreProducto>MINECRAFT</NombreProducto>
-<Descripcion>POSTER</Descripcion>
-<Key>b00691e9-fea0-4b</Key>
 <Estado>AVAILABLE</Estado>
 </Otro>
 </Producto>
@@ -170,6 +49,127 @@
 </Producto>
 </Reserva>
 <Reserva>
+<ID>6</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-30</FechaInicio>
+<FechaLimite>2020-03-29</FechaLimite>
+<FechaDevolución>2020-03-30</FechaDevolución>
+<Cliente>
+<IDCliente>31886242P</IDCliente>
+<NombreCliente>PACO CANDELA</NombreCliente>
+<Telefono>632145987</Telefono>
+<FechaInscripcion>2020-03-30T18:32:23</FechaInscripcion>
+</Cliente>
+<Producto>
+<Otro>
+<Precio>4.542500023543835</Precio>
+<TipoProducto>Otros</TipoProducto>
+<NombreProducto>TAZA</NombreProducto>
+<Descripcion>PARA BEBER</Descripcion>
+<Key>9cb90242-b120-46</Key>
+<Estado>RESERVED</Estado>
+</Otro>
+</Producto>
+</Reserva>
+<Reserva>
+<ID>1</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-23</FechaInicio>
+<FechaLimite>2020-03-27</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Juego>
+<CategoriaJuego>Adeventures</CategoriaJuego>
+<EdadMinima>15</EdadMinima>
+<Precio>8.0</Precio>
+<TipoProducto>Juegos</TipoProducto>
+<NombreProducto>304</NombreProducto>
+<Descripcion>AHORA ES UN JUEGO</Descripcion>
+<Key>361f215c-9882-46</Key>
+<Estado>RESERVED</Estado>
+</Juego>
+</Producto>
+</Reserva>
+<Reserva>
+<ID>9</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-04-01</FechaInicio>
+<FechaLimite>2020-04-09</FechaLimite>
+<FechaDevolución>2020-04-01</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Otro>
+<Precio>15.0</Precio>
+<TipoProducto>Otros</TipoProducto>
+<NombreProducto>MINECRAFT</NombreProducto>
+<Descripcion>POSTER</Descripcion>
+<Key>b00691e9-fea0-4b</Key>
+<Estado>AVAILABLE</Estado>
+</Otro>
+</Producto>
+</Reserva>
+<Reserva>
+<ID>5</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-28</FechaInicio>
+<FechaLimite>2020-03-27</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>12</EdadMinima>
+<Precio>4.95</Precio>
+<TipoProducto>Peliculas</TipoProducto>
+<NombreProducto>301</NombreProducto>
+<Descripcion>HOMBRES SEMIDESNUDOS</Descripcion>
+<Key>690ad7db-e85f-49</Key>
+<Estado>RESERVED</Estado>
+</Pelicula>
+</Producto>
+</Reserva>
+<Reserva>
+<ID>3</ID>
+<Estado>FINISHED</Estado>
+<FechaInicio>2020-03-23</FechaInicio>
+<FechaLimite>2020-03-31</FechaLimite>
+<FechaDevolución>2020-03-28</FechaDevolución>
+<Cliente>
+<IDCliente>20225097R</IDCliente>
+<NombreCliente>PERICO JIMENEZ</NombreCliente>
+<Telefono>636252145</Telefono>
+<FechaInscripcion>2020-03-23T18:28:09</FechaInscripcion>
+</Cliente>
+<Producto>
+<Pelicula>
+<CategoriaPelicula>Action</CategoriaPelicula>
+<EdadMinima>6</EdadMinima>
+<Precio>3.0</Precio>
+<TipoProducto>Peliculas</TipoProducto>
+<NombreProducto>PACOLO</NombreProducto>
+<Descripcion>LA VIDA DE PACOLO</Descripcion>
+<Key>dd1e15ed-b750-49</Key>
+<Estado>RESERVED</Estado>
+</Pelicula>
+</Producto>
+</Reserva>
+<Reserva>
 <ID>4</ID>
 <Estado>FINISHED</Estado>
 <FechaInicio>2020-03-23</FechaInicio>
@@ -195,11 +195,11 @@
 </Producto>
 </Reserva>
 <Reserva>
-<ID>1</ID>
-<Estado>FINISHED</Estado>
-<FechaInicio>2020-03-23</FechaInicio>
-<FechaLimite>2020-03-27</FechaLimite>
-<FechaDevolución>2020-03-28</FechaDevolución>
+<ID>8</ID>
+<Estado>ACTIVE</Estado>
+<FechaInicio>2020-03-30</FechaInicio>
+<FechaLimite>2020-04-07</FechaLimite>
+<FechaDevolución>NO ENTREGADO</FechaDevolución>
 <Cliente>
 <IDCliente>20225097R</IDCliente>
 <NombreCliente>PERICO JIMENEZ</NombreCliente>
@@ -209,12 +209,12 @@
 <Producto>
 <Juego>
 <CategoriaJuego>Adeventures</CategoriaJuego>
-<EdadMinima>15</EdadMinima>
-<Precio>8.0</Precio>
+<EdadMinima>5</EdadMinima>
+<Precio>19.95</Precio>
 <TipoProducto>Juegos</TipoProducto>
-<NombreProducto>304</NombreProducto>
-<Descripcion>AHORA ES UN JUEGO</Descripcion>
-<Key>361f215c-9882-46</Key>
+<NombreProducto>MINECRAFT</NombreProducto>
+<Descripcion>JUEGO DE CUBOS</Descripcion>
+<Key>95f5c764-4f29-4f</Key>
 <Estado>RESERVED</Estado>
 </Juego>
 </Producto>

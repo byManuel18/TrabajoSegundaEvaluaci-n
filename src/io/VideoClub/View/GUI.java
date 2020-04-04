@@ -925,7 +925,9 @@ public class GUI {
 
         if (!listap.isEmpty()) {
             for (Product p : listap) {
-                Utilities.P(p.toString());
+
+                Utilities.P(ImprimirToStringBonito(p));
+
             }
         } else {
             Utilities.P("Lista vacía.");
@@ -938,16 +940,16 @@ public class GUI {
         if (!listap.isEmpty()) {
             for (Map.Entry<Product, Integer> entry : listap.entrySet()) {
                 // Utilities.P(entry.getKey().toString() + " Cantidad ---> " + entry.getValue());
-      Utilities.p("Nombre: " + entry.getKey().getName() + ", Descripción: " + entry.getKey().getDescription() + ", Precio:" + entry.getKey().getPrize() + ", Tipo:" + entry.getKey().getTipo() );
+                Utilities.p("Nombre: " + entry.getKey().getName() + ", Descripción: " + entry.getKey().getDescription() + ", Precio:" + entry.getKey().getPrize() + ", Tipo:" + entry.getKey().getTipo());
                 if (entry.getKey() instanceof Juego) {
-                  Juego j= (Juego)entry.getKey();
-                   Utilities.p(", Categoria: "+j.getCategory()+", Edad minima: "+j.getEdadmnima());
-                }else if(entry.getKey() instanceof Pelicula){
-                Pelicula j= (Pelicula)entry.getKey();
-                   Utilities.p(", Categoria: "+j.getCategory()+", Edad minima: "+j.getEdadmnima());
+                    Juego j = (Juego) entry.getKey();
+                    Utilities.p(", Categoria: " + j.getCategory() + ", Edad minima: " + j.getEdadmnima());
+                } else if (entry.getKey() instanceof Pelicula) {
+                    Pelicula j = (Pelicula) entry.getKey();
+                    Utilities.p(", Categoria: " + j.getCategory() + ", Edad minima: " + j.getEdadmnima());
                 }
-                Utilities.p(" Cantidad ---> " + entry.getValue()+"\n");
-                
+                Utilities.p(" Cantidad ---> " + entry.getValue() + "\n");
+
             }
         } else {
             Utilities.P("Lista vacía.");
@@ -1029,5 +1031,20 @@ public class GUI {
             default:
                 Utilities.P("Opción no válida, vuelve a intentarlo.");
         }
+    }
+
+    private static String ImprimirToStringBonito(Product producto) {
+        String cadena = "";
+        cadena += "Nombre: " + producto.getName() + " Descripción: " + producto.getDescription();
+
+        if (producto instanceof Juego) {
+            Juego j = (Juego) producto;
+            cadena += " Categoría Juego: " + j.getCategory() + " Edad mminima: " + j.getEdadmnima();
+        } else if (producto instanceof Pelicula) {
+            Pelicula j = (Pelicula) producto;
+            cadena +=" Categoria Película: " + j.getCategory() + " Edad minima: " + j.getEdadmnima();
+        }
+        cadena += " Precio: " + producto.getPrize() + "€";
+        return cadena;
     }
 }

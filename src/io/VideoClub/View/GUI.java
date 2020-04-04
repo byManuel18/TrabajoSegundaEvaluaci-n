@@ -23,12 +23,9 @@ import io.VideoClub.Utilities.Utilities;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jdk.nashorn.internal.parser.TokenType;
 
 /**
  *

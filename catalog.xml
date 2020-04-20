@@ -1,132 +1,108 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Catalogo>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>95f5c764-4f29-4f</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
-<Tipo>Juegos</Tipo>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>10</EdadMinima>
+<Key>f6cf4527-16f5-47</Key>
+<Nombre>BATMAN </Nombre>
+<Descripcion>SUPERHEROES</Descripcion>
+<Precio>5.0</Precio>
+<Tipo>Peliculas</Tipo>
+<Estado>AVAILABLE</Estado>
+</Pelicula>
+<Otro>
+<Key>83fb8964-1c1a-4b</Key>
+<Nombre>TAZA DE BATMAN</Nombre>
+<Descripcion>PUEDES BEBER </Descripcion>
+<Precio>10.0</Precio>
+<Tipo>Otros</Tipo>
+<Estado>AVAILABLE</Estado>
+</Otro>
+<Otro>
+<Key>1047372a-c85e-4b</Key>
+<Nombre>TAZA DE BATMAN</Nombre>
+<Descripcion>PUEDES BEBER </Descripcion>
+<Precio>10.0</Precio>
+<Tipo>Otros</Tipo>
+<Estado>AVAILABLE</Estado>
+</Otro>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>10</EdadMinima>
+<Key>4a8c18b7-b7a0-47</Key>
+<Nombre>BATMAN </Nombre>
+<Descripcion>SUPERHEROES</Descripcion>
+<Precio>5.0</Precio>
+<Tipo>Peliculas</Tipo>
 <Estado>RESERVED</Estado>
-</Juego>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>851217a6-c710-43</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
-<Tipo>Juegos</Tipo>
+</Pelicula>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>10</EdadMinima>
+<Key>baab51e5-6677-42</Key>
+<Nombre>BATMAN </Nombre>
+<Descripcion>SUPERHEROES</Descripcion>
+<Precio>5.0</Precio>
+<Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
-</Juego>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>15</EdadMinima>
-<Key>361f215c-9882-46</Key>
-<Nombre>304</Nombre>
-<Descripcion>AHORA ES UN JUEGO</Descripcion>
-<Precio>8.0</Precio>
-<Tipo>Juegos</Tipo>
+</Pelicula>
+<Pelicula>
+<Categoria>Action</Categoria>
+<EdadMinima>10</EdadMinima>
+<Key>1fa9a9e6-173f-41</Key>
+<Nombre>BATMAN </Nombre>
+<Descripcion>SUPERHEROES</Descripcion>
+<Precio>5.0</Precio>
+<Tipo>Peliculas</Tipo>
 <Estado>AVAILABLE</Estado>
-</Juego>
+</Pelicula>
 <Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>2ab497c0-f106-47</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
+<Categoria>Shooter</Categoria>
+<EdadMinima>18</EdadMinima>
+<Key>54c8f2f9-a340-40</Key>
+<Nombre>GTA</Nombre>
+<Descripcion>NOO APTO PARAA NI�OS</Descripcion>
+<Precio>15.0</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
 <Juego>
 <Categoria>Shooter</Categoria>
-<EdadMinima>6</EdadMinima>
-<Key>526a98e0-b3ef-48</Key>
-<Nombre>UNO</Nombre>
-<Descripcion>CARTAS</Descripcion>
-<Precio>5.0</Precio>
-<Tipo>Juegos</Tipo>
-<Estado>AVAILABLE</Estado>
-</Juego>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>6</EdadMinima>
-<Key>3f7f7733-711f-4a</Key>
-<Nombre>PACOLO</Nombre>
-<Descripcion>LA VIDA DE PACOLO</Descripcion>
-<Precio>3.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>6</EdadMinima>
-<Key>63cad651-cef0-4c</Key>
-<Nombre>PACOLO</Nombre>
-<Descripcion>LA VIDA DE PACOLO</Descripcion>
-<Precio>3.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
-<Pelicula>
-<Categoria>Horror</Categoria>
-<EdadMinima>-1</EdadMinima>
-<Key>a9b1797d-5fb0-44</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>MINE PERO PELI</Descripcion>
-<Precio>13.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>6</EdadMinima>
-<Key>dd1e15ed-b750-49</Key>
-<Nombre>PACOLO</Nombre>
-<Descripcion>LA VIDA DE PACOLO</Descripcion>
-<Precio>3.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
-<Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>0358a16c-6c67-40</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
+<EdadMinima>18</EdadMinima>
+<Key>908b7e79-2f44-45</Key>
+<Nombre>GTA</Nombre>
+<Descripcion>NOO APTO PARAA NI�OS</Descripcion>
+<Precio>15.0</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
 <Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>0022d2c1-dc6c-48</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
+<Categoria>Shooter</Categoria>
+<EdadMinima>18</EdadMinima>
+<Key>d8f07419-9b8a-4c</Key>
+<Nombre>GTA</Nombre>
+<Descripcion>NOO APTO PARAA NI�OS</Descripcion>
+<Precio>15.0</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>
-<Pelicula>
-<Categoria>Action</Categoria>
-<EdadMinima>6</EdadMinima>
-<Key>e4be6357-170b-4c</Key>
-<Nombre>PACOLO</Nombre>
-<Descripcion>LA VIDA DE PACOLO</Descripcion>
-<Precio>3.0</Precio>
-<Tipo>Peliculas</Tipo>
-<Estado>AVAILABLE</Estado>
-</Pelicula>
 <Juego>
-<Categoria>Adeventures</Categoria>
-<EdadMinima>5</EdadMinima>
-<Key>1d35f287-bc11-40</Key>
-<Nombre>MINECRAFT</Nombre>
-<Descripcion>JUEGO DE CUBOS</Descripcion>
-<Precio>19.95</Precio>
+<Categoria>Shooter</Categoria>
+<EdadMinima>18</EdadMinima>
+<Key>52be14c8-2a34-4b</Key>
+<Nombre>GTA</Nombre>
+<Descripcion>NOO APTO PARAA NI�OS</Descripcion>
+<Precio>15.0</Precio>
+<Tipo>Juegos</Tipo>
+<Estado>RESERVED</Estado>
+</Juego>
+<Juego>
+<Categoria>Shooter</Categoria>
+<EdadMinima>18</EdadMinima>
+<Key>fbe31cab-4d67-48</Key>
+<Nombre>GTA</Nombre>
+<Descripcion>NOO APTO PARAA NI�OS</Descripcion>
+<Precio>15.0</Precio>
 <Tipo>Juegos</Tipo>
 <Estado>AVAILABLE</Estado>
 </Juego>

@@ -2,8 +2,20 @@
 <Clientes>
 <Cliente>
 <ID>20225097R</ID>
-<Nombre>PERICO JIMENEZ</Nombre>
-<Telefono>636252145</Telefono>
-<Fecha>2020-03-23T18:28:09</Fecha>
+<Nombre>MANUEL GUERRERO</Nombre>
+<Telefono>618866651</Telefono>
+<Fecha>2020-04-20T18:18:01.198</Fecha>
+</Cliente>
+<Cliente>
+<ID>31886242P</ID>
+<Nombre>ISMAEL DIAZ</Nombre>
+<Telefono>674937962</Telefono>
+<Fecha>2020-04-20T18:19:09.295</Fecha>
+</Cliente>
+<Cliente>
+<ID>08895080Z</ID>
+<Nombre>ALBERTO RUIZ</Nombre>
+<Telefono>652369478</Telefono>
+<Fecha>2020-04-20T18:20:19.594</Fecha>
 </Cliente>
 </Clientes>
